@@ -270,10 +270,8 @@ export default function App() {
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
-      <section className="relative pt-24 pb-32 lg:pt-36 lg:pb-40 overflow-hidden bg-gradient-to-br from-purple-950 via-indigo-900 to-blue-900">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-fuchsia-600/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-400/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4"></div>
+      <section className="relative pt-24 pb-32 lg:pt-36 lg:pb-40 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
