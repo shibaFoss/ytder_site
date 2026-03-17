@@ -1,0 +1,536 @@
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Download,
+  ChevronDown,
+  ShieldCheck,
+  Award,
+  Rocket,
+  MonitorPlay,
+  Globe,
+  IndianRupee,
+  CheckCircle2,
+  Settings,
+  AlertTriangle,
+  PlaySquare,
+  Star,
+  Instagram,
+  Facebook,
+  Youtube,
+  Twitter,
+  Video
+} from 'lucide-react';
+
+// --- Custom Hooks ---
+
+// Hook for scroll-triggered reveal animations
+const useScrollReveal = () => {
+  const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+};
+
+// Hook for animating numbers
+const useCountUp = (end, duration = 2000) => {
+  const [count, setCount] = useState(0);
+  const { ref, isVisible } = useScrollReveal();
+
+  useEffect(() => {
+    let startTime = null;
+    if (!isVisible) return;
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+
+      // Ease out quart
+      const easeProgress = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easeProgress * end));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [end, duration, isVisible]);
+
+  return { ref, count };
+};
+
+// --- Components ---
+
+const Reveal = ({ children, delay = 0, className = "" }) => {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        } ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+const ShimmerBadge = ({ icon: Icon, text, type = 'gold' }) => {
+  const colors = type === 'gold'
+    ? 'from-amber-400 via-yellow-200 to-amber-500 text-amber-900 border-amber-300'
+    : 'from-emerald-500 via-emerald-300 to-emerald-600 text-white border-emerald-400';
+
+  return (
+    <div className={`relative overflow-hidden flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm shadow-lg border ${colors} bg-gradient-to-r`}>
+      <Icon size={16} className={type === 'gold' ? 'text-amber-900' : 'text-white'} />
+      <span>{text}</span>
+      {/* Shimmer Effect */}
+      <div className="absolute inset-0 -translate-x-full animate-[shimmer_2.5s_infinite] bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12" />
+    </div>
+  );
+};
+
+const PhoneMockup = ({ children, className = "" }) => (
+  <div className={`relative mx-auto w-[280px] h-[580px] bg-gray-900 rounded-[3rem] border-[10px] border-gray-800 shadow-2xl overflow-hidden shadow-cyan-500/20 ${className}`}>
+    {/* Notch */}
+    <div className="absolute top-0 inset-x-0 h-6 bg-gray-800 rounded-b-3xl w-1/2 mx-auto z-20" />
+    <div className="relative h-full w-full bg-slate-950 overflow-hidden text-white">
+      {children}
+    </div>
+  </div>
+);
+
+// --- Main Application ---
+
+export default function App() {
+  const { ref: counterRef, count } = useCountUp(587324, 2500);
+
+  const scrollToInstall = () => {
+    document.getElementById('install-guide').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-900 font-sans text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden">
+      {/* Global Styles for Animations */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-outfit { font-family: 'Outfit', sans-serif; }
+        @keyframes shimmer {
+          100% { transform: translateX(100%); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .bg-circuit {
+          background-image: radial-gradient(circle, #38bdf8 1px, transparent 1px);
+          background-size: 30px 30px;
+          background-position: 0 0, 15px 15px;
+          opacity: 0.05;
+        }
+      `}} />
+
+      {/* --- SECTION 1: HERO --- */}
+      <section className="relative pt-24 pb-32 lg:pt-36 lg:pb-40 overflow-hidden bg-gradient-to-br from-purple-950 via-indigo-900 to-blue-900">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-fuchsia-600/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-400/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4"></div>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+
+            {/* Left: Copy */}
+            <div className="text-center lg:text-left">
+              <Reveal>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-cyan-300 text-sm font-semibold mb-6 backdrop-blur-sm">
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+                  </span>
+                  v2.5.0 is Live!
+                </div>
+              </Reveal>
+
+              <Reveal delay={100}>
+                <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
+                  India's <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">#1 Video</span> Downloader. <br />
+                  <span className="text-fuchsia-400">Fast. Free. Unlimited.</span>
+                </h1>
+              </Reveal>
+
+              <Reveal delay={200}>
+                <p className="text-lg lg:text-xl text-indigo-100 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                  Download any video from any website in HD quality directly to your Android phone. Trusted by over <strong className="text-white">5 Lakh+</strong> users.
+                </p>
+              </Reveal>
+
+              <Reveal delay={300} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                <button className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-fuchsia-600 to-purple-600 rounded-full font-bold text-lg shadow-[0_0_40px_rgba(192,38,211,0.4)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all hover:-translate-y-1 overflow-hidden">
+                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                  <span className="relative flex items-center justify-center gap-2">
+                    <Download className="animate-bounce" />
+                    Download APK Now (Free)
+                  </span>
+                </button>
+                <button
+                  onClick={scrollToInstall}
+                  className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/20 hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
+                >
+                  How to Install? <ChevronDown size={20} />
+                </button>
+              </Reveal>
+
+              <Reveal delay={400} className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
+                <ShimmerBadge icon={ShieldCheck} text="🇮🇳 Made in India" type="emerald" />
+                <ShimmerBadge icon={Award} text="India's No. 1 App 2024" type="gold" />
+              </Reveal>
+            </div>
+
+            {/* Right: 3D Mockup */}
+            <Reveal delay={300} className="hidden lg:block">
+              <div className="relative w-full h-full flex justify-center items-center">
+                <div className="animate-float relative z-10">
+                  <PhoneMockup>
+                    {/* Mock App UI */}
+                    <div className="p-4 bg-slate-900 h-full flex flex-col">
+                      <div className="flex justify-between items-center mb-6 mt-6">
+                        <div className="text-xl font-bold text-cyan-400">AIO-YTDER</div>
+                        <Settings size={20} className="text-slate-400" />
+                      </div>
+
+                      <div className="bg-slate-800 rounded-xl p-3 flex gap-2 mb-6 border border-slate-700 shadow-inner">
+                        <input type="text" placeholder="Paste link here..." className="bg-transparent outline-none text-sm w-full text-white placeholder-slate-400" readOnly value="https://instagram.com/reel/xyz..." />
+                        <button className="bg-fuchsia-600 p-2 rounded-lg text-white"><Download size={16} /></button>
+                      </div>
+
+                      <div className="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 relative">
+                        <div className="h-32 bg-slate-700 flex items-center justify-center relative overflow-hidden">
+                          <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" className="opacity-50 object-cover absolute inset-0 w-full h-full" alt="Video cover" />
+                          <PlaySquare size={32} className="text-white z-10 drop-shadow-lg" />
+                        </div>
+                        <div className="p-4">
+                          <div className="text-sm font-semibold mb-1 truncate">Viral Dance Reel 2024.mp4</div>
+                          <div className="text-xs text-slate-400 mb-3">45 MB • 1080p HD</div>
+
+                          {/* Progress Bar */}
+                          <div className="w-full bg-slate-700 rounded-full h-2 mb-2">
+                            <div className="bg-cyan-400 h-2 rounded-full w-[75%] shadow-[0_0_10px_#22d3ee]"></div>
+                          </div>
+                          <div className="flex justify-between text-xs text-cyan-400 font-bold">
+                            <span>Downloading...</span>
+                            <span>75%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </PhoneMockup>
+                </div>
+
+                {/* Decorative Elements behind phone */}
+                <div className="absolute top-1/4 right-[10%] bg-fuchsia-600 p-3 rounded-2xl shadow-xl shadow-fuchsia-900/50 animate-bounce" style={{ animationDelay: '1s' }}>
+                  <Download className="text-white" size={24} />
+                </div>
+                <div className="absolute bottom-1/4 left-[10%] bg-cyan-500 p-3 rounded-2xl shadow-xl shadow-cyan-900/50 animate-bounce" style={{ animationDelay: '0.5s' }}>
+                  <ShieldCheck className="text-white" size={24} />
+                </div>
+              </div>
+            </Reveal>
+
+          </div>
+        </div>
+      </section>
+
+      {/* --- SECTION 2: SOCIAL PROOF & LIVE COUNTER --- */}
+      <section className="py-16 bg-slate-950 relative border-y border-slate-800">
+        <div className="absolute inset-0 bg-circuit"></div>
+        <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
+          <Reveal>
+            <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700 p-8 md:p-12 rounded-3xl shadow-2xl">
+              <h2 className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tighter">
+                <span className="text-slate-300">Millions trust </span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-purple-600 bg-[length:200%_auto] animate-[gradient_4s_linear_infinite]">
+                  AIO-YTDER
+                </span>
+                <span className="text-lg md:text-xl font-medium text-slate-400 tracking-normal block mt-4 max-w-2xl mx-auto">
+                  The ultimate downloading powerhouse for your everyday digital life.
+                </span>
+              </h2>
+
+              <div className="py-8" ref={counterRef}>
+                <div className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 tracking-tighter drop-shadow-sm">
+                  {count.toLocaleString()}
+                </div>
+                <div className="text-cyan-400 font-bold mt-2 uppercase tracking-widest text-sm animate-pulse">
+                  Downloads & Counting... growing every second!
+                </div>
+              </div>
+
+              <div className="pt-8 border-t border-slate-800">
+                <p className="text-slate-400 mb-6 font-medium">Supports downloads from all your favorite platforms:</p>
+                <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-slate-500">
+                  <Instagram className="w-8 h-8 md:w-10 md:h-10 hover:text-pink-500 transition-colors cursor-pointer" />
+                  <Facebook className="w-8 h-8 md:w-10 md:h-10 hover:text-blue-500 transition-colors cursor-pointer" />
+                  <Youtube className="w-8 h-8 md:w-10 md:h-10 hover:text-red-500 transition-colors cursor-pointer" />
+                  <Twitter className="w-8 h-8 md:w-10 md:h-10 hover:text-blue-400 transition-colors cursor-pointer" />
+                  <Video className="w-8 h-8 md:w-10 md:h-10 hover:text-purple-500 transition-colors cursor-pointer" />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* --- SECTION 3: KEY FEATURES --- */}
+      <section className="py-24 bg-slate-900">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <Reveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Why AIO-YTDER is the <span className="text-fuchsia-400">King</span></h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg">We didn't just build another downloader. We built the fastest, safest, and most powerful tool for Android.</p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: Rocket, title: "Ultra-Fast Speed", desc: "Download full-length movies in seconds with advanced multi-threading technology.", color: "text-blue-400", bg: "bg-blue-400/10" },
+              { icon: MonitorPlay, title: "HD & 4K Quality", desc: "Choose your resolution: 144p to save data, or stunning 1080p and 4K for the big screen.", color: "text-purple-400", bg: "bg-purple-400/10" },
+              { icon: Globe, title: "In-App Browser", desc: "Browse your favorite sites and download with a single tap, without ever leaving the app.", color: "text-cyan-400", bg: "bg-cyan-400/10" },
+              { icon: IndianRupee, title: "100% Free", desc: "Bilkul Free! No hidden subscriptions. No credit cards. Premium features for everyone.", color: "text-emerald-400", bg: "bg-emerald-400/10" }
+            ].map((feature, idx) => (
+              <Reveal key={idx} delay={idx * 100}>
+                <div className="bg-slate-800/50 border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition-colors h-full group">
+                  <div className={`w-14 h-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <feature.icon className={`w-7 h-7 ${feature.color}`} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                  <p className="text-slate-400 leading-relaxed">{feature.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- SECTION 4: HOW TO INSTALL --- */}
+      <section id="install-guide" className="py-24 bg-slate-950 relative overflow-hidden">
+        {/* Background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-purple-900/20 blur-[150px] pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <Reveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Install in Minutes</h2>
+            <p className="text-cyan-400 font-semibold text-lg max-w-2xl mx-auto bg-cyan-900/30 py-2 px-4 rounded-full border border-cyan-800/50">
+              (Even if you're not a techie!)
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Step 1 */}
+            <Reveal delay={0} className="relative flex flex-col">
+              <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-4 -z-10">01</div>
+              <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
+                <div className="p-4 flex flex-col items-center justify-center h-full bg-slate-100 text-slate-900 relative">
+                  <div className="bg-white p-6 rounded-2xl shadow-xl border w-full text-center">
+                    <h4 className="font-bold text-lg mb-4">AIO-YTDER.apk</h4>
+                    <button className="bg-purple-600 text-white w-full py-3 rounded-xl font-bold flex justify-center items-center gap-2">
+                      <Download size={18} /> Download File
+                    </button>
+                  </div>
+                  {/* Annotation */}
+                  <div className="absolute bottom-16 right-8 text-red-500 font-bold flex flex-col items-center animate-bounce">
+                    <span className="bg-red-100 text-red-600 text-xs px-2 py-1 rounded shadow mb-1 border border-red-200">Tap Here</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+                  </div>
+                </div>
+              </PhoneMockup>
+              <h3 className="text-xl font-bold text-white mb-2">1. Download the APK</h3>
+              <p className="text-slate-400 text-sm">Tap the big purple button above. Don't worry, it's 100% safe and virus-scanned.</p>
+            </Reveal>
+
+            {/* Step 2 */}
+            <Reveal delay={100} className="relative flex flex-col">
+              <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-4 -z-10">02</div>
+              <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
+                <div className="p-4 flex flex-col h-full bg-slate-900 text-white relative">
+                  <div className="mt-8">
+                    <div className="flex items-center gap-3 mb-6">
+                      <AlertTriangle className="text-yellow-500" />
+                      <span className="font-bold text-lg">Chrome Settings</span>
+                    </div>
+                    <div className="bg-slate-800 p-4 rounded-xl relative">
+                      <div className="flex justify-between items-center relative z-10">
+                        <span className="text-sm">Allow from this source</span>
+                        <div className="w-10 h-6 bg-blue-500 rounded-full flex items-center p-1 justify-end">
+                          <div className="w-4 h-4 bg-white rounded-full"></div>
+                        </div>
+                      </div>
+                      {/* Red Annotation Circle */}
+                      <div className="absolute inset-0 border-2 border-red-500 rounded-xl z-0 scale-105 animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+              </PhoneMockup>
+              <h3 className="text-xl font-bold text-white mb-2">2. Allow Unknown Apps</h3>
+              <p className="text-slate-400 text-sm">Your phone might be cautious. Tap 'Settings' and toggle 'Allow from this source'.</p>
+            </Reveal>
+
+            {/* Step 3 */}
+            <Reveal delay={200} className="relative flex flex-col">
+              <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-4 -z-10">03</div>
+              <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
+                <div className="p-4 flex flex-col justify-end h-full bg-slate-100 relative">
+                  <div className="bg-white p-4 rounded-t-2xl shadow-[0_-10px_20px_rgba(0,0,0,0.1)] -mx-4 -mb-4 border-t">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center text-white">
+                        <Download size={24} />
+                      </div>
+                      <div>
+                        <div className="font-bold text-slate-900">AIO-YTDER</div>
+                        <div className="text-xs text-emerald-600 font-semibold flex items-center gap-1"><CheckCircle2 size={12} /> App Installed</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="flex-1 py-2 text-purple-600 font-semibold">Done</button>
+                      <button className="flex-1 py-2 bg-purple-600 text-white rounded-lg font-bold shadow-md shadow-purple-600/30 relative">
+                        Open
+                        <div className="absolute -inset-1 border-2 border-red-500 rounded-xl animate-pulse"></div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </PhoneMockup>
+              <h3 className="text-xl font-bold text-white mb-2">3. Install & Open</h3>
+              <p className="text-slate-400 text-sm">Tap 'Install'. It takes just 5 seconds. Once done, tap 'Open' to launch the app!</p>
+            </Reveal>
+
+            {/* Step 4 */}
+            <Reveal delay={300} className="relative flex flex-col">
+              <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-4 -z-10">04</div>
+              <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
+                <div className="p-4 flex flex-col h-full bg-slate-900 relative">
+                  <div className="mt-8 text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl mx-auto flex items-center justify-center mb-4">
+                      <Download size={32} className="text-white" />
+                    </div>
+                    <h4 className="font-bold text-white mb-6">Welcome to AIO-YTDER</h4>
+                    <div className="bg-slate-800 p-3 rounded-lg flex items-center justify-between border border-dashed border-slate-600 relative">
+                      <span className="text-slate-400 text-sm">Paste copied link...</span>
+                      <button className="bg-white text-slate-900 px-3 py-1 rounded font-bold text-sm">Paste</button>
+                      {/* Red Pointer */}
+                      <div className="absolute -right-2 -bottom-6 text-red-500 flex flex-col items-center animate-bounce z-10">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </PhoneMockup>
+              <h3 className="text-xl font-bold text-white mb-2">4. Start Downloading</h3>
+              <p className="text-slate-400 text-sm">Copy any video link from Instagram/FB/YT, paste it here, and hit download. Welcome to the club!</p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* --- SECTION 5: TESTIMONIALS --- */}
+      <section className="py-24 bg-slate-900 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <Reveal className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by Millions Across India</h2>
+            <div className="flex justify-center gap-1 text-amber-400 mb-4">
+              <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" />
+            </div>
+            <p className="text-slate-400">4.8/5 Average Rating from our users</p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { name: "Rajesh", loc: "Mumbai", text: "Finally a downloader that actually works for all apps. The speed is insane! Mere phone me kabhi buffer nahi karta ab.", color: "bg-orange-500" },
+              { name: "Priya", loc: "Delhi", text: "The 'Made in India' badge caught my attention, but the quality kept me here. Best app for saving reels and status videos.", color: "bg-purple-500" },
+              { name: "Anita", loc: "Bengaluru", text: "Super easy to install. I'm not good with tech, but the step-by-step guide was perfect. Thank you for keeping it 100% free!", color: "bg-blue-500" }
+            ].map((review, idx) => (
+              <Reveal key={idx} delay={idx * 150}>
+                <div className="bg-slate-800 p-8 rounded-3xl relative">
+                  <div className="flex text-amber-400 mb-4 gap-1">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                  </div>
+                  <p className="text-lg text-slate-300 italic mb-6">"{review.text}"</p>
+                  <div className="flex items-center gap-4">
+                    <div className={`w-12 h-12 rounded-full ${review.color} flex items-center justify-center text-white font-bold text-xl`}>
+                      {review.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-bold text-white">{review.name}</div>
+                      <div className="text-sm text-slate-400">{review.loc}</div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- SECTION 6: FINAL CTA & FOOTER --- */}
+      <footer className="relative bg-gradient-to-t from-slate-950 to-slate-900 pt-24 border-t border-slate-800">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
+
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center mb-24">
+          <Reveal>
+            <h2 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8">
+              Ready to download anything?
+            </h2>
+            <button className="group relative px-10 py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.5)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all hover:scale-105 overflow-hidden w-full md:w-auto">
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+              <span className="relative flex items-center justify-center gap-3">
+                <Download size={28} className="animate-bounce" />
+                Get the Latest APK <span className="text-white/70 font-medium text-lg">(v2.5.0)</span>
+              </span>
+            </button>
+            <p className="mt-6 text-slate-400 font-medium flex items-center justify-center gap-2">
+              <ShieldCheck size={18} className="text-emerald-400" /> 100% Safe, Secure & Free
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="border-t border-slate-800/50 bg-slate-950 relative z-10">
+          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2 text-slate-300 font-bold text-xl">
+              <Download className="text-cyan-400" />
+              AIO-YTDER
+            </div>
+
+            <div className="flex gap-6 text-sm text-slate-500 font-medium">
+              <a href="#" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-cyan-400 transition-colors">Contact Us</a>
+            </div>
+
+            <div className="text-slate-500 text-sm flex items-center gap-1">
+              © 2024 AIO-YTDER. Made with <span className="text-red-500 text-lg animate-pulse">❤️</span> in India.
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  );
+}
