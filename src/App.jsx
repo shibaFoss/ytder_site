@@ -241,7 +241,22 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 font-sans text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden relative">
+      {/* --- PREMIUM BACKGROUND SYSTEM --- */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Animated Mesh Blobs */}
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px] animate-blob"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-cyan-600/15 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-600/20 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '4s' }}></div>
+        
+        {/* Pattern Overlays */}
+        <div className="absolute inset-0 bg-grid-slate-800 opacity-30"></div>
+        <div className="absolute inset-0 noise mix-blend-overlay"></div>
+        
+        {/* Vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,0.8)_100%)]"></div>
+      </div>
+
       <SpiderWeb />
 
       {/* Global Styles for Animations */}
@@ -284,6 +299,22 @@ export default function App() {
           to { transform: rotate(360deg); }
         }
         .animate-spin-slow { animation: spin-slow 8s linear infinite; }
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .animate-blob { animation: blob 7s infinite alternate; }
+        .bg-grid-slate-800 {
+          background-image: 
+            linear-gradient(to right, rgb(30 41 59 / 0.1) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(30 41 59 / 0.1) 1px, transparent 1px);
+          background-size: 44px 44px;
+        }
+        .noise {
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+          opacity: 0.05;
+        }
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
