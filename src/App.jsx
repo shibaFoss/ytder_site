@@ -269,6 +269,21 @@ export default function App() {
           background-position: 0 0, 15px 15px;
           opacity: 0.05;
         }
+        @keyframes pulse-soft {
+          0%, 100% { transform: scale(1); opacity: 0.5; }
+          50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        .animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+        @keyframes scan {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(100%); }
+        }
+        .animate-scan { animation: scan 2s linear infinite; }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow { animation: spin-slow 8s linear infinite; }
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
@@ -478,6 +493,102 @@ export default function App() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- SECTION 3.5: PRO FEATURES (ANIMATED) --- */}
+      <section className="py-24 bg-slate-950 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] -mr-64 -mt-64"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-500/10 blur-[150px] -ml-64 -mb-64"></div>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <Reveal className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+              Power Features for <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-500">Power Users</span>
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg">Experience downloading like never before with our cutting-edge Pro Tools.</p>
+          </Reveal>
+
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* MP3 Extractions */}
+            <Reveal delay={100} className="group flex flex-col md:flex-row bg-slate-900/50 border border-slate-800 rounded-[2.5rem] overflow-hidden hover:border-fuchsia-500/50 transition-all duration-500">
+              <div className="md:w-1/2 p-10 flex flex-col justify-center">
+                <div className="w-12 h-12 bg-fuchsia-500/20 rounded-2xl flex items-center justify-center mb-6">
+                  <Music className="text-fuchsia-400" />
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-4">Magic MP3 Extraction</h3>
+                <p className="text-slate-400 leading-relaxed">Turn any music video into a high-quality 320kbps MP3 file instantly. Perfect for your workout playlists.</p>
+              </div>
+              <div className="md:w-1/2 bg-slate-800/30 relative flex items-center justify-center min-h-[250px] overflow-hidden">
+                {/* Visualizer Animation */}
+                <div className="flex items-end gap-1 h-24">
+                  {[...Array(12)].map((_, i) => (
+                    <div key={i} className="w-1.5 bg-fuchsia-500 rounded-full animate-[pulse_1s_ease-in-out_infinite]" style={{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.1}s` }}></div>
+                  ))}
+                </div>
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-900 to-transparent"></div>
+              </div>
+            </Reveal>
+
+            {/* 4K Downloads */}
+            <Reveal delay={200} className="group flex flex-col md:flex-row-reverse bg-slate-900/50 border border-slate-800 rounded-[2.5rem] overflow-hidden hover:border-cyan-500/50 transition-all duration-500">
+              <div className="md:w-1/2 p-10 flex flex-col justify-center">
+                <div className="w-12 h-12 bg-cyan-500/20 rounded-2xl flex items-center justify-center mb-6">
+                  <MonitorPlay className="text-cyan-400" />
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-4">True 4K Ultra HD</h3>
+                <p className="text-slate-400 leading-relaxed">Don't settle for grainy video. Download in crystal clear 4K resolution and feel every single pixel.</p>
+              </div>
+              <div className="md:w-1/2 bg-slate-800/30 relative flex items-center justify-center min-h-[250px]">
+                <div className="relative">
+                   <div className="text-8xl font-black text-cyan-500/10 select-none">4K</div>
+                   <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-32 h-20 border-2 border-cyan-400/30 rounded-lg flex items-center justify-center relative overflow-hidden">
+                         <div className="w-full h-0.5 bg-cyan-400 absolute top-0 animate-scan"></div>
+                         <div className="text-cyan-400 font-bold text-xl">UHD</div>
+                      </div>
+                   </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Background Play */}
+            <Reveal delay={300} className="group flex flex-col md:flex-row bg-slate-900/50 border border-slate-700/30 rounded-[2.5rem] overflow-hidden hover:border-white/20 transition-all duration-500">
+              <div className="md:w-1/2 p-10 flex flex-col justify-center">
+                <div className="w-12 h-12 bg-slate-100/10 rounded-2xl flex items-center justify-center mb-6">
+                  <PlayCircle className="text-white" />
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-4">Background Playback</h3>
+                <p className="text-slate-400 leading-relaxed">Keep your music playing even when the screen is off or you're using other apps. True multitasking.</p>
+              </div>
+              <div className="md:w-1/2 bg-slate-800/30 relative flex items-center justify-center min-h-[250px]">
+                <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center animate-pulse-soft">
+                  <PlayCircle size={48} className="text-white opacity-80" />
+                </div>
+                {/* Floating music notes */}
+                <div className="absolute top-1/4 right-1/4 rotate-12 animate-bounce">🎵</div>
+                <div className="absolute bottom-1/4 left-1/4 -rotate-12 animate-bounce" style={{ animationDelay: '0.5s' }}>🎶</div>
+              </div>
+            </Reveal>
+
+            {/* Smart Converter */}
+            <Reveal delay={400} className="group flex flex-col md:flex-row-reverse bg-slate-900/50 border border-slate-700/30 rounded-[2.5rem] overflow-hidden hover:border-emerald-500/50 transition-all duration-500">
+              <div className="md:w-1/2 p-10 flex flex-col justify-center">
+                <div className="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-6">
+                  <Settings className="text-emerald-400 animate-spin-slow" />
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-4">Smart Converter</h3>
+                <p className="text-slate-400 leading-relaxed">Convert videos to MP4, AVI, WebM or any format that fits your device. High-speed encoding guaranteed.</p>
+              </div>
+              <div className="md:w-1/2 bg-slate-800/30 relative flex items-center justify-center min-h-[250px]">
+                <div className="flex gap-4 items-center">
+                   <div className="p-4 bg-slate-700 rounded-xl text-xs font-mono text-slate-400">VIDEO.MOV</div>
+                   <div className="text-emerald-400 animate-pulse">➔</div>
+                   <div className="p-4 bg-emerald-500/20 border border-emerald-500/50 rounded-xl text-xs font-mono text-emerald-400 font-bold">VIDEO.MP4</div>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
