@@ -344,7 +344,7 @@ export default function App() {
 
                       <div className="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 relative">
                         <div className="h-32 bg-slate-700 flex items-center justify-center relative overflow-hidden">
-                          <img src="/front_thumb.jpg" className="opacity-50 object-cover absolute inset-0 w-full h-full" alt="Video cover" />
+                          <img src="https://unsplash.com/photos/xIkhRcRcbJ4/download?force=true&w=640" className="opacity-100 object-cover absolute inset-0 w-full h-full" alt="Video cover" />
                           <PlaySquare size={32} className="text-white z-10 drop-shadow-lg" />
                         </div>
                         <div className="p-4">
@@ -388,7 +388,7 @@ export default function App() {
                 <h2 className="text-3xl font-black text-white mb-2 tracking-tight">Support for <span className="text-cyan-400">Everything</span></h2>
                 <p className="text-slate-400 font-medium">Download from these platforms & 1000+ others.</p>
               </div>
-              
+
               <div className="flex flex-wrap justify-center gap-4 md:gap-8">
                 {[
                   { icon: Instagram, color: "group-hover:text-pink-500", label: "Instagram" },
