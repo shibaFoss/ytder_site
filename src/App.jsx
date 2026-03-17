@@ -17,7 +17,9 @@ import {
   Facebook,
   Youtube,
   Twitter,
-  Video
+  Video,
+  Music,
+  PlayCircle
 } from 'lucide-react';
 
 // --- Custom Hooks ---
@@ -374,6 +376,40 @@ export default function App() {
             </Reveal>
 
           </div>
+        </div>
+      </section>
+
+      {/* --- SECTION 1.5: SUPPORTED PLATFORMS --- */}
+      <section className="py-12 bg-slate-900/40 backdrop-blur-md border-y border-slate-800/50 relative z-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <Reveal>
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+              <div className="text-center lg:text-left flex-shrink-0">
+                <h2 className="text-3xl font-black text-white mb-2 tracking-tight">Support for <span className="text-cyan-400">Everything</span></h2>
+                <p className="text-slate-400 font-medium">Download from these platforms & 1000+ others.</p>
+              </div>
+              
+              <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+                {[
+                  { icon: Instagram, color: "group-hover:text-pink-500", label: "Instagram" },
+                  { icon: Facebook, color: "group-hover:text-blue-600", label: "Facebook" },
+                  { icon: Youtube, color: "group-hover:text-red-600", label: "YouTube" },
+                  { icon: Twitter, color: "group-hover:text-sky-400", label: "X / Twitter" },
+                  { icon: Music, color: "group-hover:text-emerald-400", label: "TikTok / Music" },
+                  { icon: PlayCircle, color: "group-hover:text-orange-500", label: "Movies / OTT" },
+                  { icon: Globe, color: "group-hover:text-indigo-400", label: "All Websites" }
+                ].map((site, idx) => (
+                  <div key={idx} className="group relative flex flex-col items-center">
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-slate-800/50 border border-slate-700/50 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:border-slate-500/50 group-hover:bg-slate-800 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <site.icon size={32} className={`text-slate-400 transition-all duration-500 transform group-hover:scale-110 ${site.color}`} />
+                    </div>
+                    <span className="mt-3 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 group-hover:text-slate-300 transition-colors duration-300">{site.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
