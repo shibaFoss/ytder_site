@@ -657,9 +657,22 @@ export default function App() {
                 Get the Latest APK <span className="text-white/70 font-medium text-lg">(v2.5.0)</span>
               </span>
             </button>
-            <p className="mt-6 text-slate-400 font-medium flex items-center justify-center gap-2">
-              <ShieldCheck size={18} className="text-emerald-400" /> 100% Safe, Secure & Free
-            </p>
+            <div className="mt-8 flex flex-col items-center gap-6">
+              <p className="text-slate-400 font-medium flex items-center justify-center gap-2">
+                <ShieldCheck size={18} className="text-emerald-400" /> 100% Safe, Secure & Free
+              </p>
+              
+              <div className="flex flex-wrap justify-center items-center gap-6 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/McAfee_logo.svg" alt="McAfee" className="h-6 md:h-8" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Norton_LifeLock_logo.svg" alt="Norton" className="h-6 md:h-8" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Trustpilot_logo.svg" alt="Trustpilot" className="h-6 md:h-8" />
+                <div className="flex items-center gap-1 text-white font-bold text-xs border border-white/20 px-2 py-1 rounded">
+                  <ShieldCheck size={14} className="text-cyan-400" />
+                  SSL SECURE
+                </div>
+              </div>
+            </div>
+
           </Reveal>
         </div>
 
