@@ -662,11 +662,11 @@ export default function App() {
                 <ShieldCheck size={18} className="text-emerald-400" /> 100% Safe, Secure & Free
               </p>
 
-              <div className="flex flex-wrap justify-center items-center gap-8 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-6 md:h-8" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-6 md:h-8" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-6 md:h-8" />
-                <div className="flex items-center gap-2 text-white font-bold text-xs border border-white/20 px-3 py-1.5 rounded-lg bg-white/5">
+              <div className="flex flex-wrap justify-center items-center gap-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" />
+                <div className="flex items-center gap-2 text-white font-bold text-xs border border-white/20 px-3 py-1.5 rounded-lg bg-white/5 backdrop-blur-sm opacity-40 hover:opacity-80 hover:bg-white/10 transition-all duration-500 cursor-default">
                   <ShieldCheck size={16} className="text-cyan-400" />
                   SSL SECURE
                 </div>
