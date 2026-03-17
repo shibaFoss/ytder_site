@@ -338,17 +338,17 @@ export default function App() {
                       </div>
 
                       <div className="bg-slate-800 rounded-xl p-3 flex gap-2 mb-6 border border-slate-700 shadow-inner">
-                        <input type="text" placeholder="Paste link here..." className="bg-transparent outline-none text-sm w-full text-white placeholder-slate-400" readOnly value="https://instagram.com/reel/xyz..." />
+                        <input type="text" placeholder="Paste link here..." className="bg-transparent outline-none text-sm w-full text-white placeholder-slate-400" readOnly value="https://youtube.com/watch?v=tbxYSpR8N6pc" />
                         <button className="bg-fuchsia-600 p-2 rounded-lg text-white"><Download size={16} /></button>
                       </div>
 
                       <div className="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 relative">
                         <div className="h-32 bg-slate-700 flex items-center justify-center relative overflow-hidden">
-                          <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" className="opacity-50 object-cover absolute inset-0 w-full h-full" alt="Video cover" />
+                          <img src="/front_thumb.jpg" className="opacity-50 object-cover absolute inset-0 w-full h-full" alt="Video cover" />
                           <PlaySquare size={32} className="text-white z-10 drop-shadow-lg" />
                         </div>
                         <div className="p-4">
-                          <div className="text-sm font-semibold mb-1 truncate">Viral Dance Reel 2024.mp4</div>
+                          <div className="text-sm font-semibold mb-1 truncate">Chanakya | Sitar for Mental Health Tour.mp4</div>
                           <div className="text-xs text-slate-400 mb-3">45 MB • 1080p HD</div>
 
                           {/* Progress Bar */}
