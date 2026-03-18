@@ -769,9 +769,7 @@ export default function App() {
                 <div className="p-4 flex flex-col justify-end h-full bg-slate-100 relative">
                   <div className="bg-white p-4 rounded-t-2xl shadow-[0_-10px_20px_rgba(0,0,0,0.1)] -mx-4 -mb-4 border-t">
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center text-white">
-                        <Download size={24} />
-                      </div>
+                      <img src="/logo.webp" alt="AIO-YTDER Logo" className="w-12 h-12 rounded-xl" />
                       <div>
                         <div className="font-bold text-slate-900">AIO-YTDER</div>
                         <div className="text-xs text-emerald-600 font-semibold flex items-center gap-1"><CheckCircle2 size={12} /> App Installed</div>
@@ -797,9 +795,7 @@ export default function App() {
               <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
                 <div className="p-4 flex flex-col h-full bg-slate-900 relative">
                   <div className="mt-8 text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl mx-auto flex items-center justify-center mb-4">
-                      <Download size={32} className="text-white" />
-                    </div>
+                    <img src="/logo.webp" alt="AIO-YTDER Logo" className="w-16 h-16 rounded-2xl mx-auto mb-4" />
                     <h4 className="font-bold text-white mb-6">Welcome to AIO-YTDER</h4>
                     <div className="bg-slate-800 p-3 rounded-lg flex items-center justify-between border border-dashed border-slate-600 relative">
                       <span className="text-slate-400 text-sm">Paste copied link...</span>
