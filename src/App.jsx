@@ -419,6 +419,30 @@ export default function App() {
         .text-glow-cyan {
           text-shadow: 0 0 10px rgba(34, 211, 238, 0.4), 0 0 20px rgba(34, 211, 238, 0.1);
         }
+        .premium-divider {
+          height: 1px;
+          width: 100%;
+          background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), rgba(56, 189, 248, 0.2), rgba(255, 255, 255, 0.05), transparent);
+          position: relative;
+        }
+        .premium-divider-glow {
+          height: 1px;
+          width: 100%;
+          background: linear-gradient(to right, transparent, rgba(56, 189, 248, 0.3), transparent);
+          position: relative;
+        }
+        .premium-divider-glow::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 30%;
+          height: 1px;
+          background: linear-gradient(to right, transparent, #38bdf8, transparent);
+          filter: blur(2px);
+          box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
@@ -549,7 +573,8 @@ export default function App() {
       </section>
 
       {/* --- SECTION 1.5: SUPPORTED PLATFORMS --- */}
-      <section className="py-12 bg-slate-900/40 backdrop-blur-md border-y border-slate-800/50 relative z-20">
+      <div className="premium-divider" />
+      <section className="py-12 bg-slate-900/40 backdrop-blur-md relative z-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal>
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
@@ -582,6 +607,7 @@ export default function App() {
         </div>
       </section>
 
+      <div className="premium-divider-glow" />
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-slate-900"></div>
         <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
@@ -608,7 +634,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="pt-8 border-t border-slate-800">
+              <div className="pt-8 premium-divider">
                 <p className="text-slate-400 mb-6 font-medium">Supports downloads from all your favorite platforms:</p>
                 <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-slate-500">
                   <Instagram className="w-8 h-8 md:w-10 md:h-10 hover:text-pink-500 transition-colors cursor-pointer" />
@@ -623,6 +649,7 @@ export default function App() {
         </div>
       </section>
 
+      <div className="premium-divider" />
       <section className="py-24 bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal className="text-center mb-16 px-4">
@@ -652,7 +679,12 @@ export default function App() {
       </section>
 
       {/* --- SECTION 3.5: PRO FEATURES (ANIMATED) --- */}
-      <section className="py-24 bg-slate-900 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-slate-900"></div>
+        <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
+        <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
+        
+        {/* Additional Decorative Blobs */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] -mr-64 -mt-64"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-500/10 blur-[150px] -ml-64 -mb-64"></div>
 
@@ -666,7 +698,7 @@ export default function App() {
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* MP3 Extractions */}
-            <Reveal delay={100} className="group flex flex-col md:flex-row bg-slate-900/50 border border-slate-800 rounded-[2.5rem] overflow-hidden hover:border-fuchsia-500/50 transition-all duration-500">
+            <Reveal delay={100} className="group flex flex-col md:flex-row bg-slate-900/50 border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-fuchsia-500/50 transition-all duration-500">
               <div className="md:w-1/2 p-10 flex flex-col justify-center">
                 <div className="w-12 h-12 bg-fuchsia-500/20 rounded-2xl flex items-center justify-center mb-6">
                   <Music className="text-fuchsia-400" />
@@ -686,7 +718,7 @@ export default function App() {
             </Reveal>
 
             {/* 4K Downloads */}
-            <Reveal delay={200} className="group flex flex-col md:flex-row-reverse bg-slate-900/50 border border-slate-800 rounded-[2.5rem] overflow-hidden hover:border-cyan-500/50 transition-all duration-500">
+            <Reveal delay={200} className="group flex flex-col md:flex-row-reverse bg-slate-900/50 border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-cyan-500/50 transition-all duration-500">
               <div className="md:w-1/2 p-10 flex flex-col justify-center">
                 <div className="w-12 h-12 bg-cyan-500/20 rounded-2xl flex items-center justify-center mb-6">
                   <MonitorPlay className="text-cyan-400" />
@@ -748,6 +780,7 @@ export default function App() {
       </section>
 
       {/* --- SECTION 3.7: APP SHOWCASE (3D GALLERY) --- */}
+      <div className="premium-divider-glow" />
       <section className="py-32 bg-slate-900/50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <Reveal className="text-center mb-20 sm:mb-24 px-4">
@@ -802,7 +835,12 @@ export default function App() {
       </section>
 
       {/* --- SECTION 4: HOW TO INSTALL --- */}
-      <section id="install-guide" className="py-24 bg-slate-900 relative overflow-hidden">
+      <div className="premium-divider" />
+      <section id="install-guide" className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-slate-900"></div>
+        <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
+        <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
+
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-purple-900/20 blur-[150px] pointer-events-none"></div>
 
@@ -817,7 +855,7 @@ export default function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Step 1 */}
             <Reveal delay={0} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-4 -z-10">01</div>
+              <div className="text-6xl font-black text-slate-700 absolute -top-8 -left-4 -z-10">01</div>
               <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
                 <div className="p-4 flex flex-col items-center justify-center h-full bg-slate-100 text-slate-900 relative">
                   <div className="bg-white p-6 rounded-2xl shadow-xl border w-full text-center">
@@ -839,7 +877,7 @@ export default function App() {
 
             {/* Step 2 */}
             <Reveal delay={100} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-4 -z-10">02</div>
+              <div className="text-6xl font-black text-slate-700 absolute -top-8 -left-4 -z-10">02</div>
               <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
                 <div className="p-4 flex flex-col h-full bg-slate-900 text-white relative">
                   <div className="mt-8">
@@ -866,7 +904,7 @@ export default function App() {
 
             {/* Step 3 */}
             <Reveal delay={200} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-4 -z-10">03</div>
+              <div className="text-6xl font-black text-slate-700 absolute -top-8 -left-4 -z-10">03</div>
               <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
                 <div className="p-4 flex flex-col justify-end h-full bg-slate-100 relative">
                   <div className="bg-white p-4 rounded-t-2xl shadow-[0_-10px_20px_rgba(0,0,0,0.1)] -mx-4 -mb-4 border-t">
@@ -893,7 +931,7 @@ export default function App() {
 
             {/* Step 4 */}
             <Reveal delay={300} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-800 absolute -top-8 -left-4 -z-10">04</div>
+              <div className="text-6xl font-black text-slate-700 absolute -top-8 -left-4 -z-10">04</div>
               <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
                 <div className="p-4 flex flex-col h-full bg-slate-900 relative">
                   <div className="mt-8 text-center">
@@ -918,7 +956,8 @@ export default function App() {
       </section>
 
       {/* --- SECTION 5: TESTIMONIALS --- */}
-      <section className="py-24 bg-slate-900 border-t border-slate-800">
+      <div className="premium-divider-glow" />
+      <section className="py-24 bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal className="text-center mb-16 px-4">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Loved by Millions Across India</h2>
@@ -957,7 +996,8 @@ export default function App() {
       </section>
 
       {/* --- SECTION 6: FINAL CTA & FOOTER --- */}
-      <footer className="relative bg-gradient-to-t from-slate-900 to-slate-800 pt-24 border-t border-slate-800">
+    <div className="premium-divider" />
+    <footer className="relative bg-gradient-to-t from-slate-900 to-slate-800 pt-24">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center mb-24">
@@ -1001,7 +1041,8 @@ export default function App() {
           </Reveal>
         </div>
 
-        <div className="border-t border-slate-800/50 bg-slate-900 relative z-10">
+        <div className="premium-divider mt-8 opacity-50" />
+        <div className="bg-slate-900 relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3 text-slate-300 font-bold text-xl">
               <img src="/playstore-logo.png" alt="AIO-YTDER Logo" className="w-10 h-10 rounded-xl" />
