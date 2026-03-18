@@ -292,7 +292,7 @@ export default function App() {
       </div>
 
       <SpiderWeb />
-      
+
       {/* --- PREMIUM NAVBAR --- */}
       <nav className="fixed top-0 inset-x-0 z-50 bg-slate-900/50 backdrop-blur-xl border-b border-white/5 py-4">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
@@ -311,11 +311,11 @@ export default function App() {
               </span>
             </span>
           </div>
-          
+
           <div className="flex items-center gap-4">
-            <a 
-              href="https://github.com/shibaFoss/AIO-Video-Downloader" 
-              target="_blank" 
+            <a
+              href="https://github.com/shibaFoss/AIO-Video-Downloader"
+              target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-2 px-3 py-1.5 bg-slate-800/40 hover:bg-slate-800 border border-slate-700/50 rounded-full transition-all duration-300 shadow-lg"
               title="View on GitHub"
@@ -328,8 +328,8 @@ export default function App() {
                 </div>
               )}
             </a>
-            
-            <a 
+
+            <a
               href={versionData.latest_apk_url}
               className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full font-bold text-sm transition-all duration-300 active:scale-95"
             >
@@ -485,7 +485,7 @@ export default function App() {
                   <div className="absolute -top-3 -right-3 z-30 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
                     v{versionData.latest_version}
                   </div>
-                  <a 
+                  <a
                     href={versionData.latest_apk_url}
                     className="relative block w-full sm:w-auto px-10 py-4 sm:px-12 sm:py-5 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 rounded-full font-bold text-lg sm:text-xl text-white shadow-[0_0_40px_rgba(192,38,211,0.4)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group text-center"
                   >
@@ -634,15 +634,13 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="pt-8 premium-divider">
-                <p className="text-slate-400 mb-6 font-medium">Supports downloads from all your favorite platforms:</p>
-                <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-slate-500">
-                  <Instagram className="w-8 h-8 md:w-10 md:h-10 hover:text-pink-500 transition-colors cursor-pointer" />
-                  <Facebook className="w-8 h-8 md:w-10 md:h-10 hover:text-blue-500 transition-colors cursor-pointer" />
-                  <Youtube className="w-8 h-8 md:w-10 md:h-10 hover:text-red-500 transition-colors cursor-pointer" />
-                  <Twitter className="w-8 h-8 md:w-10 md:h-10 hover:text-blue-400 transition-colors cursor-pointer" />
-                  <Video className="w-8 h-8 md:w-10 md:h-10 hover:text-purple-500 transition-colors cursor-pointer" />
-                </div>
+              <p className="text-slate-400 mb-6 font-medium">Supports downloads from all your favorite platforms:</p>
+              <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-slate-500">
+                <Instagram className="w-8 h-8 md:w-10 md:h-10 hover:text-pink-500 transition-colors cursor-pointer" />
+                <Facebook className="w-8 h-8 md:w-10 md:h-10 hover:text-blue-500 transition-colors cursor-pointer" />
+                <Youtube className="w-8 h-8 md:w-10 md:h-10 hover:text-red-500 transition-colors cursor-pointer" />
+                <Twitter className="w-8 h-8 md:w-10 md:h-10 hover:text-blue-400 transition-colors cursor-pointer" />
+                <Video className="w-8 h-8 md:w-10 md:h-10 hover:text-purple-500 transition-colors cursor-pointer" />
               </div>
             </div>
           </Reveal>
@@ -684,7 +682,7 @@ export default function App() {
         <div className="absolute inset-0 bg-slate-900"></div>
         <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
         <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
-        
+
         {/* Additional Decorative Blobs */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] -mr-64 -mt-64"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-500/10 blur-[150px] -ml-64 -mb-64"></div>
@@ -997,8 +995,8 @@ export default function App() {
       </section>
 
       {/* --- SECTION 6: FINAL CTA & FOOTER --- */}
-    <div className="premium-divider" />
-    <footer className="relative bg-gradient-to-t from-slate-900 to-slate-800 pt-24">
+      <div className="premium-divider" />
+      <footer className="relative bg-gradient-to-t from-slate-900 to-slate-800 pt-24">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center mb-24">
@@ -1010,7 +1008,7 @@ export default function App() {
               <div className="absolute -top-3 -right-3 z-30 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
                 v{versionData.latest_version}
               </div>
-              <a 
+              <a
                 href={versionData.latest_apk_url}
                 className="relative block px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-base sm:text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.3)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10"
               >
