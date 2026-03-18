@@ -492,7 +492,7 @@ export default function App() {
               <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0 relative">
 
                 {/* 1. Left Feature: Smart Browser */}
-                <Reveal delay={600} className="lg:w-1/3 order-2 lg:order-1 lg:-mr-12">
+                <Reveal delay={300} className="lg:w-1/3 order-2 lg:order-1 lg:-mr-12 hidden lg:block">
                   <div className="relative group animate-perspective-left">
                     <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
@@ -523,7 +523,7 @@ export default function App() {
                 </Reveal>
 
                 {/* 3. Right Feature: Advanced Manager */}
-                <Reveal delay={700} className="lg:w-1/3 order-3 lg:-ml-12">
+                <Reveal delay={700} className="lg:w-1/3 order-3 lg:-ml-12 hidden lg:block">
                   <div className="relative group animate-perspective-right">
                     <div className="absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
