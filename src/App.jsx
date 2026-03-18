@@ -358,10 +358,14 @@ export default function App() {
           100% { background-position: 0% 50%; }
         }
         .bg-circuit {
-          background-image: radial-gradient(circle, #38bdf8 1px, transparent 1px);
-          background-size: 30px 30px;
-          background-position: 0 0, 15px 15px;
-          opacity: 0.05;
+          background-image: radial-gradient(circle, rgba(56, 189, 248, 0.4) 1px, transparent 1px);
+          background-size: 24px 24px;
+          background-position: center;
+          -webkit-mask-image: radial-gradient(circle, black 40%, transparent 80%);
+          mask-image: radial-gradient(circle, black 40%, transparent 80%);
+        }
+        .bg-glow-soft {
+          background: radial-gradient(circle at center, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
         }
         @keyframes pulse-soft {
           0%, 100% { transform: scale(1); opacity: 0.9; filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); }
@@ -578,8 +582,10 @@ export default function App() {
         </div>
       </section>
 
-      <section className="py-16 bg-slate-900 relative border-y border-slate-800">
-        <div className="absolute inset-0 bg-circuit"></div>
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-slate-900"></div>
+        <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
+        <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           <Reveal>
             <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700 p-6 sm:p-12 rounded-3xl shadow-2xl">
