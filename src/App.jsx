@@ -315,6 +315,16 @@ export default function App() {
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
           opacity: 0.05;
         }
+        @keyframes perspective-left {
+          from { transform: perspective(1000px) rotateY(15deg) scale(0.9); }
+          to { transform: perspective(1000px) rotateY(25deg) scale(0.95); }
+        }
+        @keyframes perspective-right {
+          from { transform: perspective(1000px) rotateY(-15deg) scale(0.9); }
+          to { transform: perspective(1000px) rotateY(-25deg) scale(0.95); }
+        }
+        .animate-perspective-left { animation: perspective-left 5s ease-in-out infinite alternate; }
+        .animate-perspective-right { animation: perspective-right 5s ease-in-out infinite alternate; }
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
@@ -618,6 +628,60 @@ export default function App() {
                    <div className="text-emerald-400 animate-pulse">➔</div>
                    <div className="p-4 bg-emerald-500/20 border border-emerald-500/50 rounded-xl text-xs font-mono text-emerald-400 font-bold">VIDEO.MP4</div>
                 </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* --- SECTION 3.7: APP SHOWCASE (3D GALLERY) --- */}
+      <section className="py-32 bg-slate-900/50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <Reveal className="text-center mb-24">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+              Designed for <span className="text-fuchsia-500">Speed.</span> Built for <span className="text-cyan-400">Ease.</span>
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg">A beautiful interface that puts your content first.</p>
+          </Reveal>
+
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
+            {/* Left Screenshot */}
+            <Reveal delay={100} className="lg:w-1/3 order-2 lg:order-1">
+              <div className="animate-perspective-left shadow-[20px_20px_60px_rgba(0,0,0,0.5)] rounded-[2.5rem] border-2 border-white/5 overflow-hidden">
+                <img src="/screenshot_browser.png" alt="In-App Browser" className="w-full h-auto" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent pointer-events-none"></div>
+              </div>
+              <div className="mt-8 text-center lg:text-right lg:pr-12">
+                <h4 className="text-xl font-bold text-white mb-2">Smart In-App Browser</h4>
+                <p className="text-sm text-slate-400">Browse any site and detect videos automatically with our intelligent engine.</p>
+              </div>
+            </Reveal>
+
+            {/* Center Screenshot (Main) */}
+            <Reveal delay={0} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-110">
+              <div className="shadow-[0_20px_80px_rgba(192,38,211,0.3)] rounded-[3rem] border-4 border-white/10 overflow-hidden relative group">
+                <img src="/screenshot_home.png" alt="App Home Screen" className="w-full h-auto" />
+                <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                {/* Float Badge */}
+                <div className="absolute top-10 right-10 bg-fuchsia-600 text-white font-bold text-xs py-2 px-4 rounded-full shadow-lg animate-bounce">
+                  NEW UI
+                </div>
+              </div>
+              <div className="mt-12 text-center">
+                <h4 className="text-2xl font-black text-white mb-3">One-Tap Magic</h4>
+                <p className="text-slate-400">Paste links or use shortcuts. Downloading has never been this intuitive.</p>
+              </div>
+            </Reveal>
+
+            {/* Right Screenshot */}
+            <Reveal delay={200} className="lg:w-1/3 order-3">
+              <div className="animate-perspective-right shadow-[-20px_20px_60px_rgba(0,0,0,0.5)] rounded-[2.5rem] border-2 border-white/5 overflow-hidden">
+                <img src="/screenshot_downloads.png" alt="Downloads Manager" className="w-full h-auto" />
+                <div className="absolute inset-0 bg-gradient-to-tl from-purple-500/20 to-transparent pointer-events-none"></div>
+              </div>
+              <div className="mt-8 text-center lg:text-left lg:pl-12">
+                <h4 className="text-xl font-bold text-white mb-2">Advanced Manager</h4>
+                <p className="text-sm text-slate-400">Pause, resume, and organize your files with a desktop-class download manager.</p>
               </div>
             </Reveal>
           </div>
