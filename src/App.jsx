@@ -959,18 +959,23 @@ export default function App() {
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8 leading-[1.2]">
               Ready to download anything?
             </h2>
-            <a 
-              href={versionData.latest_apk_url}
-              className="group relative inline-block px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-base sm:text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.3)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden w-full md:w-auto border border-white/10"
-            >
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
-              {/* Interactive Shimmer */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
-              <span className="relative flex items-center justify-center gap-3 drop-shadow-md">
-                <Download size={28} className="animate-bounce" />
-                Get the Latest APK <span className="text-white/70 font-medium text-xs sm:text-lg">(v{versionData.latest_version})</span>
-              </span>
-            </a>
+            <div className="relative group inline-block w-full md:w-auto">
+              <div className="absolute -top-3 -right-3 z-30 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
+                v{versionData.latest_version}
+              </div>
+              <a 
+                href={versionData.latest_apk_url}
+                className="relative block px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-base sm:text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.3)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10"
+              >
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                {/* Interactive Shimmer */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
+                <span className="relative flex items-center justify-center gap-3 drop-shadow-md">
+                  <Download size={28} className="animate-bounce" />
+                  Download APK Now (Free)
+                </span>
+              </a>
+            </div>
             <div className="mt-8 flex flex-col items-center gap-6">
               <p className="text-slate-400 font-medium flex items-center justify-center gap-2">
                 <ShieldCheck size={18} className="text-emerald-400" /> 100% Safe, Secure & Free
