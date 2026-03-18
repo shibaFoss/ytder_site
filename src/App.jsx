@@ -19,7 +19,8 @@ import {
   Twitter,
   Video,
   Music,
-  PlayCircle
+  PlayCircle,
+  Github
 } from 'lucide-react';
 
 // --- Custom Hooks ---
@@ -235,6 +236,39 @@ const SpiderWeb = () => {
 
 export default function App() {
   const { ref: counterRef, count } = useCountUp(587324, 2500);
+  const [stars, setStars] = useState(0);
+  const [versionData, setVersionData] = useState({
+    latest_version: 'v2.5.0',
+    latest_apk_url: '#',
+  });
+
+  useEffect(() => {
+    // Fetch GitHub Stars
+    fetch('https://api.github.com/repos/shibaFoss/AIO-Video-Downloader')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count) {
+          setStars(data.stargazers_count);
+        }
+      })
+      .catch(err => console.error('Error fetching stars:', err));
+
+    // Fetch Version Info
+    fetch('https://raw.githubusercontent.com/shibaFoss/AIO-Video-Downloader/refs/heads/master/others/version_info.txt')
+      .then(res => res.text())
+      .then(text => {
+        const lines = text.split('\n');
+        const data = {};
+        lines.forEach(line => {
+          const [key, value] = line.split('=');
+          if (key && value) data[key.trim()] = value.trim();
+        });
+        if (data.latest_version) {
+          setVersionData(data);
+        }
+      })
+      .catch(err => console.error('Error fetching version info:', err));
+  }, []);
 
   const scrollToInstall = () => {
     document.getElementById('install-guide').scrollIntoView({ behavior: 'smooth' });
@@ -267,16 +301,42 @@ export default function App() {
               <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
               <img src="/playstore-logo.png" alt="AIO-YTDER" className="relative w-10 h-10 rounded-lg shadow-2xl" />
             </div>
-            <span className="text-2xl font-black tracking-tighter text-white">AIO-<span className="text-cyan-400">YTDER</span></span>
+            <span className="text-3xl font-black tracking-tighter flex items-center group perspective-1000">
+              <span className="text-white text-3d transform transition-transform duration-500 group-hover:translate-z-10 group-hover:rotate-y-10">AIO-</span>
+              <span className="relative">
+                <span className="absolute -inset-2 bg-cyan-500/10 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity animate-pulse"></span>
+                <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-fuchsia-500 bg-[length:200%_auto] animate-[gradient_4s_linear_infinite] text-glow-cyan transition-all duration-500 group-hover:scale-110 inline-block">
+                  YTDER
+                </span>
+              </span>
+            </span>
           </div>
           
-          <button 
-            onClick={scrollToInstall}
-            className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full font-bold text-sm transition-all duration-300 active:scale-95"
-          >
-            <Download size={16} className="text-fuchsia-500" />
-            Download APK
-          </button>
+          <div className="flex items-center gap-4">
+            <a 
+              href="https://github.com/shibaFoss/AIO-Video-Downloader" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 px-3 py-1.5 bg-slate-800/40 hover:bg-slate-800 border border-slate-700/50 rounded-full transition-all duration-300 shadow-lg"
+              title="View on GitHub"
+            >
+              <Github size={18} className="text-slate-400 group-hover:text-white transition-colors" />
+              {stars > 0 && (
+                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-400 group-hover:text-amber-400 transition-colors">
+                  <Star size={10} fill="currentColor" className="text-amber-500" />
+                  <span>{stars.toLocaleString()}</span>
+                </div>
+              )}
+            </a>
+            
+            <button 
+              onClick={scrollToInstall}
+              className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full font-bold text-sm transition-all duration-300 active:scale-95"
+            >
+              <Download size={16} className="text-fuchsia-500" />
+              Download APK
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -344,6 +404,17 @@ export default function App() {
         }
         .animate-perspective-left { animation: perspective-left 5s ease-in-out infinite alternate; }
         .animate-perspective-right { animation: perspective-right 5s ease-in-out infinite alternate; }
+        .text-3d {
+          text-shadow: 
+            0 1px 0 #1e293b,
+            0 2px 0 #161e2e,
+            0 3px 0 #0f172a,
+            0 4px 0 #020617,
+            0 10px 15px rgba(0,0,0,0.8);
+        }
+        .text-glow-cyan {
+          text-shadow: 0 0 10px rgba(34, 211, 238, 0.4), 0 0 20px rgba(34, 211, 238, 0.1);
+        }
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
@@ -364,7 +435,7 @@ export default function App() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-fuchsia-500"></span>
                   </span>
-                  <span className="text-xs font-bold text-fuchsia-400 uppercase tracking-wider">v2.5.0 is Live!</span>
+                  <span className="text-xs font-bold text-fuchsia-400 uppercase tracking-wider">v{versionData.latest_version} is Live!</span>
                 </div>
               </Reveal>
 
@@ -384,16 +455,19 @@ export default function App() {
               <Reveal delay={400} className="flex flex-col sm:flex-row items-center gap-4 justify-center">
                 <div className="relative group">
                   <div className="absolute -top-3 -right-3 z-30 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
-                    v2.5.0
+                    v{versionData.latest_version}
                   </div>
-                  <button className="relative w-full sm:w-auto px-12 py-5 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 rounded-full font-bold text-xl text-white shadow-[0_0_40px_rgba(192,38,211,0.4)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group">
+                  <a 
+                    href={versionData.latest_apk_url}
+                    className="relative block w-full sm:w-auto px-12 py-5 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 rounded-full font-bold text-xl text-white shadow-[0_0_40px_rgba(192,38,211,0.4)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group text-center"
+                  >
                     <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"></div>
                     <span className="relative flex items-center justify-center gap-2 drop-shadow-md">
                       <Download className="animate-bounce" />
                       Download APK Now (Free)
                     </span>
-                  </button>
+                  </a>
                 </div>
                 <button
                   onClick={scrollToInstall}
@@ -887,15 +961,18 @@ export default function App() {
             <h2 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8">
               Ready to download anything?
             </h2>
-            <button className="group relative px-10 py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.3)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden w-full md:w-auto border border-white/10">
+            <a 
+              href={versionData.latest_apk_url}
+              className="group relative inline-block px-10 py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.3)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden w-full md:w-auto border border-white/10"
+            >
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
               {/* Interactive Shimmer */}
               <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
               <span className="relative flex items-center justify-center gap-3 drop-shadow-md">
                 <Download size={28} className="animate-bounce" />
-                Get the Latest APK <span className="text-white/70 font-medium text-lg">(v2.5.0)</span>
+                Get the Latest APK <span className="text-white/70 font-medium text-lg">(v{versionData.latest_version})</span>
               </span>
-            </button>
+            </a>
             <div className="mt-8 flex flex-col items-center gap-6">
               <p className="text-slate-400 font-medium flex items-center justify-center gap-2">
                 <ShieldCheck size={18} className="text-emerald-400" /> 100% Safe, Secure & Free
