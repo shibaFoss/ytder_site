@@ -241,7 +241,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 font-sans text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden relative">
+    <div className="min-h-screen bg-slate-900 font-sans text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden relative">
       {/* --- PREMIUM BACKGROUND SYSTEM --- */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Animated Mesh Blobs */}
@@ -253,8 +253,8 @@ export default function App() {
         <div className="absolute inset-0 bg-grid-slate-800 opacity-30"></div>
         <div className="absolute inset-0 noise mix-blend-overlay"></div>
         
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,0.8)_100%)]"></div>
+        {/* Subtle Vignette for depth, much lighter now */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)]"></div>
       </div>
 
       <SpiderWeb />
@@ -470,7 +470,7 @@ export default function App() {
       </section>
 
       {/* --- SECTION 2: SOCIAL PROOF & LIVE COUNTER --- */}
-      <section className="py-16 bg-slate-950 relative border-y border-slate-800">
+      <section className="py-16 bg-slate-900 relative border-y border-slate-800">
         <div className="absolute inset-0 bg-circuit"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           <Reveal>
@@ -539,7 +539,7 @@ export default function App() {
       </section>
 
       {/* --- SECTION 3.5: PRO FEATURES (ANIMATED) --- */}
-      <section className="py-24 bg-slate-950 relative overflow-hidden">
+      <section className="py-24 bg-slate-900 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] -mr-64 -mt-64"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-500/10 blur-[150px] -ml-64 -mb-64"></div>
 
@@ -689,7 +689,7 @@ export default function App() {
       </section>
 
       {/* --- SECTION 4: HOW TO INSTALL --- */}
-      <section id="install-guide" className="py-24 bg-slate-950 relative overflow-hidden">
+      <section id="install-guide" className="py-24 bg-slate-900 relative overflow-hidden">
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-purple-900/20 blur-[150px] pointer-events-none"></div>
 
@@ -848,7 +848,7 @@ export default function App() {
       </section>
 
       {/* --- SECTION 6: FINAL CTA & FOOTER --- */}
-      <footer className="relative bg-gradient-to-t from-slate-950 to-slate-900 pt-24 border-t border-slate-800">
+      <footer className="relative bg-gradient-to-t from-slate-900 to-slate-800 pt-24 border-t border-slate-800">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center mb-24">
@@ -882,7 +882,7 @@ export default function App() {
           </Reveal>
         </div>
 
-        <div className="border-t border-slate-800/50 bg-slate-950 relative z-10">
+        <div className="border-t border-slate-800/50 bg-slate-900 relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2 text-slate-300 font-bold text-xl">
               <Download className="text-cyan-400" />
