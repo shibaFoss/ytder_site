@@ -258,6 +258,27 @@ export default function App() {
       </div>
 
       <SpiderWeb />
+      
+      {/* --- PREMIUM NAVBAR --- */}
+      <nav className="fixed top-0 inset-x-0 z-50 bg-slate-900/50 backdrop-blur-xl border-b border-white/5 py-4">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+              <img src="/playstore-logo.png" alt="AIO-YTDER" className="relative w-10 h-10 rounded-lg shadow-2xl" />
+            </div>
+            <span className="text-2xl font-black tracking-tighter text-white">AIO-<span className="text-cyan-400">YTDER</span></span>
+          </div>
+          
+          <button 
+            onClick={scrollToInstall}
+            className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full font-bold text-sm transition-all duration-300 active:scale-95"
+          >
+            <Download size={16} className="text-fuchsia-500" />
+            Download APK
+          </button>
+        </div>
+      </nav>
 
       {/* Global Styles for Animations */}
       <style dangerouslySetInnerHTML={{
@@ -334,6 +355,9 @@ export default function App() {
 
             {/* Top: Copy & CTA */}
             <div className="max-w-4xl">
+              <Reveal delay={50}>
+                <img src="/playstore-logo.png" alt="AIO-YTDER Icon" className="w-24 h-24 mx-auto mb-8 shadow-2xl rounded-[2rem] border-2 border-white/10" />
+              </Reveal>
               <Reveal delay={100}>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 mb-6 group hover:bg-fuchsia-500/20 transition-colors mx-auto">
                   <span className="relative flex h-2 w-2">
@@ -893,8 +917,8 @@ export default function App() {
 
         <div className="border-t border-slate-800/50 bg-slate-900 relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2 text-slate-300 font-bold text-xl">
-              <Download className="text-cyan-400" />
+            <div className="flex items-center gap-3 text-slate-300 font-bold text-xl">
+              <img src="/playstore-logo.png" alt="AIO-YTDER Logo" className="w-10 h-10 rounded-xl" />
               AIO-YTDER
             </div>
 
