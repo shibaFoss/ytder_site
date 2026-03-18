@@ -248,11 +248,11 @@ export default function App() {
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px] animate-blob"></div>
         <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-cyan-600/15 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '2s' }}></div>
         <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-600/20 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '4s' }}></div>
-        
+
         {/* Pattern Overlays */}
         <div className="absolute inset-0 bg-grid-slate-800 opacity-30"></div>
         <div className="absolute inset-0 noise mix-blend-overlay"></div>
-        
+
         {/* Subtle Vignette for depth, much lighter now */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)]"></div>
       </div>
@@ -381,7 +381,7 @@ export default function App() {
 
               <Reveal delay={500} className="mt-12 flex flex-wrap justify-center gap-6">
                 <ShimmerBadge icon={ShieldCheck} text="🇮🇳 Made in India" type="emerald" />
-                <ShimmerBadge icon={Award} text="India's No. 1 App 2024" type="gold" />
+                <ShimmerBadge icon={Award} text="India's No. 1 App 2026" type="gold" />
                 <div className="flex items-center gap-2 text-slate-400 font-medium">
                   <Star className="text-amber-400" size={18} fill="currentColor" />
                   <span className="text-white">4.9/5</span> Rating
@@ -392,7 +392,7 @@ export default function App() {
             {/* Bottom: 3D Triple Gallery (The "Better Idea") */}
             <div className="mt-24 lg:mt-32 w-full max-w-6xl">
               <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0 relative">
-                
+
                 {/* 1. Left Feature: Smart Browser */}
                 <Reveal delay={600} className="lg:w-1/3 order-2 lg:order-1 lg:-mr-12">
                   <div className="relative group animate-perspective-left">
@@ -594,13 +594,13 @@ export default function App() {
               </div>
               <div className="md:w-1/2 bg-slate-800/30 relative flex items-center justify-center min-h-[250px]">
                 <div className="relative">
-                   <div className="text-8xl font-black text-cyan-500/10 select-none">4K</div>
-                   <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-32 h-20 border-2 border-cyan-400/30 rounded-lg flex items-center justify-center relative overflow-hidden">
-                         <div className="w-full h-0.5 bg-cyan-400 absolute top-0 animate-scan"></div>
-                         <div className="text-cyan-400 font-bold text-xl">UHD</div>
-                      </div>
-                   </div>
+                  <div className="text-8xl font-black text-cyan-500/10 select-none">4K</div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-32 h-20 border-2 border-cyan-400/30 rounded-lg flex items-center justify-center relative overflow-hidden">
+                      <div className="w-full h-0.5 bg-cyan-400 absolute top-0 animate-scan"></div>
+                      <div className="text-cyan-400 font-bold text-xl">UHD</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Reveal>
@@ -635,9 +635,9 @@ export default function App() {
               </div>
               <div className="md:w-1/2 bg-slate-800/30 relative flex items-center justify-center min-h-[250px]">
                 <div className="flex gap-4 items-center">
-                   <div className="p-4 bg-slate-700 rounded-xl text-xs font-mono text-slate-400">VIDEO.MOV</div>
-                   <div className="text-emerald-400 animate-pulse">➔</div>
-                   <div className="p-4 bg-emerald-500/20 border border-emerald-500/50 rounded-xl text-xs font-mono text-emerald-400 font-bold">VIDEO.MP4</div>
+                  <div className="p-4 bg-slate-700 rounded-xl text-xs font-mono text-slate-400">VIDEO.MOV</div>
+                  <div className="text-emerald-400 animate-pulse">➔</div>
+                  <div className="p-4 bg-emerald-500/20 border border-emerald-500/50 rounded-xl text-xs font-mono text-emerald-400 font-bold">VIDEO.MP4</div>
                 </div>
               </div>
             </Reveal>
@@ -909,7 +909,7 @@ export default function App() {
             </div>
 
             <div className="text-slate-500 text-sm flex items-center gap-1">
-              © 2024 AIO-YTDER. Made with <span className="text-red-500 text-lg animate-pulse">❤️</span> in India.
+              © 2026 AIO-YTDER. Made with <span className="text-red-500 text-lg animate-pulse">❤️</span> in India.
             </div>
           </div>
         </div>
