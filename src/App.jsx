@@ -330,54 +330,48 @@ export default function App() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
 
             {/* Left: Copy */}
-            <div className="text-center lg:text-left">
-              <Reveal>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-cyan-300 text-sm font-semibold mb-6 backdrop-blur-sm">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+            <div className="text-center lg:text-left lg:w-1/2">
+              <Reveal delay={100}>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 mb-6 group hover:bg-fuchsia-500/20 transition-colors">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-fuchsia-500"></span>
                   </span>
-                  v2.5.0 is Live!
+                  <span className="text-xs font-bold text-fuchsia-400 uppercase tracking-wider">v2.5.0 is Live!</span>
                 </div>
               </Reveal>
 
-              <Reveal delay={100}>
-                <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                  India's <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">#1 Video</span> Downloader. <br />
-                  <span className="text-fuchsia-400">Fast. Free. Unlimited.</span>
+              <Reveal delay={200}>
+                <h1 className="text-6xl lg:text-8xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                  Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-purple-600">Anything.</span><br />
+                  <span className="text-slate-400">Anywhere.</span>
                 </h1>
               </Reveal>
 
-              <Reveal delay={200}>
+              <Reveal delay={300}>
                 <p className="text-lg lg:text-xl text-indigo-100 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                   Download any video from any website in HD quality directly to your Android phone. Trusted by over <strong className="text-white">5 Lakh+</strong> users.
                 </p>
               </Reveal>
 
-              <Reveal delay={300} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+              <Reveal delay={400} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                {/* ... CTA buttons ... */}
                 <div className="relative group">
-                  {/* Floating Version Badge */}
                   <div className="absolute -top-3 -right-3 z-20 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
                     v2.5.0
                   </div>
-                  
                   <button className="relative w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 rounded-full font-bold text-lg text-white shadow-[0_0_30px_rgba(192,38,211,0.3)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group">
-                    {/* Glass Overlay Light */}
                     <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
-                    
-                    {/* Interactive Shimmer */}
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"></div>
-                    
                     <span className="relative flex items-center justify-center gap-2 drop-shadow-md">
                       <Download className="animate-bounce" />
                       Download APK Now (Free)
                     </span>
                   </button>
                 </div>
-                
                 <button
                   onClick={scrollToInstall}
                   className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/20 hover:bg-white/10 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
@@ -386,62 +380,41 @@ export default function App() {
                 </button>
               </Reveal>
 
-              <Reveal delay={400} className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
+              <Reveal delay={500} className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
                 <ShimmerBadge icon={ShieldCheck} text="🇮🇳 Made in India" type="emerald" />
                 <ShimmerBadge icon={Award} text="India's No. 1 App 2024" type="gold" />
               </Reveal>
             </div>
 
-            {/* Right: 3D Mockup */}
-            <Reveal delay={300} className="hidden lg:block">
-              <div className="relative w-full h-full flex justify-center items-center">
-                <div className="animate-float relative z-10">
-                  <PhoneMockup>
-                    {/* Mock App UI */}
-                    <div className="p-4 bg-slate-900 h-full flex flex-col">
-                      <div className="flex justify-between items-center mb-6 mt-6">
-                        <div className="text-xl font-bold text-cyan-400">AIO-YTDER</div>
-                        <Settings size={20} className="text-slate-400" />
-                      </div>
+            {/* Right: AI-Generated Visual (Inspired by Screenshot) */}
+            <div className="lg:w-1/2 relative lg:pl-12 flex justify-center">
+              <Reveal delay={600} className="relative z-10 w-full max-w-[600px]">
+                <div className="relative group">
+                  {/* Outer Glow Effect */}
+                  <div className="absolute -inset-4 bg-gradient-to-r from-fuchsia-500/20 to-blue-500/20 blur-[60px] opacity-50 group-hover:opacity-80 transition-opacity duration-1000 animate-pulse"></div>
+                  
+                  {/* The AI Artifact Image */}
+                  <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl transform hover:scale-[1.02] transition-transform duration-700 ease-out animate-float">
+                    <img 
+                      src="/hero-mockup.png" 
+                      className="w-full h-auto object-cover relative z-10" 
+                      alt="AIO-YTDER High-End App Interface Mockup" 
+                    />
+                    
+                    {/* Glass Shine */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-20"></div>
+                  </div>
 
-                      <div className="bg-slate-800 rounded-xl p-3 flex gap-2 mb-6 border border-slate-700 shadow-inner">
-                        <input type="text" placeholder="Paste link here..." className="bg-transparent outline-none text-sm w-full text-white placeholder-slate-400" readOnly value="https://youtube.com/watch?v=tbxYSpR8N6pc" />
-                        <button className="bg-fuchsia-600 p-2 rounded-lg text-white"><Download size={16} /></button>
-                      </div>
-
-                      <div className="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-slate-700 relative">
-                        <div className="h-32 bg-slate-700 flex items-center justify-center relative overflow-hidden">
-                          <img src="https://unsplash.com/photos/xIkhRcRcbJ4/download?force=true&w=640" className="opacity-100 object-cover absolute inset-0 w-full h-full" alt="Video cover" />
-                          <PlaySquare size={32} className="text-white z-10 drop-shadow-lg" />
-                        </div>
-                        <div className="p-4">
-                          <div className="text-sm font-semibold mb-1 truncate">Chanakya | Sitar for Mental Health Tour.mp4</div>
-                          <div className="text-xs text-slate-400 mb-3">45 MB • 1080p HD</div>
-
-                          {/* Progress Bar */}
-                          <div className="w-full bg-slate-700 rounded-full h-2 mb-2">
-                            <div className="bg-cyan-400 h-2 rounded-full w-[75%] shadow-[0_0_10px_#22d3ee]"></div>
-                          </div>
-                          <div className="flex justify-between text-xs text-cyan-400 font-bold">
-                            <span>Downloading...</span>
-                            <span>75%</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </PhoneMockup>
+                  {/* Smaller Floating Elements (Added for extra depth) */}
+                  <div className="absolute -top-12 -right-8 w-16 h-16 bg-fuchsia-600 rounded-2xl shadow-xl shadow-fuchsia-900/50 animate-bounce flex items-center justify-center z-30 invisible lg:visible" style={{ animationDelay: '1s' }}>
+                    <Rocket className="text-white" size={32} />
+                  </div>
+                  <div className="absolute -bottom-10 -left-6 bg-cyan-500 p-4 rounded-3xl shadow-xl shadow-cyan-900/50 animate-bounce flex items-center justify-center z-30 invisible lg:visible" style={{ animationDelay: '0.5s' }}>
+                    <ShieldCheck className="text-white" size={32} />
+                  </div>
                 </div>
-
-                {/* Decorative Elements behind phone */}
-                <div className="absolute top-1/4 right-[10%] bg-fuchsia-600 p-3 rounded-2xl shadow-xl shadow-fuchsia-900/50 animate-bounce" style={{ animationDelay: '1s' }}>
-                  <Download className="text-white" size={24} />
-                </div>
-                <div className="absolute bottom-1/4 left-[10%] bg-cyan-500 p-3 rounded-2xl shadow-xl shadow-cyan-900/50 animate-bounce" style={{ animationDelay: '0.5s' }}>
-                  <ShieldCheck className="text-white" size={24} />
-                </div>
-              </div>
-            </Reveal>
-
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
