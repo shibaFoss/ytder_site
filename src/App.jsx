@@ -330,12 +330,12 @@ export default function App() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
+          <div className="flex flex-col items-center justify-center text-center">
 
-            {/* Left: Copy */}
-            <div className="text-center lg:text-left lg:w-1/2">
+            {/* Top: Copy & CTA */}
+            <div className="max-w-4xl">
               <Reveal delay={100}>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 mb-6 group hover:bg-fuchsia-500/20 transition-colors">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 mb-6 group hover:bg-fuchsia-500/20 transition-colors mx-auto">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-fuchsia-500"></span>
@@ -352,18 +352,17 @@ export default function App() {
               </Reveal>
 
               <Reveal delay={300}>
-                <p className="text-lg lg:text-xl text-indigo-100 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                  Download any video from any website in HD quality directly to your Android phone. Trusted by over <strong className="text-white">5 Lakh+</strong> users.
+                <p className="text-lg lg:text-xl text-indigo-100 mb-10 max-w-2xl mx-auto leading-relaxed">
+                  Download any video from any website in HD quality directly to your Android phone. Trusted by over <strong className="text-white">5 Lakh+</strong> users worldwide.
                 </p>
               </Reveal>
 
-              <Reveal delay={400} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                {/* ... CTA buttons ... */}
+              <Reveal delay={400} className="flex flex-col sm:flex-row items-center gap-4 justify-center">
                 <div className="relative group">
-                  <div className="absolute -top-3 -right-3 z-20 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
+                  <div className="absolute -top-3 -right-3 z-30 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
                     v2.5.0
                   </div>
-                  <button className="relative w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 rounded-full font-bold text-lg text-white shadow-[0_0_30px_rgba(192,38,211,0.3)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group">
+                  <button className="relative w-full sm:w-auto px-12 py-5 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 rounded-full font-bold text-xl text-white shadow-[0_0_40px_rgba(192,38,211,0.4)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group">
                     <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"></div>
                     <span className="relative flex items-center justify-center gap-2 drop-shadow-md">
@@ -374,47 +373,75 @@ export default function App() {
                 </div>
                 <button
                   onClick={scrollToInstall}
-                  className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/20 hover:bg-white/10 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-10 py-5 rounded-full font-semibold text-xl text-white border border-white/20 hover:bg-white/10 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
                 >
-                  How to Install? <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" />
+                  How to Install? <ChevronDown size={24} className="group-hover:translate-y-1 transition-transform" />
                 </button>
               </Reveal>
 
-              <Reveal delay={500} className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
+              <Reveal delay={500} className="mt-12 flex flex-wrap justify-center gap-6">
                 <ShimmerBadge icon={ShieldCheck} text="🇮🇳 Made in India" type="emerald" />
                 <ShimmerBadge icon={Award} text="India's No. 1 App 2024" type="gold" />
-              </Reveal>
-            </div>
-
-            {/* Right: AI-Generated Visual (Inspired by Screenshot) */}
-            <div className="lg:w-1/2 relative lg:pl-12 flex justify-center">
-              <Reveal delay={600} className="relative z-10 w-full max-w-[600px]">
-                <div className="relative group">
-                  {/* Outer Glow Effect */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-fuchsia-500/20 to-blue-500/20 blur-[60px] opacity-50 group-hover:opacity-80 transition-opacity duration-1000 animate-pulse"></div>
-                  
-                  {/* The AI Artifact Image */}
-                  <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl transform hover:scale-[1.02] transition-transform duration-700 ease-out animate-float">
-                    <img 
-                      src="/hero-mockup.png" 
-                      className="w-full h-auto object-cover relative z-10" 
-                      alt="AIO-YTDER High-End App Interface Mockup" 
-                    />
-                    
-                    {/* Glass Shine */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-20"></div>
-                  </div>
-
-                  {/* Smaller Floating Elements (Added for extra depth) */}
-                  <div className="absolute -top-12 -right-8 w-16 h-16 bg-fuchsia-600 rounded-2xl shadow-xl shadow-fuchsia-900/50 animate-bounce flex items-center justify-center z-30 invisible lg:visible" style={{ animationDelay: '1s' }}>
-                    <Rocket className="text-white" size={32} />
-                  </div>
-                  <div className="absolute -bottom-10 -left-6 bg-cyan-500 p-4 rounded-3xl shadow-xl shadow-cyan-900/50 animate-bounce flex items-center justify-center z-30 invisible lg:visible" style={{ animationDelay: '0.5s' }}>
-                    <ShieldCheck className="text-white" size={32} />
-                  </div>
+                <div className="flex items-center gap-2 text-slate-400 font-medium">
+                  <Star className="text-amber-400" size={18} fill="currentColor" />
+                  <span className="text-white">4.9/5</span> Rating
                 </div>
               </Reveal>
             </div>
+
+            {/* Bottom: 3D Triple Gallery (The "Better Idea") */}
+            <div className="mt-24 lg:mt-32 w-full max-w-6xl">
+              <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0 relative">
+                
+                {/* 1. Left Feature: Smart Browser */}
+                <Reveal delay={600} className="lg:w-1/3 order-2 lg:order-1 lg:-mr-12">
+                  <div className="relative group animate-perspective-left">
+                    <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                      <img src="/hero-browser.png" alt="Smart In-App Browser" className="w-full h-auto" />
+                      <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent pointer-events-none"></div>
+                    </div>
+                    <div className="mt-8 text-center bg-slate-800/40 backdrop-blur-md p-4 rounded-2xl border border-white/5 opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                      <h4 className="text-lg font-bold text-white mb-1">Smart Browser</h4>
+                      <p className="text-xs text-slate-400">Auto-detect any video on any site.</p>
+                    </div>
+                  </div>
+                </Reveal>
+
+                {/* 2. Center: Main Experience (Download UI) */}
+                <Reveal delay={500} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-110 lg:scale-[1.2]">
+                  <div className="relative group animate-float">
+                    <div className="absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-3xl rounded-[3rem] opacity-70 animate-pulse"></div>
+                    <div className="relative rounded-[3rem] overflow-hidden border-4 border-white/20 shadow-[0_0_80px_rgba(192,38,211,0.4)] transition-transform duration-700">
+                      <img src="/hero-mockup.png" alt="High-Speed Downloading" className="w-full h-auto" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 via-transparent to-white/5 pointer-events-none"></div>
+                    </div>
+                    {/* Floating Hero Badges */}
+                    <div className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-fuchsia-600 to-indigo-700 rounded-full flex flex-col items-center justify-center shadow-2xl border-2 border-white/20 animate-bounce invisible lg:visible" style={{ animationDelay: '1s' }}>
+                      <span className="text-[10px] font-black uppercase text-white/70 tracking-tighter">Ultra</span>
+                      <span className="text-xl font-black text-white">4K</span>
+                    </div>
+                  </div>
+                </Reveal>
+
+                {/* 3. Right Feature: Advanced Manager */}
+                <Reveal delay={700} className="lg:w-1/3 order-3 lg:-ml-12">
+                  <div className="relative group animate-perspective-right">
+                    <div className="absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                      <img src="/hero-downloads.png" alt="Advanced Multi-threaded Download Manager" className="w-full h-auto" />
+                      <div className="absolute inset-0 bg-gradient-to-tl from-purple-500/10 to-transparent pointer-events-none"></div>
+                    </div>
+                    <div className="mt-8 text-center bg-slate-800/40 backdrop-blur-md p-4 rounded-2xl border border-white/5 opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                      <h4 className="text-lg font-bold text-white mb-1">Downloader v2</h4>
+                      <p className="text-xs text-slate-400">10x Speed with multi-threading.</p>
+                    </div>
+                  </div>
+                </Reveal>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
