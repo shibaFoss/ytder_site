@@ -241,7 +241,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 font-sans text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden relative">
+    <div className="min-h-screen bg-slate-900 text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden relative">
       {/* --- PREMIUM BACKGROUND SYSTEM --- */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Animated Mesh Blobs */}
@@ -262,9 +262,7 @@ export default function App() {
       {/* Global Styles for Animations */}
       <style dangerouslySetInnerHTML={{
         __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4, h5, h6, .font-outfit { font-family: 'Outfit', sans-serif; }
+        body { font-family: 'Ubuntu', sans-serif; }
         @keyframes shimmer {
           100% { transform: translateX(100%); }
         }
