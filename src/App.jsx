@@ -679,6 +679,7 @@ export default function App() {
       </section>
 
       {/* --- SECTION 3.5: PRO FEATURES (ANIMATED) --- */}
+      <div className="premium-divider-glow" />
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-slate-900"></div>
         <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
