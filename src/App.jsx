@@ -364,10 +364,10 @@ export default function App() {
           opacity: 0.05;
         }
         @keyframes pulse-soft {
-          0%, 100% { transform: scale(1); opacity: 0.5; }
-          50% { transform: scale(1.05); opacity: 0.8; }
+          0%, 100% { transform: scale(1); opacity: 0.9; filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); }
+          50% { transform: scale(1.02); opacity: 1; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
         }
-        .animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+        .animate-pulse-soft { animation: pulse-soft 4s ease-in-out infinite; }
         @keyframes scan {
           0% { transform: translateY(-100%); }
           100% { transform: translateY(100%); }
@@ -441,8 +441,8 @@ export default function App() {
 
               <Reveal delay={200}>
                 <h1 className="text-6xl lg:text-8xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-                  Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-purple-600">Anything.</span><br />
-                  <span className="text-slate-400">Anywhere.</span>
+                  Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-purple-600 drop-shadow-[0_0_15px_rgba(192,38,211,0.3)]">Anything.</span><br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-white to-slate-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] animate-pulse-soft">Anywhere.</span>
                 </h1>
               </Reveal>
 
