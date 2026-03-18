@@ -329,13 +329,13 @@ export default function App() {
               )}
             </a>
             
-            <button 
-              onClick={scrollToInstall}
+            <a 
+              href={versionData.latest_apk_url}
               className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full font-bold text-sm transition-all duration-300 active:scale-95"
             >
               <Download size={16} className="text-fuchsia-500" />
               Download APK
-            </button>
+            </a>
           </div>
         </div>
       </nav>
@@ -515,7 +515,7 @@ export default function App() {
                       <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 via-transparent to-white/5 pointer-events-none"></div>
                     </div>
                     {/* Floating Hero Badges */}
-                    <div className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-fuchsia-600 to-indigo-700 rounded-full flex flex-col items-center justify-center shadow-2xl border-2 border-white/20 animate-bounce invisible lg:visible" style={{ animationDelay: '1s' }}>
+                    <div className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-fuchsia-600 to-indigo-700 rounded-full flex flex-col items-center justify-center shadow-2xl border-2 border-white/20 animate-float invisible lg:visible" style={{ animationDelay: '1s' }}>
                       <span className="text-[10px] font-black uppercase text-white/70 tracking-tighter">Ultra</span>
                       <span className="text-xl font-black text-white">4K</span>
                     </div>
@@ -772,7 +772,7 @@ export default function App() {
                 <img src="/screenshot_home.png" alt="App Home Screen" className="w-full h-auto" />
                 <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                 {/* Float Badge */}
-                <div className="absolute top-10 right-10 bg-fuchsia-600 text-white font-bold text-xs py-2 px-4 rounded-full shadow-lg animate-bounce">
+                <div className="absolute top-10 right-10 bg-fuchsia-600 text-white font-bold text-xs py-2 px-4 rounded-full shadow-lg animate-float">
                   NEW UI
                 </div>
               </div>
