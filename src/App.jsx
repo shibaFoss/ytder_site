@@ -301,7 +301,7 @@ export default function App() {
               <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
               <img src="/playstore-logo.png" alt="AIO-YTDER" className="relative w-10 h-10 rounded-lg shadow-2xl" />
             </div>
-            <span className="text-3xl font-black tracking-tighter flex items-center group perspective-1000">
+            <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center group perspective-1000">
               <span className="text-white text-3d transform transition-transform duration-500 group-hover:translate-z-10 group-hover:rotate-y-10">AIO-</span>
               <span className="relative">
                 <span className="absolute -inset-2 bg-cyan-500/10 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity animate-pulse"></span>
@@ -440,14 +440,14 @@ export default function App() {
               </Reveal>
 
               <Reveal delay={200}>
-                <h1 className="text-6xl lg:text-8xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black text-white mb-6 leading-[1.1] tracking-tight px-4 sm:px-0">
                   Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-purple-600 drop-shadow-[0_0_15px_rgba(192,38,211,0.3)]">Anything.</span><br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-white to-slate-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] animate-pulse-soft">Anywhere.</span>
                 </h1>
               </Reveal>
 
               <Reveal delay={300}>
-                <p className="text-lg lg:text-xl text-indigo-100 mb-10 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-base sm:text-lg lg:text-xl text-indigo-100 mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
                   Download any video from any website in HD quality directly to your Android phone. Trusted by over <strong className="text-white">5 Lakh+</strong> users worldwide.
                 </p>
               </Reveal>
@@ -507,7 +507,7 @@ export default function App() {
                 </Reveal>
 
                 {/* 2. Center: Main Experience (Download UI) */}
-                <Reveal delay={500} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-110 lg:scale-[1.2]">
+                <Reveal delay={500} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-95 sm:scale-110 lg:scale-[1.2]">
                   <div className="relative group animate-float">
                     <div className="absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-3xl rounded-[3rem] opacity-70 animate-pulse"></div>
                     <div className="relative rounded-[3rem] overflow-hidden border-4 border-white/20 shadow-[0_0_80px_rgba(192,38,211,0.4)] transition-transform duration-700">
@@ -515,9 +515,9 @@ export default function App() {
                       <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 via-transparent to-white/5 pointer-events-none"></div>
                     </div>
                     {/* Floating Hero Badges */}
-                    <div className="absolute -top-10 -right-10 w-24 h-24 bg-gradient-to-br from-fuchsia-600 to-indigo-700 rounded-full flex flex-col items-center justify-center shadow-2xl border-2 border-white/20 animate-float invisible lg:visible" style={{ animationDelay: '1s' }}>
+                    <div className="absolute -top-6 -right-2 lg:-top-10 lg:-right-10 w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-fuchsia-600 to-indigo-700 rounded-full flex flex-col items-center justify-center shadow-2xl border-2 border-white/20 animate-float invisible lg:visible" style={{ animationDelay: '1s' }}>
                       <span className="text-[10px] font-black uppercase text-white/70 tracking-tighter">Ultra</span>
-                      <span className="text-xl font-black text-white">4K</span>
+                      <span className="text-lg lg:text-xl font-black text-white">4K</span>
                     </div>
                   </div>
                 </Reveal>
@@ -548,10 +548,10 @@ export default function App() {
       <section className="py-12 bg-slate-900/40 backdrop-blur-md border-y border-slate-800/50 relative z-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal>
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-              <div className="text-center lg:text-left flex-shrink-0">
-                <h2 className="text-3xl font-black text-white mb-2 tracking-tight">Support for <span className="text-cyan-400">Everything</span></h2>
-                <p className="text-slate-400 font-medium">Download from these platforms & 1000+ others.</p>
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
+              <div className="flex-shrink-0">
+                <h2 className="text-2xl sm:text-3xl font-black text-white mb-2 tracking-tight">Support for <span className="text-cyan-400">Everything</span></h2>
+                <p className="text-slate-400 font-medium text-sm sm:text-base">Download from these platforms & 1000+ others.</p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-4 md:gap-8">
@@ -578,18 +578,17 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- SECTION 2: SOCIAL PROOF & LIVE COUNTER --- */}
       <section className="py-16 bg-slate-900 relative border-y border-slate-800">
         <div className="absolute inset-0 bg-circuit"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           <Reveal>
-            <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700 p-8 md:p-12 rounded-3xl shadow-2xl">
-              <h2 className="text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tighter">
+            <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700 p-6 sm:p-12 rounded-3xl shadow-2xl">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tighter">
                 <span className="text-slate-300">Millions trust </span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-purple-600 bg-[length:200%_auto] animate-[gradient_4s_linear_infinite]">
                   AIO-YTDER
                 </span>
-                <span className="text-lg md:text-xl font-medium text-slate-400 tracking-normal block mt-4 max-w-2xl mx-auto">
+                <span className="text-base sm:text-lg md:text-xl font-medium text-slate-400 tracking-normal block mt-4 max-w-2xl mx-auto px-2 sm:px-0">
                   The ultimate downloading powerhouse for your everyday digital life.
                 </span>
               </h2>
@@ -618,12 +617,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- SECTION 3: KEY FEATURES --- */}
       <section className="py-24 bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <Reveal className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Why AIO-YTDER is the <span className="text-fuchsia-400">King</span></h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg">We didn't just build another downloader. We built the fastest, safest, and most powerful tool for Android.</p>
+          <Reveal className="text-center mb-16 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Why AIO-YTDER is the <span className="text-fuchsia-400">King</span></h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">We didn't just build another downloader. We built the fastest, safest, and most powerful tool for Android.</p>
           </Reveal>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -653,11 +651,11 @@ export default function App() {
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-500/10 blur-[150px] -ml-64 -mb-64"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <Reveal className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+          <Reveal className="text-center mb-16 sm:mb-20 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-6 tracking-tight">
               Power Features for <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-500">Power Users</span>
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg">Experience downloading like never before with our cutting-edge Pro Tools.</p>
+            <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">Experience downloading like never before with our cutting-edge Pro Tools.</p>
           </Reveal>
 
           <div className="grid lg:grid-cols-2 gap-12">
@@ -746,11 +744,11 @@ export default function App() {
       {/* --- SECTION 3.7: APP SHOWCASE (3D GALLERY) --- */}
       <section className="py-32 bg-slate-900/50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <Reveal className="text-center mb-24">
-            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+          <Reveal className="text-center mb-20 sm:mb-24 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-6 tracking-tight">
               Designed for <span className="text-fuchsia-500">Speed.</span> Built for <span className="text-cyan-400">Ease.</span>
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg">A beautiful interface that puts your content first.</p>
+            <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">A beautiful interface that puts your content first.</p>
           </Reveal>
 
           <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
@@ -803,9 +801,9 @@ export default function App() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-purple-900/20 blur-[150px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <Reveal className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Install in Minutes</h2>
-            <p className="text-cyan-400 font-semibold text-lg max-w-2xl mx-auto bg-cyan-900/30 py-2 px-4 rounded-full border border-cyan-800/50">
+          <Reveal className="text-center mb-16 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Install in Minutes</h2>
+            <p className="text-cyan-400 font-semibold text-base sm:text-lg max-w-2xl mx-auto bg-cyan-900/30 py-2 px-4 rounded-full border border-cyan-800/50 inline-block">
               (Even if you're not a techie!)
             </p>
           </Reveal>
@@ -916,12 +914,12 @@ export default function App() {
       {/* --- SECTION 5: TESTIMONIALS --- */}
       <section className="py-24 bg-slate-900 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <Reveal className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by Millions Across India</h2>
+          <Reveal className="text-center mb-16 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Loved by Millions Across India</h2>
             <div className="flex justify-center gap-1 text-amber-400 mb-4">
               <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" />
             </div>
-            <p className="text-slate-400">4.8/5 Average Rating from our users</p>
+            <p className="text-slate-400 text-sm sm:text-base">4.8/5 Average Rating from our users</p>
           </Reveal>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -957,8 +955,8 @@ export default function App() {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center mb-24">
-          <Reveal>
-            <h2 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8">
+          <Reveal className="px-4">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8 leading-[1.2]">
               Ready to download anything?
             </h2>
             <a 
