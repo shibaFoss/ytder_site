@@ -358,18 +358,31 @@ export default function App() {
               </Reveal>
 
               <Reveal delay={300} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                <button className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-fuchsia-600 to-purple-600 rounded-full font-bold text-lg shadow-[0_0_40px_rgba(192,38,211,0.4)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all hover:-translate-y-1 overflow-hidden">
-                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
-                  <span className="relative flex items-center justify-center gap-2">
-                    <Download className="animate-bounce" />
-                    Download APK Now (Free)
-                  </span>
-                </button>
+                <div className="relative group">
+                  {/* Floating Version Badge */}
+                  <div className="absolute -top-3 -right-3 z-20 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
+                    v2.5.0
+                  </div>
+                  
+                  <button className="relative w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 rounded-full font-bold text-lg text-white shadow-[0_0_30px_rgba(192,38,211,0.3)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group">
+                    {/* Glass Overlay Light */}
+                    <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
+                    
+                    {/* Interactive Shimmer */}
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"></div>
+                    
+                    <span className="relative flex items-center justify-center gap-2 drop-shadow-md">
+                      <Download className="animate-bounce" />
+                      Download APK Now (Free)
+                    </span>
+                  </button>
+                </div>
+                
                 <button
                   onClick={scrollToInstall}
-                  className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/20 hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/20 hover:bg-white/10 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
                 >
-                  How to Install? <ChevronDown size={20} />
+                  How to Install? <ChevronDown size={20} className="group-hover:translate-y-1 transition-transform" />
                 </button>
               </Reveal>
 
@@ -854,9 +867,11 @@ export default function App() {
             <h2 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8">
               Ready to download anything?
             </h2>
-            <button className="group relative px-10 py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.5)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all hover:scale-105 overflow-hidden w-full md:w-auto">
+            <button className="group relative px-10 py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.3)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden w-full md:w-auto border border-white/10">
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
-              <span className="relative flex items-center justify-center gap-3">
+              {/* Interactive Shimmer */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
+              <span className="relative flex items-center justify-center gap-3 drop-shadow-md">
                 <Download size={28} className="animate-bounce" />
                 Get the Latest APK <span className="text-white/70 font-medium text-lg">(v2.5.0)</span>
               </span>
