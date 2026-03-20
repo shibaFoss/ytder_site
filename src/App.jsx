@@ -83,7 +83,7 @@ const Reveal = ({ children, delay = 0, className = "" }) => {
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      className={`transition-[opacity,transform] duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         } ${className}`}
     >
       {children}
@@ -121,6 +121,7 @@ const SpiderWeb = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (window.innerWidth < 768) return; // Disable canvas animation on mobile for performance
     const ctx = canvas.getContext('2d');
     let animationFrameId;
 
@@ -225,7 +226,7 @@ const SpiderWeb = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 pointer-events-none z-0 hidden md:block"
       style={{ opacity: 0.6 }}
     />
   );
@@ -279,22 +280,22 @@ export default function App() {
       {/* --- PREMIUM BACKGROUND SYSTEM --- */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Animated Mesh Blobs */}
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px] animate-blob"></div>
-        <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-cyan-600/15 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-600/20 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '4s' }}></div>
+        <div className="hidden md:block absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px] animate-blob"></div>
+        <div className="hidden md:block absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-cyan-600/15 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '2s' }}></div>
+        <div className="hidden md:block absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-600/20 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '4s' }}></div>
 
         {/* Pattern Overlays */}
         <div className="absolute inset-0 bg-grid-slate-800 opacity-30"></div>
-        <div className="absolute inset-0 noise mix-blend-overlay"></div>
+        <div className="absolute inset-0 noise mix-blend-normal md:mix-blend-overlay"></div>
 
         {/* Subtle Vignette for depth, much lighter now */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)] hidden md:block"></div>
       </div>
 
       <SpiderWeb />
 
       {/* --- PREMIUM NAVBAR --- */}
-      <nav className="fixed top-0 inset-x-0 z-50 bg-slate-900/50 backdrop-blur-xl border-b border-white/5 py-4">
+      <nav className="fixed top-0 inset-x-0 z-50 bg-slate-900/95 md:bg-slate-900/50 backdrop-blur-none md:backdrop-blur-xl border-b border-white/5 py-4">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer">
             <div className="relative">
@@ -537,7 +538,7 @@ export default function App() {
                 {/* 2. Center: Main Experience (Download UI) */}
                 <Reveal delay={500} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-95 sm:scale-110 lg:scale-[1.2]">
                   <div className="relative group animate-float">
-                    <div className="absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-3xl rounded-[3rem] opacity-70 animate-pulse"></div>
+                    <div className="absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-xl md:blur-3xl rounded-[3rem] opacity-40 md:opacity-70 animate-pulse"></div>
                     <div className="relative rounded-[3rem] overflow-hidden border-4 border-white/20 shadow-[0_0_80px_rgba(192,38,211,0.4)] transition-transform duration-700">
                       <img src="/hero-mockup.png" alt="High-Speed Downloading" className="w-full h-auto" />
                       <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 via-transparent to-white/5 pointer-events-none"></div>
@@ -574,7 +575,7 @@ export default function App() {
 
       {/* --- SECTION 1.5: SUPPORTED PLATFORMS --- */}
       <div className="premium-divider" />
-      <section className="py-12 bg-slate-900/40 backdrop-blur-md relative z-20">
+      <section className="py-12 bg-slate-900/90 md:bg-slate-900/40 backdrop-blur-none md:backdrop-blur-md relative z-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal>
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
@@ -614,7 +615,7 @@ export default function App() {
         <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           <Reveal>
-            <div className="bg-slate-900/80 backdrop-blur-md border border-slate-700 p-6 sm:p-12 rounded-3xl shadow-2xl">
+            <div className="bg-slate-900/95 md:bg-slate-900/80 backdrop-blur-none md:backdrop-blur-md border border-slate-700 p-6 sm:p-12 rounded-3xl shadow-2xl">
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tighter">
                 <span className="text-slate-300">Millions trust </span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-purple-600 bg-[length:200%_auto] animate-[gradient_4s_linear_infinite]">
@@ -684,8 +685,8 @@ export default function App() {
         <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
 
         {/* Additional Decorative Blobs */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] -mr-64 -mt-64"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-500/10 blur-[150px] -ml-64 -mb-64"></div>
+        <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] -mr-64 -mt-64"></div>
+        <div className="hidden md:block absolute bottom-0 left-0 w-[500px] h-[500px] bg-fuchsia-500/10 blur-[150px] -ml-64 -mb-64"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <Reveal className="text-center mb-16 sm:mb-20 px-4">
@@ -841,7 +842,7 @@ export default function App() {
         <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
 
         {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-purple-900/20 blur-[150px] pointer-events-none"></div>
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-purple-900/20 blur-[150px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <Reveal className="text-center mb-16 px-4">
