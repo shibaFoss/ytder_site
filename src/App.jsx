@@ -31,6 +31,10 @@ const useScrollReveal = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsVisible(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -444,6 +448,26 @@ export default function App() {
           filter: blur(2px);
           box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
         }
+
+        /* --- EXTREME MOBILE OPTIMIZATIONS --- */
+        @media (max-width: 768px) {
+          [class*="animate-"] {
+            animation: none !important;
+          }
+          .noise, .bg-circuit, .bg-glow-soft {
+            display: none !important;
+          }
+          .text-3d {
+            text-shadow: none !important;
+            transform: none !important;
+          }
+          .text-glow-cyan {
+            text-shadow: none !important;
+          }
+          .premium-divider-glow::after {
+            display: none !important;
+          }
+        }
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
@@ -793,9 +817,9 @@ export default function App() {
           <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
             {/* Left Screenshot */}
             <Reveal delay={100} className="lg:w-1/3 order-2 lg:order-1">
-              <div className="animate-perspective-left shadow-[20px_20px_60px_rgba(0,0,0,0.5)] rounded-[2.5rem] border-2 border-white/5 overflow-hidden">
+              <div className="animate-perspective-left shadow-none md:shadow-[20px_20px_60px_rgba(0,0,0,0.5)] rounded-[2.5rem] border-2 border-white/5 overflow-hidden">
                 <img src="/screenshot_browser.png" alt="In-App Browser" className="w-full h-auto" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent pointer-events-none"></div>
+                <div className="hidden md:block absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent pointer-events-none"></div>
               </div>
               <div className="mt-8 text-center lg:text-right lg:pr-12">
                 <h4 className="text-xl font-bold text-white mb-2">Smart In-App Browser</h4>
@@ -821,9 +845,9 @@ export default function App() {
 
             {/* Right Screenshot */}
             <Reveal delay={200} className="lg:w-1/3 order-3">
-              <div className="animate-perspective-right shadow-[-20px_20px_60px_rgba(0,0,0,0.5)] rounded-[2.5rem] border-2 border-white/5 overflow-hidden">
+              <div className="animate-perspective-right shadow-none md:shadow-[-20px_20px_60px_rgba(0,0,0,0.5)] rounded-[2.5rem] border-2 border-white/5 overflow-hidden">
                 <img src="/screenshot_downloads.png" alt="Downloads Manager" className="w-full h-auto" />
-                <div className="absolute inset-0 bg-gradient-to-tl from-purple-500/20 to-transparent pointer-events-none"></div>
+                <div className="hidden md:block absolute inset-0 bg-gradient-to-tl from-purple-500/20 to-transparent pointer-events-none"></div>
               </div>
               <div className="mt-8 text-center lg:text-left lg:pl-12">
                 <h4 className="text-xl font-bold text-white mb-2">Advanced Manager</h4>
