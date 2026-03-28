@@ -560,12 +560,12 @@ export default function App() {
                 </Reveal>
 
                 {/* 2. Center: Main Experience (Download UI) */}
-                <Reveal delay={500} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-95 sm:scale-110 lg:scale-[1.2]">
+                <Reveal delay={500} className="hidden lg:block lg:w-2/5 z-20 order-1 lg:order-2 scale-95 sm:scale-110 lg:scale-[1.2]">
                   <div className="relative group animate-float">
-                    <div className="absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-xl md:blur-3xl rounded-[3rem] opacity-40 md:opacity-70 animate-pulse"></div>
-                    <div className="relative rounded-[3rem] overflow-hidden border-4 border-white/20 shadow-[0_0_80px_rgba(192,38,211,0.4)] transition-transform duration-700">
-                      <img src="/hero-mockup.png" alt="High-Speed Downloading" className="w-full h-auto" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 via-transparent to-white/5 pointer-events-none"></div>
+                    <div className="hidden md:block absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-xl md:blur-3xl rounded-[3rem] opacity-40 md:opacity-70 animate-pulse"></div>
+                    <div className="relative md:rounded-[3rem] md:overflow-hidden border-none md:border-4 md:border-white/20 shadow-none md:shadow-[0_0_80px_rgba(192,38,211,0.4)] transition-transform duration-700">
+                      <img src="/hero-mockup-blended.png" alt="High-Speed Downloading" className="w-full h-auto" />
+                      <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 via-transparent to-white/5 pointer-events-none"></div>
                     </div>
                     {/* Floating Hero Badges */}
                     <div className="absolute -top-6 -right-2 lg:-top-10 lg:-right-10 w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-fuchsia-600 to-indigo-700 rounded-full flex flex-col items-center justify-center shadow-2xl border-2 border-white/20 animate-float invisible lg:visible" style={{ animationDelay: '1s' }}>
@@ -803,60 +803,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- SECTION 3.7: APP SHOWCASE (3D GALLERY) --- */}
-      <div className="premium-divider-glow" />
-      <section className="py-32 bg-slate-900/50 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <Reveal className="text-center mb-20 sm:mb-24 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-6 tracking-tight">
-              Designed for <span className="text-fuchsia-500">Speed.</span> Built for <span className="text-cyan-400">Ease.</span>
-            </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">A beautiful interface that puts your content first.</p>
-          </Reveal>
-
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
-            {/* Left Screenshot */}
-            <Reveal delay={100} className="lg:w-1/3 order-2 lg:order-1">
-              <div className="animate-perspective-left shadow-none md:shadow-[20px_20px_60px_rgba(0,0,0,0.5)] rounded-[2.5rem] border-2 border-white/5 overflow-hidden">
-                <img src="/screenshot_browser.png" alt="In-App Browser" className="w-full h-auto" />
-                <div className="hidden md:block absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent pointer-events-none"></div>
-              </div>
-              <div className="mt-8 text-center lg:text-right lg:pr-12">
-                <h4 className="text-xl font-bold text-white mb-2">Smart In-App Browser</h4>
-                <p className="text-sm text-slate-400">Browse any site and detect videos automatically with our intelligent engine.</p>
-              </div>
-            </Reveal>
-
-            {/* Center Screenshot (Main) */}
-            <Reveal delay={0} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-110">
-              <div className="shadow-[0_20px_80px_rgba(192,38,211,0.3)] rounded-[3rem] border-4 border-white/10 overflow-hidden relative group">
-                <img src="/screenshot_home.png" alt="App Home Screen" className="w-full h-auto" />
-                <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                {/* Float Badge */}
-                <div className="absolute top-10 right-10 bg-fuchsia-600 text-white font-bold text-xs py-2 px-4 rounded-full shadow-lg animate-float">
-                  NEW UI
-                </div>
-              </div>
-              <div className="mt-12 text-center">
-                <h4 className="text-2xl font-black text-white mb-3">One-Tap Magic</h4>
-                <p className="text-slate-400">Paste links or use shortcuts. Downloading has never been this intuitive.</p>
-              </div>
-            </Reveal>
-
-            {/* Right Screenshot */}
-            <Reveal delay={200} className="lg:w-1/3 order-3">
-              <div className="animate-perspective-right shadow-none md:shadow-[-20px_20px_60px_rgba(0,0,0,0.5)] rounded-[2.5rem] border-2 border-white/5 overflow-hidden">
-                <img src="/screenshot_downloads.png" alt="Downloads Manager" className="w-full h-auto" />
-                <div className="hidden md:block absolute inset-0 bg-gradient-to-tl from-purple-500/20 to-transparent pointer-events-none"></div>
-              </div>
-              <div className="mt-8 text-center lg:text-left lg:pl-12">
-                <h4 className="text-xl font-bold text-white mb-2">Advanced Manager</h4>
-                <p className="text-sm text-slate-400">Pause, resume, and organize your files with a desktop-class download manager.</p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
       {/* --- SECTION 4: HOW TO INSTALL --- */}
       <div className="premium-divider" />
