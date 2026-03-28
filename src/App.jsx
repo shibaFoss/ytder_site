@@ -597,14 +597,16 @@ export default function App() {
                 onScroll={(e) => handleScroll(e, setScreenshotIndex)}
               >
                 {[
-                  { img: '/screenshot_home.webp', title: 'Power Home', rotate: '-rotate-2' },
-                  { img: '/screenshot_browser.webp', title: 'Smart Search', rotate: 'rotate-0' },
-                  { img: '/screenshot_downloads.webp', title: 'Ultra Speed', rotate: 'rotate-2' }
+                  { img: '/shots/shot1.jpg', title: 'Power Splash', rotate: '-rotate-2' },
+                  { img: '/shots/shot2.jpg', title: 'Smart Browser', rotate: '-rotate-1' },
+                  { img: '/shots/shot3.jpg', title: 'Video Extractor', rotate: 'rotate-0' },
+                  { img: '/shots/shot4.jpg', title: 'Download Manager', rotate: 'rotate-1' },
+                  { img: '/shots/shot5.jpg', title: 'HD Quality', rotate: 'rotate-2' }
                 ].map((shot, idx) => (
                   <div
                     key={idx}
                     className={`min-w-[78%] sm:min-w-[45%] md:min-w-0 md:w-[280px] lg:w-[340px] snap-center transition-all duration-700 ease-out transform 
-                      ${screenshotIndex === idx || (idx >= 0 && idx <= 2) // Always active on desktop
+                      ${screenshotIndex === idx || (idx >= 0 && idx <= 4) // Always active on desktop
                         ? 'scale-100 opacity-100'
                         : 'scale-90 opacity-40'
                       } ${shot.rotate} md:rotate-0 hover:rotate-0 hover:scale-105 hover:z-30`}
@@ -635,7 +637,7 @@ export default function App() {
 
               {/* Pagination Dots (Mobile Only) */}
               <div className="md:hidden flex justify-center gap-2 mt-4">
-                {[0, 1, 2].map((i) => (
+                {[0, 1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
                     className={`h-1.5 rounded-full transition-all duration-500 ${i === screenshotIndex ? 'bg-orange-500 w-8' : 'bg-slate-300 w-2'}`}
