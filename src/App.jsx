@@ -318,8 +318,8 @@ export default function App() {
       <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 py-4 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-200 group-hover:scale-110 transition-transform">
-              <Download className="text-white" size={24} />
+            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-orange-200 group-hover:scale-110 transition-transform">
+              <img src="/playstore-logo.webp" alt="AIO-YTDER" className="w-full h-full object-cover" />
             </div>
             <span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tighter">
               AIO<span className="text-orange-600">-</span>YTDER
@@ -331,12 +331,12 @@ export default function App() {
               href="https://github.com/shibaFoss/AIO-Video-Downloader"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-3 py-1.5 bg-slate-800/40 hover:bg-slate-800 border border-slate-700/50 rounded-full transition-all duration-300 shadow-lg"
+              className="group flex items-center gap-2 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-full transition-all duration-300 shadow-sm"
               title="View on GitHub"
             >
-              <Github size={18} className="text-slate-400 group-hover:text-white transition-colors" />
+              <Github size={18} className="text-slate-600 group-hover:text-slate-900 transition-colors" />
               {stars > 0 && (
-                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-400 group-hover:text-amber-400 transition-colors">
+                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-500 group-hover:text-amber-600 transition-colors">
                   <Star size={10} fill="currentColor" className="text-amber-500" />
                   <span>{stars.toLocaleString()}</span>
                 </div>
@@ -345,7 +345,7 @@ export default function App() {
 
             <a
               href={versionData.latest_apk_url}
-              className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full font-bold text-sm transition-all duration-300 active:scale-95"
+              className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-full font-bold text-sm text-slate-900 transition-all duration-300 active:scale-95"
             >
               <Download size={16} className="text-fuchsia-500" />
               Download APK
@@ -1063,11 +1063,13 @@ export default function App() {
         <div className="h-px w-full bg-slate-200/60" />
         <div className="bg-slate-50 relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-3 text-slate-900 font-bold text-xl">
-              <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center shadow-lg shadow-orange-100">
-                <Download className="text-white" size={20} />
+            <div className="flex items-center gap-3 group cursor-pointer">
+              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-orange-100 group-hover:scale-110 transition-transform">
+                <img src="/playstore-logo.webp" alt="AIO-YTDER" className="w-full h-full object-cover" />
               </div>
-              AIO-YTDER
+              <span className="text-xl font-black text-slate-900 tracking-tighter">
+                AIO<span className="text-orange-600">-</span>YTDER
+              </span>
             </div>
 
             <div className="flex gap-6 text-sm text-slate-500 font-medium">
