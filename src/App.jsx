@@ -456,6 +456,12 @@ export default function App() {
           filter: blur(2px);
           box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
         }
+        .premium-divider-orange {
+          height: 1px;
+          width: 100%;
+          background: linear-gradient(to right, transparent, rgba(249, 115, 22, 0.1), rgba(249, 115, 22, 0.4), rgba(249, 115, 22, 0.1), transparent);
+          position: relative;
+        }
 
         /* --- EXTREME MOBILE OPTIMIZATIONS --- */
         @media (max-width: 768px) {
@@ -559,11 +565,10 @@ export default function App() {
                   { img: '/screenshot_browser.webp', title: 'Smart Search' },
                   { img: '/screenshot_downloads.webp', title: 'Ultra Speed' }
                 ].map((shot, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`min-w-[88%] snap-center transition-all duration-700 ease-out transform ${
-                      screenshotIndex === idx ? 'scale-100 opacity-100 rotate-0' : 'scale-90 opacity-40 -rotate-1'
-                    }`}
+                  <div
+                    key={idx}
+                    className={`min-w-[88%] snap-center transition-all duration-700 ease-out transform ${screenshotIndex === idx ? 'scale-100 opacity-100 rotate-0' : 'scale-90 opacity-40 -rotate-1'
+                      }`}
                   >
                     <div className="aspect-[9/17] relative rounded-[2.5rem] overflow-hidden border-4 border-slate-100 shadow-lg shadow-slate-200/30">
                       <img
@@ -639,7 +644,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- SECTION 1.5: SUPPORTED PLATFORMS --- */}
+      <div className="premium-divider-orange" />
       <section className="py-12 md:py-20 bg-slate-50/30 relative z-20 overflow-hidden">
         {/* Subtle Section Flare */}
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-orange-200/20 blur-[100px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
@@ -681,8 +686,7 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
-      <div className="h-px w-full bg-slate-200" />
+      <div className="premium-divider-orange" />
       <section className="pt-8 pb-16 md:py-24 relative overflow-hidden bg-white">
         <div className="absolute inset-0 bg-white"></div>
         <div className="absolute inset-0 bg-white opacity-60"></div>
@@ -735,6 +739,7 @@ export default function App() {
         </div>
       </section>
 
+      <div className="premium-divider-orange" />
       <div className="h-px w-full bg-slate-200" />
       <section className="py-8 md:py-24 bg-white relative">
         <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.05)_0%,transparent_60%)]"></div>
@@ -921,7 +926,7 @@ export default function App() {
                   <div className="bg-white p-4 rounded-xl shadow-lg border w-full text-center">
                     <h4 className="font-bold text-sm mb-2 text-slate-900 line-clamp-1">AIO-YTDER.apk</h4>
                     <div className="bg-orange-600 text-white w-full py-2 rounded-lg font-bold text-xs flex justify-center items-center gap-2">
-                       Download File
+                      Download File
                     </div>
                   </div>
                   <div className="absolute -bottom-2 right-4 text-orange-500 font-bold flex flex-col items-center animate-bounce">
@@ -963,12 +968,12 @@ export default function App() {
                 <div className="p-4 flex flex-col justify-center h-48 bg-slate-50 text-slate-900 relative rounded-2xl border border-slate-100">
                   <div className="bg-white p-4 rounded-xl shadow-lg border w-full">
                     <div className="flex items-center gap-3 border-b border-slate-100 pb-2 mb-2">
-                       <div className="w-6 h-6 bg-orange-600 rounded flex items-center justify-center text-white text-[10px]">AIO</div>
-                       <span className="font-bold text-xs">YTDER</span>
+                      <div className="w-6 h-6 bg-orange-600 rounded flex items-center justify-center text-white text-[10px]">AIO</div>
+                      <span className="font-bold text-xs">YTDER</span>
                     </div>
                     <div className="flex justify-between gap-4">
-                       <div className="flex-1 py-1 text-[10px] font-bold text-slate-400 text-center">CANCEL</div>
-                       <div className="flex-1 py-1 text-[10px] font-bold text-orange-600 text-center">INSTALL</div>
+                      <div className="flex-1 py-1 text-[10px] font-bold text-slate-400 text-center">CANCEL</div>
+                      <div className="flex-1 py-1 text-[10px] font-bold text-orange-600 text-center">INSTALL</div>
                     </div>
                   </div>
                 </div>
