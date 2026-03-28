@@ -43,7 +43,7 @@ const useScrollReveal = () => {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05, rootMargin: '0px 0px -50px 0px' }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -198,6 +198,10 @@ const SpiderWeb = () => {
     };
 
     const animate = () => {
+      if (document.hidden) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.strokeStyle = 'rgba(0, 0, 0, 0.03)';
       ctx.lineWidth = 0.5;
@@ -286,15 +290,25 @@ export default function App() {
       })
       .catch(err => console.error('Error fetching version info:', err));
 
-    // Sticky CTA Logic
+    // Sticky CTA Logic with Throttle
+    let lastScrollY = 0;
+    let ticking = false;
+
     const handleScrollEvent = () => {
-      if (window.scrollY > 600) {
-        setShowStickyCTA(true);
-      } else {
-        setShowStickyCTA(false);
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (lastScrollY > 600) {
+            setShowStickyCTA(true);
+          } else {
+            setShowStickyCTA(false);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener('scroll', handleScrollEvent);
+    window.addEventListener('scroll', handleScrollEvent, { passive: true });
     return () => window.removeEventListener('scroll', handleScrollEvent);
   }, []);
 
@@ -304,10 +318,19 @@ export default function App() {
 
   const handleScroll = (e, setter) => {
     const container = e.target;
-    const scrollLeft = container.scrollLeft;
-    const itemWidth = container.children[0].offsetWidth + 16; // item width + gap
-    const index = Math.round(scrollLeft / itemWidth);
-    setter(index);
+    if (container.ticking) return;
+    
+    window.requestAnimationFrame(() => {
+      const scrollLeft = container.scrollLeft;
+      const firstChild = container.children[0];
+      if (firstChild) {
+        const itemWidth = firstChild.offsetWidth + 16; // item width + gap
+        const index = Math.round(scrollLeft / itemWidth);
+        setter(index);
+      }
+      container.ticking = false;
+    });
+    container.ticking = true;
   };
 
 
@@ -509,7 +532,7 @@ export default function App() {
             {/* Top: Copy & CTA */}
             <div className="max-w-4xl">
               <Reveal delay={50}>
-                <img src="/playstore-logo.webp" alt="AIO-YTDER Icon" className="w-24 h-24 mx-auto mb-8 shadow-2xl rounded-[2rem] border-2 border-white/10" width="96" height="96" />
+                <img src="/playstore-logo.webp" alt="AIO-YTDER Icon" className="w-24 h-24 mx-auto mb-8 shadow-2xl rounded-[2rem] border-2 border-white/10" width="96" height="96" loading="eager" decoding="sync" />
               </Reveal>
               <Reveal delay={100}>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6 group hover:bg-blue-500/20 transition-colors mx-auto">
@@ -594,7 +617,8 @@ export default function App() {
                         src={shot.img}
                         alt={shot.title}
                         className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
-                        loading="lazy"
+                        loading={idx === 1 ? "eager" : "lazy"}
+                        decoding="async"
                         width="640"
                         height="640"
                       />
@@ -977,9 +1001,9 @@ export default function App() {
               </p>
 
               <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 px-4">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" decoding="async" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" decoding="async" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" decoding="async" />
               </div>
             </div>
           </Reveal>
@@ -989,8 +1013,8 @@ export default function App() {
         <div className="bg-slate-50 relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-slate-200/50 mb-6">
             <div className="flex items-center gap-3 group cursor-pointer">
-              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-orange-100 group-hover:scale-110 transition-transform">
-                <img src="/playstore-logo.webp" alt="AIO-YTDER" className="w-full h-full object-cover" />
+              <div className="w-8 h-8 rounded-lg overflow-hidden shadow-lg group-hover:scale-110 transition-transform">
+                <img src="/playstore-logo.webp" alt="AIO-YTDER" className="w-full h-full object-cover" width="32" height="32" loading="lazy" decoding="async" />
               </div>
               <span className="text-xl font-black text-slate-900 tracking-tighter">
                 AIO<span className="text-orange-600">-</span>YTDER
