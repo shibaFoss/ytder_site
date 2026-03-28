@@ -554,92 +554,58 @@ export default function App() {
               </Reveal>
             </div>
 
-            {/* --- MOBILE ONLY SLIDESHOW --- */}
-            <div className="md:hidden relative w-full mt-12 overflow-visible">
+            {/* --- ADAPTIVE SCREENSHOT SHOWCASE --- */}
+            <div className="relative w-full mt-12 md:mt-32 overflow-visible px-4">
               <div
-                className="flex gap-2 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-12 pt-4 px-[6%]"
+                className="flex gap-4 md:gap-12 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar pb-12 pt-4 px-[6%] md:px-0 md:justify-center"
                 onScroll={(e) => handleScroll(e, setScreenshotIndex)}
               >
                 {[
-                  { img: '/screenshot_home.webp', title: 'Power Home' },
-                  { img: '/screenshot_browser.webp', title: 'Smart Search' },
-                  { img: '/screenshot_downloads.webp', title: 'Ultra Speed' }
+                  { img: '/screenshot_home.webp', title: 'Power Home', rotate: '-rotate-2' },
+                  { img: '/screenshot_browser.webp', title: 'Smart Search', rotate: 'rotate-0' },
+                  { img: '/screenshot_downloads.webp', title: 'Ultra Speed', rotate: 'rotate-2' }
                 ].map((shot, idx) => (
                   <div
                     key={idx}
-                    className={`min-w-[88%] snap-center transition-all duration-700 ease-out transform ${screenshotIndex === idx ? 'scale-100 opacity-100 rotate-0' : 'scale-90 opacity-40 -rotate-1'
-                      }`}
+                    className={`min-w-[85%] sm:min-w-[45%] md:min-w-0 md:w-[280px] lg:w-[340px] snap-center transition-all duration-700 ease-out transform 
+                      ${screenshotIndex === idx || (idx >= 0 && idx <= 2) // Always active on desktop
+                        ? 'scale-100 opacity-100'
+                        : 'scale-90 opacity-40'
+                      } ${shot.rotate} md:rotate-0 hover:rotate-0 hover:scale-105 hover:z-30`}
                   >
-                    <div className="aspect-[9/17] relative rounded-[2.5rem] overflow-hidden border-4 border-slate-100 shadow-lg shadow-slate-200/30">
+                    <div className="relative aspect-[9/19.5] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border-4 md:border-[12px] border-slate-100 shadow-2xl shadow-slate-200/50 group transition-all duration-500 bg-white">
+                      {/* Reflection/Glow Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-10"></div>
+                      
                       <img
                         src={shot.img}
                         alt={shot.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
                         loading="lazy"
                         width="640"
                         height="640"
                       />
-                      <div className="absolute top-4 right-4 bg-white/50 backdrop-blur-xl px-4 py-2 rounded-full border border-white/20 shadow-2xl shadow-black/10 flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.6)] animate-pulse"></div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-900 leading-none">{shot.title}</span>
+
+                      {/* Floating Badge */}
+                      <div className="absolute top-4 right-4 md:top-8 md:right-8 bg-white/80 backdrop-blur-xl px-4 py-2 rounded-full border border-slate-200 shadow-xl flex items-center gap-2 z-20">
+                        <div className="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.8)] animate-pulse"></div>
+                        <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-slate-800 leading-none">{shot.title}</span>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-              {/* Pagination Dots */}
-              <div className="flex justify-center gap-1.5 mt-4">
+
+              {/* Pagination Dots (Mobile Only) */}
+              <div className="md:hidden flex justify-center gap-2 mt-4">
                 {[0, 1, 2].map((i) => (
-                  <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === screenshotIndex ? 'bg-orange-500 w-5' : 'bg-slate-300'}`} />
+                  <div
+                    key={i}
+                    className={`h-1.5 rounded-full transition-all duration-500 ${i === screenshotIndex ? 'bg-orange-500 w-8' : 'bg-slate-300 w-2'}`}
+                  />
                 ))}
               </div>
             </div>
-
-            {/* Bottom: 3D Triple Gallery (The "Better Idea") */}
-            <div className="mt-16 lg:mt-32 w-full max-w-6xl md:block hidden">
-              <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0 relative">
-
-                {/* 1. Left Feature: Smart Browser */}
-                <Reveal delay={300} className="lg:w-1/3 order-2 lg:order-1 lg:-mr-12 hidden lg:block">
-                  <div className="relative group animate-perspective-left">
-                    <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div className="relative rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-xl transition-transform duration-500 group-hover:scale-105">
-                      <img src="/hero-browser.webp" alt="Smart In-App Browser" className="w-full h-auto" width="640" height="640" loading="lazy" />
-                    </div>
-                    <div className="mt-8 text-center bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-slate-200 opacity-0 lg:group-hover:opacity-100 transition-opacity">
-                      <p className="text-slate-900 font-bold">Smart In-App Browser</p>
-                      <p className="text-slate-500 text-sm">Download directly from any site.</p>
-                    </div>
-                  </div>
-                </Reveal>
-
-                {/* 2. Center: Main Experience (Download UI) */}
-                <Reveal delay={500} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-75 sm:scale-110 lg:scale-[1.2] -mt-10 lg:mt-0">
-                  <div className="relative group animate-float">
-                    <div className="hidden md:block absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-fuchsia-500/20 blur-xl md:blur-3xl rounded-[3rem] opacity-40 md:opacity-70 animate-pulse"></div>
-                    <div className="relative rounded-[3rem] overflow-hidden border-[8px] border-slate-100 shadow-2xl shadow-slate-200">
-                      <img src="/hero-home.webp" alt="Speed Downloading Mockup" className="w-full h-auto" width="600" height="1200" />
-                    </div>
-                  </div>
-                </Reveal>
-
-                {/* 3. Right Feature: Advanced Manager */}
-                <Reveal delay={400} className="lg:w-1/3 order-3 lg:order-3 lg:-ml-12 hidden lg:block">
-                  <div className="relative group animate-perspective-right">
-                    <div className="absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div className="relative rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-xl transition-transform duration-500 group-hover:scale-105">
-                      <img src="/hero-downloads.webp" alt="Download Management" className="w-full h-auto" width="640" height="640" loading="lazy" />
-                    </div>
-                    <div className="mt-8 text-center bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-slate-200 opacity-0 lg:group-hover:opacity-100 transition-opacity">
-                      <p className="text-slate-900 font-bold">Files Manager</p>
-                      <p className="text-slate-500 text-sm">Organize & play offline.</p>
-                    </div>
-                  </div>
-                </Reveal>
-
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
@@ -672,7 +638,7 @@ export default function App() {
                   { icon: PlaySquare, color: "text-blue-500", glow: "shadow-blue-500/20", label: "Dailymotion" },
                   { icon: PlayCircle, color: "text-orange-500", glow: "shadow-orange-500/20", label: "Movies" }
                 ].map((site, idx) => (
-                  <div key={idx} className="group relative flex flex-col items-center">
+                  <div key={idx} className={`group relative flex flex-col items-center ${idx >= 6 ? 'md:hidden' : ''}`}>
                     <div className={`w-16 h-16 md:w-20 md:h-20 bg-white border border-slate-200/80 rounded-2xl md:rounded-3xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:border-transparent group-hover:shadow-2xl ${site.glow} group-hover:-translate-y-2 relative overflow-hidden`}>
                       {/* Brand Gradient Overlay on Hover */}
                       <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity bg-current ${site.color}`}></div>
