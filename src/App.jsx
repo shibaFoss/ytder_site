@@ -551,7 +551,7 @@ export default function App() {
             {/* --- MOBILE ONLY SLIDESHOW --- */}
             <div className="md:hidden relative w-full mt-12 overflow-visible">
               <div
-                className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar px-6 pb-2"
+                className="flex gap-2 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-12 pt-4 px-[6%]"
                 onScroll={(e) => handleScroll(e, setScreenshotIndex)}
               >
                 {[
@@ -559,8 +559,13 @@ export default function App() {
                   { img: '/screenshot_browser.webp', title: 'Smart Search' },
                   { img: '/screenshot_downloads.webp', title: 'Ultra Speed' }
                 ].map((shot, idx) => (
-                  <div key={idx} className="min-w-[85%] snap-center">
-                    <div className="aspect-[9/17] relative rounded-[2rem] overflow-hidden border-4 border-slate-100 shadow-xl shadow-slate-200">
+                  <div 
+                    key={idx} 
+                    className={`min-w-[88%] snap-center transition-all duration-700 ease-out transform ${
+                      screenshotIndex === idx ? 'scale-100 opacity-100 rotate-0' : 'scale-90 opacity-40 -rotate-1'
+                    }`}
+                  >
+                    <div className="aspect-[9/17] relative rounded-[2.5rem] overflow-hidden border-4 border-slate-100 shadow-lg shadow-slate-200/30">
                       <img
                         src={shot.img}
                         alt={shot.title}
@@ -569,8 +574,9 @@ export default function App() {
                         width="640"
                         height="640"
                       />
-                      <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{shot.title}</span>
+                      <div className="absolute top-4 right-4 bg-white/50 backdrop-blur-xl px-4 py-2 rounded-full border border-white/20 shadow-2xl shadow-black/10 flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.6)] animate-pulse"></div>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-900 leading-none">{shot.title}</span>
                       </div>
                     </div>
                   </div>
@@ -579,7 +585,7 @@ export default function App() {
               {/* Pagination Dots */}
               <div className="flex justify-center gap-1.5 mt-4">
                 {[0, 1, 2].map((i) => (
-                  <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === screenshotIndex ? 'bg-orange-500 w-4' : 'bg-slate-300'}`} />
+                  <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === screenshotIndex ? 'bg-orange-500 w-5' : 'bg-slate-300'}`} />
                 ))}
               </div>
             </div>
