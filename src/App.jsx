@@ -488,12 +488,12 @@ export default function App() {
                 <img src="/playstore-logo.webp" alt="AIO-YTDER Icon" className="w-24 h-24 mx-auto mb-8 shadow-2xl rounded-[2rem] border-2 border-white/10" width="96" height="96" />
               </Reveal>
               <Reveal delay={100}>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 mb-6 group hover:bg-fuchsia-500/20 transition-colors mx-auto">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6 group hover:bg-blue-500/20 transition-colors mx-auto">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-fuchsia-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                   </span>
-                  <span className="text-xs font-bold text-fuchsia-400 uppercase tracking-wider">v{versionData.latest_version} is Live!</span>
+                  <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">v{versionData.latest_version} is Live!</span>
                 </div>
               </Reveal>
 
