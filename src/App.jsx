@@ -487,7 +487,7 @@ export default function App() {
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
-      <section className="relative pt-16 pb-12 lg:pt-36 lg:pb-40 overflow-hidden">
+      <section className="relative pt-28 pb-12 lg:pt-36 lg:pb-40 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
@@ -555,9 +555,9 @@ export default function App() {
             </div>
 
             {/* --- ADAPTIVE SCREENSHOT SHOWCASE --- */}
-            <div className="relative w-full mt-12 md:mt-32 overflow-visible px-4">
+            <div className="relative w-[calc(100%+3rem)] -mx-6 md:w-full md:mx-0 mt-12 md:mt-32 overflow-hidden md:overflow-visible">
               <div
-                className="flex gap-4 md:gap-12 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar pb-12 pt-4 px-[6%] md:px-0 md:justify-center"
+                className="flex gap-4 md:gap-12 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar pb-12 pt-4 px-[11%] md:px-0 md:justify-center"
                 onScroll={(e) => handleScroll(e, setScreenshotIndex)}
               >
                 {[
@@ -567,7 +567,7 @@ export default function App() {
                 ].map((shot, idx) => (
                   <div
                     key={idx}
-                    className={`min-w-[85%] sm:min-w-[45%] md:min-w-0 md:w-[280px] lg:w-[340px] snap-center transition-all duration-700 ease-out transform 
+                    className={`min-w-[78%] sm:min-w-[45%] md:min-w-0 md:w-[280px] lg:w-[340px] snap-center transition-all duration-700 ease-out transform 
                       ${screenshotIndex === idx || (idx >= 0 && idx <= 2) // Always active on desktop
                         ? 'scale-100 opacity-100'
                         : 'scale-90 opacity-40'
