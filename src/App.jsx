@@ -907,94 +907,110 @@ export default function App() {
 
 
       {/* --- SECTION 4: HOW TO INSTALL --- */}
-      <div className="h-px w-full bg-slate-200" />
-      <section id="install-guide" className="py-12 md:py-24 relative overflow-hidden bg-slate-50">
+      <section id="install-guide" className="py-16 md:py-32 relative overflow-hidden bg-white">
+        {/* Stylized Section Decor */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.06)_0%,transparent_50%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.05)_0%,transparent_50%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <Reveal className="text-center mb-16 sm:mb-20 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900">How to <span className="text-orange-600">Install?</span></h2>
-            <p className="text-orange-600 font-semibold text-base sm:text-lg max-w-2xl mx-auto bg-orange-100/50 py-2 px-4 rounded-full border border-orange-200 inline-block">
-              (Even if you're not a techie!)
-            </p>
+          <Reveal className="text-center mb-20 md:mb-28 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-8 tracking-tighter text-slate-900 leading-none">
+              How to <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-500">Install?</span>
+            </h2>
+            <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-500 font-bold text-sm sm:text-base">
+              <ShieldCheck size={18} className="text-emerald-500" />
+              100% Secure & Non-Technical Guide
+            </div>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
+            {/* Desktop Connectors - Subtle Dashed Lines */}
+            <div className="hidden lg:block absolute top-1/4 left-0 w-full px-20 pointer-events-none">
+              <div className="flex justify-between">
+                {[1, 2, 3].map((_) => (
+                  <div key={_} className="h-px flex-1 bg-gradient-to-r from-slate-200 via-orange-300/30 to-slate-200 border-dashed border-b-2"></div>
+                ))}
+              </div>
+            </div>
+
             {/* Step 1 */}
-            <Reveal delay={0} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-200 absolute -top-8 -left-4 -z-0">01</div>
-              <div className="bg-white p-6 rounded-[2.5rem] border border-slate-200 shadow-xl mb-6 relative overflow-hidden group">
-                <div className="p-4 flex flex-col items-center justify-center h-48 bg-slate-50 text-slate-900 relative rounded-2xl border border-slate-100">
-                  <div className="bg-white p-4 rounded-xl shadow-lg border w-full text-center">
-                    <h4 className="font-bold text-sm mb-2 text-slate-900 line-clamp-1">AIO-YTDER.apk</h4>
-                    <div className="bg-orange-600 text-white w-full py-2 rounded-lg font-bold text-xs flex justify-center items-center gap-2">
-                      Download File
+            <Reveal delay={0} className="relative flex flex-col group">
+              <div className="text-8xl font-black text-slate-900/5 absolute -top-12 -left-6 z-0 select-none group-hover:text-orange-500/10 transition-colors">01</div>
+              <div className="bg-white/40 backdrop-blur-xl p-6 rounded-[3rem] border border-slate-200/60 shadow-xl shadow-slate-100 mb-8 relative overflow-hidden group-hover:-translate-y-3 transition-all duration-500">
+                <div className="p-4 flex flex-col items-center justify-center h-52 bg-slate-50 text-slate-900 relative rounded-[2rem] border border-slate-100 overflow-hidden group-hover:bg-white transition-colors">
+                  <div className="bg-white p-5 rounded-2xl shadow-xl border border-slate-100 w-full text-center relative z-10 transition-transform group-hover:scale-105">
+                    <h4 className="font-black text-xs mb-3 text-slate-900 line-clamp-1 opacity-70">AIO-YTDER.apk</h4>
+                    <div className="bg-orange-600 text-white w-full py-3 rounded-xl font-black text-[10px] sm:text-xs flex justify-center items-center gap-2 shadow-lg shadow-orange-200 animate-pulse">
+                      <Download size={14} /> DOWNLOAD
                     </div>
                   </div>
-                  <div className="absolute -bottom-2 right-4 text-orange-500 font-bold flex flex-col items-center animate-bounce">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-5 scale-150">
+                    <Rocket size={100} />
                   </div>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">1. Download APK</h3>
-              <p className="text-slate-500 text-sm">Tap the big orange button. It's 100% safe and virus-scanned.</p>
+              <h3 className="text-xl font-black text-slate-900 mb-3 ml-2 group-hover:text-orange-600 transition-colors">1. Download APK</h3>
+              <p className="text-slate-500 text-sm leading-relaxed px-2 font-medium">Click the main download button. The APK is small, safe, and ready in seconds.</p>
             </Reveal>
 
             {/* Step 2 */}
-            <Reveal delay={100} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-200 absolute -top-8 -left-4 -z-0">02</div>
-              <div className="bg-white p-6 rounded-[2.5rem] border border-slate-200 shadow-xl mb-6 relative overflow-hidden group">
-                <div className="p-4 flex flex-col justify-center h-48 bg-slate-900 text-white relative rounded-2xl shadow-inner">
-                  <div className="text-[10px] uppercase font-black text-slate-500 mb-2">Security Setting</div>
-                  <div className="bg-slate-800 p-3 rounded-xl border border-slate-700">
+            <Reveal delay={150} className="relative flex flex-col group">
+              <div className="text-8xl font-black text-slate-900/5 absolute -top-12 -left-6 z-0 select-none group-hover:text-fuchsia-500/10 transition-colors">02</div>
+              <div className="bg-white/40 backdrop-blur-xl p-6 rounded-[3rem] border border-slate-200/60 shadow-xl shadow-slate-100 mb-8 relative overflow-hidden group-hover:-translate-y-3 transition-all duration-500">
+                <div className="p-4 flex flex-col justify-center h-52 bg-slate-900 text-white relative rounded-[2rem] shadow-inner overflow-hidden">
+                  <div className="absolute top-0 right-0 p-4 opacity-10">
+                    <Settings size={60} className="animate-spin-slow" />
+                  </div>
+                  <div className="text-[10px] uppercase font-black text-slate-500 mb-3 tracking-widest">Security Setting</div>
+                  <div className="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/10">
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] font-bold">Allow Unknown Apps</span>
-                      <div className="w-8 h-4 bg-orange-500 rounded-full flex items-center p-0.5 justify-end">
-                        <div className="w-3 h-3 bg-white rounded-full shadow-sm"></div>
+                      <span className="text-xs font-bold font-mono">Unknown Apps</span>
+                      <div className="w-10 h-5 bg-orange-500 rounded-full flex items-center p-1 justify-end shadow-[0_0_15px_rgba(249,115,22,0.5)]">
+                        <div className="w-3.5 h-3.5 bg-white rounded-full shadow-sm"></div>
                       </div>
                     </div>
                   </div>
-                  <div className="absolute top-4 right-4 animate-pulse">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                  </div>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">2. Enable Sources</h3>
-              <p className="text-slate-500 text-sm">Your phone might ask. Tap 'Settings' and toggle 'Allow from this source'.</p>
+              <h3 className="text-xl font-black text-slate-900 mb-3 ml-2 group-hover:text-fuchsia-600 transition-colors">2. System Access</h3>
+              <p className="text-slate-500 text-sm leading-relaxed px-2 font-medium">If Chrome asks, go to Settings & tap <b className="text-slate-900">'Allow from this source'</b>.</p>
             </Reveal>
 
             {/* Step 3 */}
-            <Reveal delay={200} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-200 absolute -top-8 -left-4 -z-0">03</div>
-              <div className="bg-white p-6 rounded-[2.5rem] border border-slate-200 shadow-xl mb-6 relative overflow-hidden group">
-                <div className="p-4 flex flex-col justify-center h-48 bg-slate-50 text-slate-900 relative rounded-2xl border border-slate-100">
-                  <div className="bg-white p-4 rounded-xl shadow-lg border w-full">
-                    <div className="flex items-center gap-3 border-b border-slate-100 pb-2 mb-2">
-                      <div className="w-6 h-6 bg-orange-600 rounded flex items-center justify-center text-white text-[10px]">AIO</div>
-                      <span className="font-bold text-xs">YTDER</span>
+            <Reveal delay={300} className="relative flex flex-col group">
+              <div className="text-8xl font-black text-slate-900/5 absolute -top-12 -left-6 z-0 select-none group-hover:text-orange-500/10 transition-colors">03</div>
+              <div className="bg-white/40 backdrop-blur-xl p-6 rounded-[3rem] border border-slate-200/60 shadow-xl shadow-slate-100 mb-8 relative overflow-hidden group-hover:-translate-y-3 transition-all duration-500">
+                <div className="p-4 flex flex-col justify-center h-52 bg-slate-50 text-slate-900 relative rounded-[2rem] border border-slate-100 overflow-hidden group-hover:bg-white transition-colors">
+                  <div className="bg-white p-5 rounded-2xl shadow-xl border border-slate-100 w-full relative z-10 font-bold">
+                    <div className="flex items-center gap-3 border-b border-slate-100 pb-3 mb-4">
+                      <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center text-white text-xs shadow-md">AIO</div>
+                      <span className="font-black text-xs tracking-tight">YTDER Downloader</span>
                     </div>
                     <div className="flex justify-between gap-4">
-                      <div className="flex-1 py-1 text-[10px] font-bold text-slate-400 text-center">CANCEL</div>
-                      <div className="flex-1 py-1 text-[10px] font-bold text-orange-600 text-center">INSTALL</div>
+                      <div className="flex-1 py-2 text-[10px] font-black text-slate-400 text-center uppercase tracking-wider">CANCEL</div>
+                      <div className="flex-1 py-2 text-[10px] font-black text-orange-600 text-center uppercase tracking-wider bg-orange-50 rounded-lg animate-pulse">INSTALL</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">3. Tap Install</h3>
-              <p className="text-slate-500 text-sm">Tap 'Install'. It takes just 5 seconds to get everything set up.</p>
+              <h3 className="text-xl font-black text-slate-900 mb-3 ml-2 group-hover:text-orange-600 transition-colors">3. Quick Install</h3>
+              <p className="text-slate-500 text-sm leading-relaxed px-2 font-medium">Just tap <b className="text-slate-900">'Install'</b>. The process is instant and automated.</p>
             </Reveal>
 
             {/* Step 4 */}
-            <Reveal delay={300} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-200 absolute -top-8 -left-4 -z-0">04</div>
-              <div className="bg-white p-6 rounded-[2.5rem] border border-slate-200 shadow-xl mb-6 relative overflow-hidden group">
-                <div className="p-4 flex flex-col items-center justify-center h-48 bg-slate-50 text-slate-900 relative rounded-2xl border border-slate-100">
-                  <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-emerald-100">
-                    <CheckCircle2 size={24} className="text-white" />
+            <Reveal delay={450} className="relative flex flex-col group">
+              <div className="text-8xl font-black text-slate-900/5 absolute -top-12 -left-6 z-0 select-none group-hover:text-emerald-500/10 transition-colors">04</div>
+              <div className="bg-white/40 backdrop-blur-xl p-6 rounded-[3rem] border border-slate-200/60 shadow-xl shadow-slate-100 mb-8 relative overflow-hidden group-hover:-translate-y-3 transition-all duration-500">
+                <div className="p-4 flex flex-col items-center justify-center h-52 bg-slate-50 text-slate-900 relative rounded-[2rem] border border-slate-100 overflow-hidden group-hover:bg-white transition-colors">
+                  <div className="w-16 h-16 bg-emerald-500 rounded-[1.2rem] flex items-center justify-center mb-4 shadow-2xl shadow-emerald-200 group-hover:scale-110 transition-transform">
+                    <CheckCircle2 size={32} className="text-white" />
                   </div>
-                  <h4 className="font-black text-lg text-emerald-600">App Ready!</h4>
+                  <h4 className="font-black text-xl text-emerald-600 tracking-tight">Success!</h4>
+                  <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">Enjoy Your Power</p>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">4. Ready to Go!</h3>
-              <p className="text-slate-500 text-sm">Launch AIO-YTDER from your app drawer and start downloading unlimitedly.</p>
+              <h3 className="text-xl font-black text-slate-900 mb-3 ml-2 group-hover:text-emerald-600 transition-colors">4. Launch & Play</h3>
+              <p className="text-slate-500 text-sm leading-relaxed px-2 font-medium">Open the app, browse your favorite site, and start saving content for free.</p>
             </Reveal>
           </div>
         </div>
@@ -1006,7 +1022,7 @@ export default function App() {
         {/* Stylized Section Flare */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.08)_0%,transparent_50%),radial-gradient(circle_at_top_left,rgba(168,85,247,0.05)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"></div>
-        
+
         {/* Floating Decorative Elements */}
         <div className="absolute top-1/4 left-10 opacity-20 animate-spin-slow pointer-events-none hidden md:block">
           <Star size={40} className="text-orange-300" />
@@ -1083,10 +1099,10 @@ export default function App() {
                 <ShieldCheck size={18} className="text-emerald-500" /> 100% Safe, Secure & Free
               </p>
 
-              <div className="flex flex-wrap justify-center items-center gap-10">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-6 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-6 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-6 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
+              <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 px-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-5 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
               </div>
             </div>
           </Reveal>
@@ -1094,7 +1110,7 @@ export default function App() {
 
         <div className="h-px w-full bg-slate-200/60" />
         <div className="bg-slate-50 relative z-10">
-          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-slate-200/50 mb-6">
             <div className="flex items-center gap-3 group cursor-pointer">
               <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-orange-100 group-hover:scale-110 transition-transform">
                 <img src="/playstore-logo.webp" alt="AIO-YTDER" className="w-full h-full object-cover" />
@@ -1113,6 +1129,11 @@ export default function App() {
             <div className="text-slate-500 text-sm flex items-center gap-1">
               © 2026 AIO-YTDER. Made with <span className="text-red-500 text-lg animate-pulse">❤️</span> in India.
             </div>
+          </div>
+          <div className="max-w-7xl mx-auto px-6 pb-8">
+            <p className="text-[10px] text-slate-400 max-w-3xl mx-auto text-center uppercase tracking-[0.15em] leading-relaxed opacity-60 font-medium">
+              Disclaimer: AIO-YTDER is built as a utility tool and is not responsible for any copyrighted material downloaded by users. Users are sole responsible for their actions and complying with relevant terms of service of any third-party websites.
+            </p>
           </div>
         </div>
       </footer>
