@@ -473,6 +473,8 @@ export default function App() {
             display: none !important;
           }
         }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
@@ -543,8 +545,35 @@ export default function App() {
               </Reveal>
             </div>
 
+            {/* --- MOBILE ONLY SLIDESHOW --- */}
+            <div className="md:hidden relative w-full mt-12 overflow-visible">
+              <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar px-6 pb-2">
+                {[
+                  { img: '/screenshot_home.webp', title: 'Power Home' },
+                  { img: '/screenshot_browser.webp', title: 'Smart Search' },
+                  { img: '/screenshot_downloads.webp', title: 'Ultra Speed' }
+                ].map((shot, idx) => (
+                  <div key={idx} className="min-w-[85%] snap-center">
+                    <div className="aspect-[9/17] relative rounded-[2rem] overflow-hidden border-4 border-slate-800 shadow-2xl">
+                      <img
+                        src={shot.img}
+                        alt={shot.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        width="640"
+                        height="640"
+                      />
+                      <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-white/50">{shot.title}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Bottom: 3D Triple Gallery (The "Better Idea") */}
-            <div className="mt-16 lg:mt-32 w-full max-w-6xl">
+            <div className="mt-16 lg:mt-32 w-full max-w-6xl md:block hidden">
               <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0 relative">
 
                 {/* 1. Left Feature: Smart Browser */}
