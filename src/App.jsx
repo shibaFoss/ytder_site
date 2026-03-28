@@ -96,9 +96,14 @@ const Reveal = ({ children, delay = 0, className = "" }) => {
 };
 
 const ShimmerBadge = ({ icon: Icon, text, type = 'gold' }) => {
-  const colors = type === 'gold'
-    ? 'from-amber-400 via-yellow-200 to-amber-500 text-amber-900 border-amber-300'
-    : 'from-emerald-500 via-emerald-300 to-emerald-600 text-white border-emerald-400';
+  const typeColors = {
+    gold: 'from-amber-400 via-yellow-200 to-amber-500 text-amber-900 border-amber-300',
+    emerald: 'from-emerald-500 via-emerald-300 to-emerald-600 text-white border-emerald-400',
+    blue: 'from-blue-500 via-cyan-300 to-indigo-600 text-white border-blue-400',
+    purple: 'from-purple-500 via-fuchsia-300 to-purple-700 text-white border-purple-400'
+  };
+
+  const colors = typeColors[type] || typeColors.gold;
 
   return (
     <div className={`relative overflow-hidden flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm shadow-lg border ${colors} bg-gradient-to-r`}>
@@ -530,18 +535,16 @@ export default function App() {
                 </button>
               </Reveal>
 
-              <Reveal delay={500} className="mt-12 flex flex-wrap justify-center gap-6">
-                <ShimmerBadge icon={ShieldCheck} text="🇮🇳 Made in India" type="emerald" />
-                <ShimmerBadge icon={Award} text="India's No. 1 App 2026" type="gold" />
-                <div className="flex items-center gap-2 text-slate-400 font-medium">
-                  <Star className="text-amber-400" size={18} fill="currentColor" />
-                  <span className="text-white">4.9/5</span> Rating
-                </div>
+              <Reveal delay={500} className="mt-12 grid grid-cols-2 md:flex md:flex-wrap justify-center gap-4 md:gap-6 w-full max-w-lg mx-auto md:max-w-none">
+                <ShimmerBadge icon={ShieldCheck} text="Made in India" type="emerald" />
+                <ShimmerBadge icon={Award} text="No.1 Choice" type="gold" />
+                <ShimmerBadge icon={Star} text="4.9/5 Rating" type="blue" />
+                <ShimmerBadge icon={CheckCircle2} text="100% Secured" type="purple" />
               </Reveal>
             </div>
 
             {/* Bottom: 3D Triple Gallery (The "Better Idea") */}
-            <div className="mt-24 lg:mt-32 w-full max-w-6xl">
+            <div className="mt-16 lg:mt-32 w-full max-w-6xl">
               <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0 relative">
 
                 {/* 1. Left Feature: Smart Browser */}
@@ -560,7 +563,7 @@ export default function App() {
                 </Reveal>
 
                 {/* 2. Center: Main Experience (Download UI) */}
-                <Reveal delay={500} className="hidden lg:block lg:w-2/5 z-20 order-1 lg:order-2 scale-95 sm:scale-110 lg:scale-[1.2]">
+                <Reveal delay={500} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-75 sm:scale-110 lg:scale-[1.2] -mt-10 lg:mt-0">
                   <div className="relative group animate-float">
                     <div className="hidden md:block absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-xl md:blur-3xl rounded-[3rem] opacity-40 md:opacity-70 animate-pulse"></div>
                     <div className="relative md:rounded-[3rem] md:overflow-hidden border-none md:border-4 md:border-white/20 shadow-none md:shadow-[0_0_80px_rgba(192,38,211,0.4)] transition-transform duration-700">
