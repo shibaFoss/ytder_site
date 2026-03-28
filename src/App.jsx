@@ -357,7 +357,6 @@ export default function App() {
       {/* Global Styles for Animations */}
       <style dangerouslySetInnerHTML={{
         __html: `
-        body { font-family: 'Ubuntu', sans-serif; }
         @keyframes shimmer {
           100% { transform: translateX(100%); }
         }
