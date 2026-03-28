@@ -303,13 +303,13 @@ export default function App() {
       {/* --- PREMIUM BACKGROUND SYSTEM --- */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Animated Mesh Blobs - Lightened for Light Mode */}
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-400/10 rounded-full blur-[120px] animate-blob"></div>
-        <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-fuchsia-400/10 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-400/10 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-400/10 rounded-full blur-[120px] animate-blob pointer-events-none"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-fuchsia-400/10 rounded-full blur-[120px] animate-blob pointer-events-none" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-400/10 rounded-full blur-[120px] animate-blob pointer-events-none" style={{ animationDelay: '4s' }}></div>
 
         {/* Subtle Background Pattern */}
-        <div className="absolute inset-0 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/40 via-white to-fuchsia-50/40"></div>
+        <div className="absolute inset-0 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/40 via-white to-fuchsia-50/40 pointer-events-none"></div>
       </div>
 
       <SpiderWeb />
@@ -488,7 +488,7 @@ export default function App() {
 
       {/* --- SECTION 1: HERO --- */}
       <section className="relative pt-16 pb-12 lg:pt-36 lg:pb-40 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="flex flex-col items-center justify-center text-center">
@@ -688,8 +688,8 @@ export default function App() {
       </section>
       <div className="premium-divider-orange" />
       <section className="pt-8 pb-16 md:py-24 relative overflow-hidden bg-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,237,213,0.4)_0%,transparent_40%),radial-gradient(circle_at_70%_80%,rgba(245,243,255,0.4)_0%,transparent_40%)]"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,237,213,0.4)_0%,transparent_40%),radial-gradient(circle_at_70%_80%,rgba(245,243,255,0.4)_0%,transparent_40%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           {/* Mobile-only background spice */}
           <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
@@ -739,10 +739,10 @@ export default function App() {
       </section>
 
       <div className="premium-divider-orange" />
-      <section className="py-8 md:py-24 bg-white relative">
+      <section className="py-8 md:py-24 bg-white relative overflow-hidden">
         {/* Stylized Mobile Atmosphere */}
-        <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.08)_0%,transparent_60%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.03)_0%,transparent_50%)]"></div>
-        <div className="md:hidden absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+        <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.08)_0%,transparent_60%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.03)_0%,transparent_50%)] pointer-events-none"></div>
+        <div className="md:hidden absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal className="text-center mb-16 px-4">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight text-slate-900">Why AIO is the <span className="text-orange-600">King</span> of all downloaders?</h2>
@@ -760,7 +760,7 @@ export default function App() {
               { icon: IndianRupee, title: "100% Free", desc: "Bilkul Free! No hidden subscriptions. No credit cards. Premium features for everyone.", color: "text-emerald-400", bg: "bg-emerald-400/10" }
             ].map((feature, idx) => (
               <Reveal key={idx} delay={idx * 100}>
-                <div className="bg-slate-50/50 border border-slate-200 p-8 rounded-3xl hover:bg-white transition-all shadow-sm hover:shadow-xl hover:shadow-slate-200/50 h-full group">
+                <div className="bg-slate-50/50 border border-slate-100 p-8 rounded-3xl hover:bg-white transition-all h-full group">
                   <div className={`w-14 h-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className={`w-7 h-7 ${feature.color}`} />
                   </div>
@@ -777,13 +777,13 @@ export default function App() {
             onScroll={(e) => handleScroll(e, setFeatureIndex)}
           >
             {[
-              { icon: Rocket, title: "Ultra Speed", desc: "Download full-length 4K HD movies in a few munites.", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200" },
+              { icon: Rocket, title: "Ultra Speed", desc: "Download full-length 4K HD movies in a few minutes.", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200" },
               { icon: MonitorPlay, title: "4K Quality", desc: "Play stunning 1080p and 4K resolution with built-in player.", color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-200" },
               { icon: Globe, title: "Smart Browser", desc: "Browse and download online videos directly with a single tap.", color: "text-cyan-600", bg: "bg-cyan-50", border: "border-cyan-200" },
               { icon: IndianRupee, title: "100% Free", desc: "There is no hidden costs. No subscriptions. No hidden charges.", color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-200" }
             ].map((feature, idx) => (
-              <div key={idx} className="min-w-[75%] snap-center">
-                <div className={`bg-white/80 backdrop-blur-xl border border-slate-200 p-8 rounded-[2rem] h-full flex flex-col items-center text-center shadow-lg`}>
+              <div key={idx} className="min-w-[75%] snap-center px-1">
+                <div className={`bg-white border border-slate-100 p-8 rounded-[2rem] h-full flex flex-col items-center text-center transition-all`}>
                   <div className={`w-16 h-16 rounded-[1.5rem] ${feature.bg} flex items-center justify-center mb-6`}>
                     <feature.icon className={`w-8 h-8 ${feature.color}`} />
                   </div>
@@ -806,9 +806,9 @@ export default function App() {
       {/* --- SECTION 3.5: PRO FEATURES (ANIMATED) --- */}
       <div className="premium-divider-glow hidden md:block" />
       <section className="py-12 md:py-24 relative overflow-hidden hidden md:block">
-        <div className="absolute inset-0 bg-slate-900"></div>
-        <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
-        <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
+        <div className="absolute inset-0 bg-slate-900 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-glow-soft opacity-60 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-circuit animate-pulse-soft pointer-events-none"></div>
 
         {/* Additional Decorative Blobs */}
         <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[150px] -mr-64 -mt-64"></div>
@@ -1000,16 +1000,30 @@ export default function App() {
         </div>
       </section>
 
+      <div className="premium-divider-orange" />
       {/* --- SECTION 5: TESTIMONIALS --- */}
-      <div className="h-px w-full bg-slate-200" />
-      <section className="py-12 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-16 md:py-28 bg-slate-50 relative overflow-hidden">
+        {/* Stylized Section Flare */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.08)_0%,transparent_50%),radial-gradient(circle_at_top_left,rgba(168,85,247,0.05)_0%,transparent_50%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"></div>
+        
+        {/* Floating Decorative Elements */}
+        <div className="absolute top-1/4 left-10 opacity-20 animate-spin-slow pointer-events-none hidden md:block">
+          <Star size={40} className="text-orange-300" />
+        </div>
+        <div className="absolute bottom-1/4 right-10 opacity-20 animate-spin-slow pointer-events-none hidden md:block" style={{ animationDirection: 'reverse' }}>
+          <Star size={60} className="text-purple-300" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <Reveal className="text-center mb-16 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-900">Loved by Millions Across India</h2>
-            <div className="flex justify-center gap-1 text-amber-400 mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900">
+              Loved by Millions <span className="text-orange-600">Across India</span>
+            </h2>
+            <div className="flex justify-center gap-1 text-amber-400 mb-6 scale-125">
               <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" />
             </div>
-            <p className="text-slate-500 font-medium">4.8/5 Average Rating from our global users</p>
+            <p className="text-slate-500 font-medium text-lg">Trusted by users globally with a <span className="text-slate-900 font-bold underline decoration-orange-500/30">4.8/5 Rating</span></p>
           </Reveal>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -1019,18 +1033,18 @@ export default function App() {
               { name: "Anita", loc: "Bengaluru", text: "Super easy to install. I'm not good with tech, but the guide was perfect. Thank you for keeping it free!", color: "bg-blue-500" }
             ].map((review, idx) => (
               <Reveal key={idx} delay={idx * 150}>
-                <div className="bg-slate-50 p-8 rounded-3xl relative border border-slate-100 hover:shadow-xl transition-all">
-                  <div className="flex text-amber-400 mb-4 gap-1">
+                <div className="bg-white/70 backdrop-blur-md p-8 rounded-[2.5rem] relative border border-white shadow-xl hover:shadow-2xl hover:bg-white transition-all duration-500 group">
+                  <div className="flex text-amber-400 mb-6 gap-1 group-hover:scale-110 transition-transform origin-left">
                     {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
                   </div>
-                  <p className="text-lg text-slate-700 italic mb-6 leading-relaxed">"{review.text}"</p>
+                  <p className="text-lg text-slate-700 font-medium italic mb-8 leading-relaxed">"{review.text}"</p>
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-full ${review.color} flex items-center justify-center text-white font-bold text-xl`}>
+                    <div className={`w-14 h-14 rounded-2xl ${review.color} flex items-center justify-center text-white font-black text-2xl shadow-lg transition-transform group-hover:rotate-12`}>
                       {review.name.charAt(0)}
                     </div>
                     <div>
-                      <div className="font-bold text-slate-900">{review.name}</div>
-                      <div className="text-sm text-slate-500">{review.loc}</div>
+                      <div className="font-black text-slate-900 text-lg">{review.name}</div>
+                      <div className="text-xs font-bold text-orange-500/70 uppercase tracking-widest">{review.loc}</div>
                     </div>
                   </div>
                 </div>
