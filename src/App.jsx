@@ -20,7 +20,8 @@ import {
   Video,
   Music,
   PlayCircle,
-  Github
+  Github,
+  Image
 } from 'lucide-react';
 
 // --- Custom Hooks ---
@@ -646,16 +647,17 @@ export default function App() {
                   { icon: Facebook, color: "text-blue-600", label: "Facebook" },
                   { icon: Youtube, color: "text-red-600", label: "YouTube" },
                   { icon: Twitter, color: "text-sky-400", label: "X / Twitter" },
-                  { icon: Music, color: "text-emerald-400", label: "TikTok / Music" },
-                  { icon: PlayCircle, color: "text-orange-500", label: "Movies / OTT" },
-                  { icon: Globe, color: "text-indigo-400", label: "All Websites" }
+                  { icon: Music, color: "text-emerald-400", label: "TikTok" },
+                  { icon: Image, color: "text-rose-500", label: "Pinterest" },
+                  { icon: PlaySquare, color: "text-blue-500", label: "Dailymotion" },
+                  { icon: PlayCircle, color: "text-orange-500", label: "Movies" }
                 ].map((site, idx) => (
                   <div key={idx} className="group relative flex flex-col items-center">
                     <div className="w-16 h-16 md:w-20 md:h-20 bg-slate-800/80 border border-slate-700/50 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:border-slate-500 group-hover:bg-slate-800 relative overflow-hidden shadow-lg shadow-black/20">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                       <site.icon size={32} className={`transition-all duration-500 transform group-hover:scale-110 ${site.color}`} />
                     </div>
-                    <span className="mt-3 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 group-hover:text-slate-200 transition-colors duration-300">{site.label}</span>
+                    <span className="mt-3 text-xs font-bold text-slate-400 group-hover:text-slate-200 transition-colors duration-300">{site.label}</span>
                   </div>
                 ))}
               </div>
