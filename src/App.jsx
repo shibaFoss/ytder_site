@@ -479,7 +479,7 @@ export default function App() {
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
-      <section className="relative pt-24 pb-16 lg:pt-36 lg:pb-40 overflow-hidden">
+      <section className="relative pt-16 pb-12 lg:pt-36 lg:pb-40 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
@@ -632,7 +632,7 @@ export default function App() {
 
       {/* --- SECTION 1.5: SUPPORTED PLATFORMS --- */}
       <div className="premium-divider" />
-      <section className="py-12 bg-slate-900/90 md:bg-slate-900/40 backdrop-blur-none md:backdrop-blur-md relative z-20">
+      <section className="py-8 md:py-12 bg-slate-900/90 md:bg-slate-900/40 backdrop-blur-none md:backdrop-blur-md relative z-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal>
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
@@ -667,7 +667,7 @@ export default function App() {
       </section>
 
       <div className="premium-divider-glow" />
-      <section className="pt-12 pb-24 md:py-24 relative overflow-hidden">
+      <section className="pt-8 pb-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-slate-900"></div>
         <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
         <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
@@ -720,14 +720,18 @@ export default function App() {
       </section>
 
       <div className="premium-divider" />
-      <section className="py-24 bg-slate-900">
+      <section className="py-8 md:py-24 bg-transparent md:bg-slate-900 relative">
+        <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.1)_0%,transparent_60%)]"></div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal className="text-center mb-16 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Why AIO-YTDER is the <span className="text-fuchsia-400">King</span></h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg">We didn't just build another downloader. We built the fastest, safest, and most powerful tool for Android.</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Why AIO is the <span className="text-fuchsia-400">King</span> of all downloaders?</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+              We didn’t just build another downloader, we engineered the <span className="font-bold text-white">fastest</span>, <span className="font-bold text-white">safest</span>, and <span className="font-bold text-fuchsia-400">most powerful</span> tool for Android, combining effortless simplicity with full user control.
+            </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Desktop Grid */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { icon: Rocket, title: "Ultra-Fast Speed", desc: "Download full-length movies in seconds with advanced multi-threading technology.", color: "text-blue-400", bg: "bg-blue-400/10" },
               { icon: MonitorPlay, title: "HD & 4K Quality", desc: "Choose your resolution: 144p to save data, or stunning 1080p and 4K for the big screen.", color: "text-purple-400", bg: "bg-purple-400/10" },
@@ -745,12 +749,33 @@ export default function App() {
               </Reveal>
             ))}
           </div>
+
+          {/* New Mobile Experience: Horizontal Snap Scroll Cards */}
+          <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 px-6 -mx-6 pb-4">
+            {[
+              { icon: Rocket, title: "Ultra Speed", desc: "Download full-length 4K HD movies in a few munites.", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-500/30" },
+              { icon: MonitorPlay, title: "4K Quality", desc: "Play stunning 1080p and 4K resolution with built-in player.", color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-500/30" },
+              { icon: Globe, title: "Smart Browser", desc: "Browse and download online videos directly with a single tap.", color: "text-cyan-400", bg: "bg-cyan-400/10", border: "border-cyan-500/30" },
+              { icon: IndianRupee, title: "100% Free", desc: "There is no hidden costs. No subscriptions. No hidden charges.", color: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-500/30" }
+            ].map((feature, idx) => (
+              <div key={idx} className="min-w-[75%] snap-center">
+                <div className={`bg-slate-900/60 backdrop-blur-xl border-t ${feature.border} p-8 rounded-[2rem] h-full flex flex-col items-center text-center shadow-xl`}>
+                  <div className={`w-16 h-16 rounded-[1.5rem] ${feature.bg} flex items-center justify-center mb-6`}>
+                    <feature.icon className={`w-8 h-8 ${feature.color}`} />
+                  </div>
+                  <h3 className="text-xl font-black text-white mb-2">{feature.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{feature.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
       {/* --- SECTION 3.5: PRO FEATURES (ANIMATED) --- */}
       <div className="premium-divider-glow" />
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-12 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-slate-900"></div>
         <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
         <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
@@ -853,7 +878,7 @@ export default function App() {
 
       {/* --- SECTION 4: HOW TO INSTALL --- */}
       <div className="premium-divider" />
-      <section id="install-guide" className="py-24 relative overflow-hidden">
+      <section id="install-guide" className="py-12 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-slate-900"></div>
         <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
         <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
@@ -974,7 +999,7 @@ export default function App() {
 
       {/* --- SECTION 5: TESTIMONIALS --- */}
       <div className="premium-divider-glow" />
-      <section className="py-24 bg-slate-900">
+      <section className="py-12 md:py-24 bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal className="text-center mb-16 px-4">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Loved by Millions Across India</h2>
@@ -1014,7 +1039,7 @@ export default function App() {
 
       {/* --- SECTION 6: FINAL CTA & FOOTER --- */}
       <div className="premium-divider" />
-      <footer className="relative bg-gradient-to-t from-slate-900 to-slate-800 pt-24">
+      <footer className="relative bg-gradient-to-t from-slate-900 to-slate-800 pt-12 md:pt-24">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center mb-24">
