@@ -304,7 +304,7 @@ export default function App() {
           <div className="flex items-center gap-3 group cursor-pointer">
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-              <img src="/playstore-logo.png" alt="AIO-YTDER" className="relative w-10 h-10 rounded-lg shadow-2xl" />
+              <img src="/playstore-logo.webp" alt="AIO-YTDER" className="relative w-10 h-10 rounded-lg shadow-2xl" width="40" height="40" />
             </div>
             <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center group perspective-1000">
               <span className="text-white text-3d transform transition-transform duration-500 group-hover:translate-z-10 group-hover:rotate-y-10">AIO-</span>
@@ -480,7 +480,7 @@ export default function App() {
             {/* Top: Copy & CTA */}
             <div className="max-w-4xl">
               <Reveal delay={50}>
-                <img src="/playstore-logo.png" alt="AIO-YTDER Icon" className="w-24 h-24 mx-auto mb-8 shadow-2xl rounded-[2rem] border-2 border-white/10" />
+                <img src="/playstore-logo.webp" alt="AIO-YTDER Icon" className="w-24 h-24 mx-auto mb-8 shadow-2xl rounded-[2rem] border-2 border-white/10" width="96" height="96" />
               </Reveal>
               <Reveal delay={100}>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 mb-6 group hover:bg-fuchsia-500/20 transition-colors mx-auto">
@@ -549,7 +549,7 @@ export default function App() {
                   <div className="relative group animate-perspective-left">
                     <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                      <img src="/hero-browser.png" alt="Smart In-App Browser" className="w-full h-auto" />
+                      <img src="/hero-browser.webp" alt="Smart In-App Browser" className="w-full h-auto" width="640" height="640" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent pointer-events-none"></div>
                     </div>
                     <div className="mt-8 text-center bg-slate-800/40 backdrop-blur-md p-4 rounded-2xl border border-white/5 opacity-0 lg:group-hover:opacity-100 transition-opacity">
@@ -564,7 +564,7 @@ export default function App() {
                   <div className="relative group animate-float">
                     <div className="hidden md:block absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-xl md:blur-3xl rounded-[3rem] opacity-40 md:opacity-70 animate-pulse"></div>
                     <div className="relative md:rounded-[3rem] md:overflow-hidden border-none md:border-4 md:border-white/20 shadow-none md:shadow-[0_0_80px_rgba(192,38,211,0.4)] transition-transform duration-700">
-                      <img src="/hero-mockup-blended.png" alt="High-Speed Downloading" className="w-full h-auto" />
+                      <img src="/hero-mockup-blended.webp" alt="High-Speed Downloading" className="w-full h-auto" width="640" height="640" loading="lazy" />
                       <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 via-transparent to-white/5 pointer-events-none"></div>
                     </div>
                     {/* Floating Hero Badges */}
@@ -580,7 +580,7 @@ export default function App() {
                   <div className="relative group animate-perspective-right">
                     <div className="absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                      <img src="/hero-downloads.png" alt="Advanced Multi-threaded Download Manager" className="w-full h-auto" />
+                      <img src="/hero-downloads.webp" alt="Advanced Multi-threaded Download Manager" className="w-full h-auto" width="640" height="640" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-tl from-purple-500/10 to-transparent pointer-events-none"></div>
                     </div>
                     <div className="mt-8 text-center bg-slate-800/40 backdrop-blur-md p-4 rounded-2xl border border-white/5 opacity-0 lg:group-hover:opacity-100 transition-opacity">
@@ -879,7 +879,7 @@ export default function App() {
                 <div className="p-4 flex flex-col justify-end h-full bg-slate-100 relative">
                   <div className="bg-white p-4 rounded-t-2xl shadow-[0_-10px_20px_rgba(0,0,0,0.1)] -mx-4 -mb-4 border-t">
                     <div className="flex items-center gap-4 mb-6">
-                      <img src="/logo.webp" alt="AIO-YTDER Logo" className="w-12 h-12 rounded-xl" />
+                      <img src="/logo.webp" alt="AIO-YTDER Logo" className="w-12 h-12 rounded-xl" width="48" height="48" loading="lazy" />
                       <div>
                         <div className="font-bold text-slate-900">AIO-YTDER</div>
                         <div className="text-xs text-emerald-600 font-semibold flex items-center gap-1"><CheckCircle2 size={12} /> App Installed</div>
@@ -905,7 +905,7 @@ export default function App() {
               <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
                 <div className="p-4 flex flex-col h-full bg-slate-900 relative">
                   <div className="mt-8 text-center">
-                    <img src="/logo.webp" alt="AIO-YTDER Logo" className="w-16 h-16 rounded-2xl mx-auto mb-4" />
+                    <img src="/logo.webp" alt="AIO-YTDER Logo" className="w-16 h-16 rounded-2xl mx-auto mb-4" width="64" height="64" loading="lazy" />
                     <h4 className="font-bold text-white mb-6">Welcome to AIO-YTDER</h4>
                     <div className="bg-slate-800 p-3 rounded-lg flex items-center justify-between border border-dashed border-slate-600 relative">
                       <span className="text-slate-400 text-sm">Paste copied link...</span>
@@ -998,9 +998,9 @@ export default function App() {
               </p>
 
               <div className="flex flex-wrap justify-center items-center gap-10">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
                 <div className="flex items-center gap-2 text-white font-bold text-xs border border-white/20 px-3 py-1.5 rounded-lg bg-white/5 backdrop-blur-sm opacity-40 hover:opacity-80 hover:bg-white/10 transition-all duration-500 cursor-default">
                   <ShieldCheck size={16} className="text-cyan-400" />
                   SSL SECURE
@@ -1015,7 +1015,7 @@ export default function App() {
         <div className="bg-slate-900 relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3 text-slate-300 font-bold text-xl">
-              <img src="/playstore-logo.png" alt="AIO-YTDER Logo" className="w-10 h-10 rounded-xl" />
+              <img src="/playstore-logo.webp" alt="AIO-YTDER Logo" className="w-10 h-10 rounded-xl" width="40" height="40" loading="lazy" />
               AIO-YTDER
             </div>
 
