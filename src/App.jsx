@@ -493,7 +493,7 @@ export default function App() {
               </Reveal>
 
               <Reveal delay={200}>
-                <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black text-white mb-6 leading-[1.1] tracking-tight px-4 sm:px-0">
+                <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-6 leading-[1.1] tracking-tight px-4 sm:px-0">
                   Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-purple-600 drop-shadow-[0_0_15px_rgba(192,38,211,0.3)]">Anything.</span><br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-white to-slate-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] animate-pulse-soft">Anywhere.</span>
                 </h1>
