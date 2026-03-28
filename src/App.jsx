@@ -98,17 +98,17 @@ const Reveal = ({ children, delay = 0, className = "" }) => {
 
 const ShimmerBadge = ({ icon: Icon, text, type = 'gold' }) => {
   const typeColors = {
-    gold: 'from-amber-400 via-yellow-200 to-amber-500 text-amber-900 border-amber-300',
-    emerald: 'from-emerald-500 via-emerald-300 to-emerald-600 text-white border-emerald-400',
-    blue: 'from-blue-500 via-cyan-300 to-indigo-600 text-white border-blue-400',
-    purple: 'from-purple-500 via-fuchsia-300 to-purple-700 text-white border-purple-400'
+    gold: 'from-amber-400 via-amber-100 to-amber-500 text-amber-900 border-amber-200 shadow-amber-100',
+    emerald: 'from-emerald-500 via-emerald-100 to-emerald-600 text-emerald-900 border-emerald-200 shadow-emerald-100',
+    blue: 'from-blue-500 via-blue-100 to-blue-600 text-blue-900 border-blue-200 shadow-blue-100',
+    purple: 'from-purple-500 via-purple-100 to-purple-600 text-purple-900 border-purple-200 shadow-purple-100'
   };
 
   const colors = typeColors[type] || typeColors.gold;
 
   return (
-    <div className={`relative overflow-hidden flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm shadow-lg border ${colors} bg-gradient-to-r`}>
-      <Icon size={16} className={type === 'gold' ? 'text-amber-900' : 'text-white'} />
+    <div className={`relative overflow-hidden flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm shadow-md border ${colors} bg-gradient-to-r transition-all hover:scale-105 active:scale-95 cursor-default`}>
+      <Icon size={16} className={colors.split(' ')[2]} />
       <span>{text}</span>
       {/* Shimmer Effect */}
       <div className="absolute inset-0 -translate-x-full animate-[shimmer_2.5s_infinite] bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12" />
@@ -185,7 +185,7 @@ const SpiderWeb = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(148, 163, 184, 0.3)';
+        ctx.fillStyle = 'rgba(249, 115, 22, 0.2)';
         ctx.fill();
       }
     }
@@ -199,6 +199,8 @@ const SpiderWeb = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.03)';
+      ctx.lineWidth = 0.5;
 
       particles.forEach((p, i) => {
         p.update();
@@ -212,8 +214,8 @@ const SpiderWeb = () => {
 
           if (distance < connectionDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(148, 163, 184, ${0.15 * (1 - distance / connectionDistance)})`;
-            ctx.lineWidth = 1;
+            ctx.strokeStyle = `rgba(249, 115, 22, ${0.1 * (1 - distance / connectionDistance)})`;
+            ctx.lineWidth = 0.8;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
@@ -297,40 +299,30 @@ export default function App() {
 
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden relative">
+    <div className="min-h-screen bg-white text-slate-900 selection:bg-orange-500 selection:text-white overflow-x-hidden relative font-sans">
       {/* --- PREMIUM BACKGROUND SYSTEM --- */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Animated Mesh Blobs */}
-        <div className="hidden md:block absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px] animate-blob"></div>
-        <div className="hidden md:block absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-cyan-600/15 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '2s' }}></div>
-        <div className="hidden md:block absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-600/20 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '4s' }}></div>
+        {/* Animated Mesh Blobs - Lightened for Light Mode */}
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-400/10 rounded-full blur-[120px] animate-blob"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[35%] h-[35%] bg-fuchsia-400/10 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-blue-400/10 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '4s' }}></div>
 
-        {/* Pattern Overlays */}
-        <div className="absolute inset-0 bg-grid-slate-800 opacity-30"></div>
-        <div className="absolute inset-0 noise mix-blend-normal md:mix-blend-overlay"></div>
-
-        {/* Subtle Vignette for depth, much lighter now */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(15,23,42,0.4)_100%)] hidden md:block"></div>
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/40 via-white to-fuchsia-50/40"></div>
       </div>
 
       <SpiderWeb />
 
       {/* --- PREMIUM NAVBAR --- */}
-      <nav className="fixed top-0 inset-x-0 z-50 bg-slate-900/95 md:bg-slate-900/50 backdrop-blur-none md:backdrop-blur-xl border-b border-white/5 py-4">
+      <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 py-4 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-fuchsia-500 to-cyan-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-              <img src="/playstore-logo.webp" alt="AIO-YTDER" className="relative w-10 h-10 rounded-lg shadow-2xl" width="40" height="40" />
+            <div className="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-200 group-hover:scale-110 transition-transform">
+              <Download className="text-white" size={24} />
             </div>
-            <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter flex items-center group perspective-1000">
-              <span className="text-white text-3d transform transition-transform duration-500 group-hover:translate-z-10 group-hover:rotate-y-10">AIO-</span>
-              <span className="relative">
-                <span className="absolute -inset-2 bg-cyan-500/10 blur-2xl opacity-0 group-hover:opacity-60 transition-opacity animate-pulse"></span>
-                <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-fuchsia-500 bg-[length:200%_auto] animate-[gradient_4s_linear_infinite] text-glow-cyan transition-all duration-500 group-hover:scale-110 inline-block">
-                  YTDER
-                </span>
-              </span>
+            <span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tighter">
+              AIO<span className="text-orange-600">-</span>YTDER
             </span>
           </div>
 
@@ -512,15 +504,15 @@ export default function App() {
               </Reveal>
 
               <Reveal delay={200}>
-                <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-6 leading-[1.1] tracking-tight px-4 sm:px-0">
-                  Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-purple-600 drop-shadow-[0_0_15px_rgba(192,38,211,0.3)]">Anything.</span><br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-white to-slate-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] animate-pulse-soft">Anywhere.</span>
+                <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-slate-900 mb-6 leading-[1.1] tracking-tight px-4 sm:px-0">
+                  Download <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-fuchsia-600 drop-shadow-sm">Anything.</span><br />
+                  <span className="text-slate-800 animate-pulse-soft">Anywhere.</span>
                 </h1>
               </Reveal>
 
               <Reveal delay={300}>
-                <p className="text-base sm:text-lg lg:text-xl text-indigo-100 mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
-                  The #1 premium alternative to Snaptube and Vidmate. Download any video from any website in HD quality. Trusted by over <strong className="text-white">5 Lakh+</strong> users.
+                <p className="text-base sm:text-lg lg:text-xl text-slate-600 mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
+                  The #1 premium alternative to Snaptube and Vidmate. Download any video from any website in HD quality. Trusted by over <strong className="text-slate-900">5 Lakh+</strong> users.
                 </p>
               </Reveal>
 
@@ -531,7 +523,7 @@ export default function App() {
                   </div>
                   <a
                     href={versionData.latest_apk_url}
-                    className="relative block w-full sm:w-auto px-10 py-4 sm:px-12 sm:py-5 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-indigo-600 rounded-full font-bold text-lg sm:text-xl text-white shadow-[0_0_40px_rgba(192,38,211,0.4)] hover:shadow-[0_0_60px_rgba(192,38,211,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group text-center"
+                    className="relative block w-full sm:w-auto px-10 py-4 sm:px-12 sm:py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 rounded-full font-bold text-lg sm:text-xl text-white shadow-xl shadow-orange-200 hover:shadow-2xl hover:shadow-orange-300 transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/20 group text-center"
                   >
                     <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"></div>
@@ -543,7 +535,7 @@ export default function App() {
                 </div>
                 <button
                   onClick={scrollToInstall}
-                  className="w-full sm:w-auto px-10 py-5 rounded-full font-semibold text-xl text-white border border-white/20 hover:bg-white/10 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-10 py-5 rounded-full font-semibold text-xl text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 group"
                 >
                   How to Install? <ChevronDown size={24} className="group-hover:translate-y-1 transition-transform" />
                 </button>
@@ -569,7 +561,7 @@ export default function App() {
                   { img: '/screenshot_downloads.webp', title: 'Ultra Speed' }
                 ].map((shot, idx) => (
                   <div key={idx} className="min-w-[85%] snap-center">
-                    <div className="aspect-[9/17] relative rounded-[2rem] overflow-hidden border-4 border-slate-800 shadow-2xl">
+                    <div className="aspect-[9/17] relative rounded-[2rem] overflow-hidden border-4 border-slate-100 shadow-xl shadow-slate-200">
                       <img
                         src={shot.img}
                         alt={shot.title}
@@ -578,8 +570,8 @@ export default function App() {
                         width="640"
                         height="640"
                       />
-                      <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-white/50">{shot.title}</span>
+                      <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{shot.title}</span>
                       </div>
                     </div>
                   </div>
@@ -588,7 +580,7 @@ export default function App() {
               {/* Pagination Dots */}
               <div className="flex justify-center gap-1.5 mt-4">
                 {[0, 1, 2].map((i) => (
-                  <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === screenshotIndex ? 'bg-fuchsia-500 w-4' : 'bg-slate-700'}`} />
+                  <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === screenshotIndex ? 'bg-orange-500 w-4' : 'bg-slate-300'}`} />
                 ))}
               </div>
             </div>
@@ -601,13 +593,12 @@ export default function App() {
                 <Reveal delay={300} className="lg:w-1/3 order-2 lg:order-1 lg:-mr-12 hidden lg:block">
                   <div className="relative group animate-perspective-left">
                     <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                    <div className="relative rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-xl transition-transform duration-500 group-hover:scale-105">
                       <img src="/hero-browser.webp" alt="Smart In-App Browser" className="w-full h-auto" width="640" height="640" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent pointer-events-none"></div>
                     </div>
-                    <div className="mt-8 text-center bg-slate-800/40 backdrop-blur-md p-4 rounded-2xl border border-white/5 opacity-0 lg:group-hover:opacity-100 transition-opacity">
-                      <h4 className="text-lg font-bold text-white mb-1">Smart Browser</h4>
-                      <p className="text-xs text-slate-400">Auto-detect any video on any site.</p>
+                    <div className="mt-8 text-center bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-slate-200 opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                      <p className="text-slate-900 font-bold">Smart In-App Browser</p>
+                      <p className="text-slate-500 text-sm">Download directly from any site.</p>
                     </div>
                   </div>
                 </Reveal>
@@ -615,30 +606,23 @@ export default function App() {
                 {/* 2. Center: Main Experience (Download UI) */}
                 <Reveal delay={500} className="lg:w-2/5 z-20 order-1 lg:order-2 scale-75 sm:scale-110 lg:scale-[1.2] -mt-10 lg:mt-0">
                   <div className="relative group animate-float">
-                    <div className="hidden md:block absolute -inset-4 bg-gradient-to-r from-fuchsia-500/30 to-purple-500/30 blur-xl md:blur-3xl rounded-[3rem] opacity-40 md:opacity-70 animate-pulse"></div>
-                    <div className="relative md:rounded-[3rem] md:overflow-hidden border-none md:border-4 md:border-white/20 shadow-none md:shadow-[0_0_80px_rgba(192,38,211,0.4)] transition-transform duration-700">
-                      <img src="/hero-mockup-blended.webp" alt="High-Speed Downloading" className="w-full h-auto" width="640" height="640" loading="lazy" />
-                      <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-fuchsia-500/10 via-transparent to-white/5 pointer-events-none"></div>
-                    </div>
-                    {/* Floating Hero Badges */}
-                    <div className="absolute -top-6 -right-2 lg:-top-10 lg:-right-10 w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-fuchsia-600 to-indigo-700 rounded-full flex flex-col items-center justify-center shadow-2xl border-2 border-white/20 animate-float invisible lg:visible" style={{ animationDelay: '1s' }}>
-                      <span className="text-[10px] font-black uppercase text-white/70 tracking-tighter">Ultra</span>
-                      <span className="text-lg lg:text-xl font-black text-white">4K</span>
+                    <div className="hidden md:block absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-fuchsia-500/20 blur-xl md:blur-3xl rounded-[3rem] opacity-40 md:opacity-70 animate-pulse"></div>
+                    <div className="relative rounded-[3rem] overflow-hidden border-[8px] border-slate-100 shadow-2xl shadow-slate-200">
+                      <img src="/hero-home.webp" alt="Speed Downloading Mockup" className="w-full h-auto" width="600" height="1200" />
                     </div>
                   </div>
                 </Reveal>
 
                 {/* 3. Right Feature: Advanced Manager */}
-                <Reveal delay={700} className="lg:w-1/3 order-3 lg:-ml-12 hidden lg:block">
+                <Reveal delay={400} className="lg:w-1/3 order-3 lg:order-3 lg:-ml-12 hidden lg:block">
                   <div className="relative group animate-perspective-right">
-                    <div className="absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                      <img src="/hero-downloads.webp" alt="Advanced Multi-threaded Download Manager" className="w-full h-auto" width="640" height="640" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-tl from-purple-500/10 to-transparent pointer-events-none"></div>
+                    <div className="absolute -inset-2 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 blur-2xl rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-xl transition-transform duration-500 group-hover:scale-105">
+                      <img src="/hero-downloads.webp" alt="Download Management" className="w-full h-auto" width="640" height="640" loading="lazy" />
                     </div>
-                    <div className="mt-8 text-center bg-slate-800/40 backdrop-blur-md p-4 rounded-2xl border border-white/5 opacity-0 lg:group-hover:opacity-100 transition-opacity">
-                      <h4 className="text-lg font-bold text-white mb-1">Downloader v2</h4>
-                      <p className="text-xs text-slate-400">10x Speed with multi-threading.</p>
+                    <div className="mt-8 text-center bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-slate-200 opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                      <p className="text-slate-900 font-bold">Files Manager</p>
+                      <p className="text-slate-500 text-sm">Organize & play offline.</p>
                     </div>
                   </div>
                 </Reveal>
@@ -651,14 +635,14 @@ export default function App() {
       </section>
 
       {/* --- SECTION 1.5: SUPPORTED PLATFORMS --- */}
-      <div className="premium-divider" />
-      <section className="py-8 md:py-12 bg-slate-900/90 md:bg-slate-900/40 backdrop-blur-none md:backdrop-blur-md relative z-20">
+      <div className="h-px w-full bg-slate-200" />
+      <section className="py-8 md:py-12 bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal>
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
               <div className="flex-shrink-0">
-                <h2 className="text-2xl sm:text-3xl font-black text-white mb-2 tracking-tight">Support for <span className="text-cyan-400">Everything</span></h2>
-                <p className="text-slate-400 font-medium text-sm sm:text-base">Download from these platforms & 1000+ others.</p>
+                <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2 tracking-tight">Support for <span className="text-orange-600">Everything</span></h2>
+                <p className="text-slate-600 font-medium text-sm sm:text-base">Download from these platforms & 1000+ others.</p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-4 md:gap-8">
@@ -673,8 +657,8 @@ export default function App() {
                   { icon: PlayCircle, color: "text-orange-500", label: "Movies" }
                 ].map((site, idx) => (
                   <div key={idx} className="group relative flex flex-col items-center">
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-slate-800/80 border border-slate-700/50 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:border-slate-500 group-hover:bg-slate-800 relative overflow-hidden shadow-lg shadow-black/20">
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="w-16 h-16 md:w-20 md:h-20 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:border-orange-200 group-hover:bg-white relative overflow-hidden shadow-sm">
+                      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                       <site.icon size={32} className={`transition-all duration-500 transform group-hover:scale-110 ${site.color}`} />
                     </div>
                     <span className="mt-3 text-xs font-bold text-slate-400 group-hover:text-slate-200 transition-colors duration-300">{site.label}</span>
@@ -686,11 +670,11 @@ export default function App() {
         </div>
       </section>
 
-      <div className="premium-divider-glow" />
-      <section className="pt-8 pb-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-slate-900"></div>
-        <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
-        <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
+      <div className="h-px w-full bg-slate-200" />
+      <section className="pt-8 pb-16 md:py-24 relative overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-white"></div>
+        <div className="absolute inset-0 bg-white opacity-60"></div>
+        <div className="absolute inset-0 bg-slate-50 opacity-10"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           {/* Mobile-only background spice */}
           <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
@@ -699,28 +683,28 @@ export default function App() {
           </div>
 
           <Reveal className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-[2.2rem] blur-xl md:hidden opacity-50 animate-pulse"></div>
-            <div className="relative bg-slate-900/95 md:bg-slate-900/80 backdrop-blur-none md:backdrop-blur-md border border-slate-700 md:group-hover:border-slate-500 p-6 sm:p-12 rounded-3xl shadow-2xl transition-all duration-500 overflow-hidden">
+            <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/10 to-purple-500/10 rounded-[2.2rem] blur-xl md:hidden opacity-50 animate-pulse"></div>
+            <div className="relative bg-white/95 md:bg-white/80 backdrop-blur-none md:backdrop-blur-md border border-slate-200 md:group-hover:border-slate-300 p-6 sm:p-12 rounded-3xl shadow-xl transition-all duration-500 overflow-hidden">
               {/* Internal spice items */}
-              <div className="md:hidden absolute top-0 right-0 p-4 opacity-10">
-                <Star size={80} className="text-white rotate-12" />
+              <div className="md:hidden absolute top-0 right-0 p-4 opacity-5">
+                <Star size={80} className="text-slate-900 rotate-12" />
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tighter">
-                <span className="text-slate-300">Millions trust </span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-purple-600 bg-[length:200%_auto] animate-[gradient_4s_linear_infinite]">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tighter text-slate-900">
+                <span className="text-slate-700">Millions trust </span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-fuchsia-500 to-purple-600 bg-[length:200%_auto] animate-[gradient_4s_linear_infinite]">
                   AIO-YTDER
                 </span>
-                <span className="text-base sm:text-lg md:text-xl font-medium text-slate-400 tracking-normal block mt-4 max-w-2xl mx-auto px-2 sm:px-0">
+                <span className="text-base sm:text-lg md:text-xl font-medium text-slate-500 tracking-normal block mt-4 max-w-2xl mx-auto px-2 sm:px-0">
                   The ultimate downloading powerhouse for your everyday digital life.
                 </span>
               </h2>
 
               <div className="py-8 relative" ref={counterRef}>
-                <div className="absolute inset-0 bg-blue-500/5 blur-3xl md:hidden rounded-full animate-pulse"></div>
-                <div className="relative text-7xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-slate-500 tracking-tighter drop-shadow-2xl">
+                <div className="absolute inset-0 bg-orange-500/5 blur-3xl md:hidden rounded-full animate-pulse"></div>
+                <div className="relative text-7xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-slate-900 via-slate-800 to-slate-500 tracking-tighter">
                   {count.toLocaleString()}
                 </div>
-                <div className="text-cyan-400 font-bold mt-3 uppercase tracking-widest text-[10px] sm:text-sm animate-pulse flex items-center justify-center gap-2">
+                <div className="text-orange-600 font-bold mt-3 uppercase tracking-widest text-[10px] sm:text-sm animate-pulse flex items-center justify-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></span>
                   Downloads & Counting...
                 </div>
@@ -739,14 +723,14 @@ export default function App() {
         </div>
       </section>
 
-      <div className="premium-divider" />
-      <section className="py-8 md:py-24 bg-transparent md:bg-slate-900 relative">
-        <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.1)_0%,transparent_60%)]"></div>
+      <div className="h-px w-full bg-slate-200" />
+      <section className="py-8 md:py-24 bg-white relative">
+        <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.05)_0%,transparent_60%)]"></div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal className="text-center mb-16 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Why AIO is the <span className="text-fuchsia-400">King</span> of all downloaders?</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
-              We didn’t just build another downloader, we engineered the <span className="font-bold text-white">fastest</span>, <span className="font-bold text-white">safest</span>, and <span className="font-bold text-fuchsia-400">most powerful</span> tool for Android, combining effortless simplicity with full user control.
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight text-slate-900">Why AIO is the <span className="text-orange-600">King</span> of all downloaders?</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+              We didn’t just build another downloader, we engineered the <span className="font-bold text-slate-900">fastest</span>, <span className="font-bold text-slate-900">safest</span>, and <span className="font-bold text-orange-600">most powerful</span> tool for Android, combining effortless simplicity with full user control.
             </p>
           </Reveal>
 
@@ -759,12 +743,12 @@ export default function App() {
               { icon: IndianRupee, title: "100% Free", desc: "Bilkul Free! No hidden subscriptions. No credit cards. Premium features for everyone.", color: "text-emerald-400", bg: "bg-emerald-400/10" }
             ].map((feature, idx) => (
               <Reveal key={idx} delay={idx * 100}>
-                <div className="bg-slate-800/50 border border-slate-700/50 p-8 rounded-3xl hover:bg-slate-800 transition-colors h-full group">
+                <div className="bg-slate-50/50 border border-slate-200 p-8 rounded-3xl hover:bg-white transition-all shadow-sm hover:shadow-xl hover:shadow-slate-200/50 h-full group">
                   <div className={`w-14 h-14 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className={`w-7 h-7 ${feature.color}`} />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                  <p className="text-slate-400 leading-relaxed">{feature.desc}</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -776,18 +760,18 @@ export default function App() {
             onScroll={(e) => handleScroll(e, setFeatureIndex)}
           >
             {[
-              { icon: Rocket, title: "Ultra Speed", desc: "Download full-length 4K HD movies in a few munites.", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-500/30" },
-              { icon: MonitorPlay, title: "4K Quality", desc: "Play stunning 1080p and 4K resolution with built-in player.", color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-500/30" },
-              { icon: Globe, title: "Smart Browser", desc: "Browse and download online videos directly with a single tap.", color: "text-cyan-400", bg: "bg-cyan-400/10", border: "border-cyan-500/30" },
-              { icon: IndianRupee, title: "100% Free", desc: "There is no hidden costs. No subscriptions. No hidden charges.", color: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-500/30" }
+              { icon: Rocket, title: "Ultra Speed", desc: "Download full-length 4K HD movies in a few munites.", color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200" },
+              { icon: MonitorPlay, title: "4K Quality", desc: "Play stunning 1080p and 4K resolution with built-in player.", color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-200" },
+              { icon: Globe, title: "Smart Browser", desc: "Browse and download online videos directly with a single tap.", color: "text-cyan-600", bg: "bg-cyan-50", border: "border-cyan-200" },
+              { icon: IndianRupee, title: "100% Free", desc: "There is no hidden costs. No subscriptions. No hidden charges.", color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-200" }
             ].map((feature, idx) => (
               <div key={idx} className="min-w-[75%] snap-center">
-                <div className={`bg-slate-900/60 backdrop-blur-xl border-t ${feature.border} p-8 rounded-[2rem] h-full flex flex-col items-center text-center shadow-xl`}>
+                <div className={`bg-white/80 backdrop-blur-xl border border-slate-200 p-8 rounded-[2rem] h-full flex flex-col items-center text-center shadow-lg`}>
                   <div className={`w-16 h-16 rounded-[1.5rem] ${feature.bg} flex items-center justify-center mb-6`}>
                     <feature.icon className={`w-8 h-8 ${feature.color}`} />
                   </div>
-                  <h3 className="text-xl font-black text-white mb-2">{feature.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{feature.desc}</p>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">{feature.title}</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">{feature.desc}</p>
                 </div>
               </div>
             ))}
@@ -795,7 +779,7 @@ export default function App() {
           {/* Slider Indicator */}
           <div className="md:hidden flex justify-center gap-1 mt-2">
             {[0, 1, 2, 3].map((i) => (
-              <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === featureIndex ? 'w-4 bg-fuchsia-500' : 'w-1 bg-slate-800'}`} />
+              <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === featureIndex ? 'w-4 bg-orange-500' : 'bg-slate-200'}`} />
             ))}
           </div>
 
@@ -906,19 +890,12 @@ export default function App() {
 
 
       {/* --- SECTION 4: HOW TO INSTALL --- */}
-      <div className="premium-divider" />
-      <section id="install-guide" className="py-12 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-slate-900"></div>
-        <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
-        <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
-
-        {/* Background glow */}
-        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-purple-900/20 blur-[150px] pointer-events-none"></div>
-
+      <div className="h-px w-full bg-slate-200" />
+      <section id="install-guide" className="py-12 md:py-24 relative overflow-hidden bg-slate-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <Reveal className="text-center mb-16 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Install in Minutes</h2>
-            <p className="text-cyan-400 font-semibold text-base sm:text-lg max-w-2xl mx-auto bg-cyan-900/30 py-2 px-4 rounded-full border border-cyan-800/50 inline-block">
+          <Reveal className="text-center mb-16 sm:mb-20 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900">How to <span className="text-orange-600">Install?</span></h2>
+            <p className="text-orange-600 font-semibold text-base sm:text-lg max-w-2xl mx-auto bg-orange-100/50 py-2 px-4 rounded-full border border-orange-200 inline-block">
               (Even if you're not a techie!)
             </p>
           </Reveal>
@@ -926,137 +903,117 @@ export default function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Step 1 */}
             <Reveal delay={0} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-700 absolute -top-8 -left-4 -z-10">01</div>
-              <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
-                <div className="p-4 flex flex-col items-center justify-center h-full bg-slate-100 text-slate-900 relative">
-                  <div className="bg-white p-6 rounded-2xl shadow-xl border w-full text-center">
-                    <h4 className="font-bold text-lg mb-4">AIO-YTDER.apk</h4>
-                    <button className="bg-purple-600 text-white w-full py-3 rounded-xl font-bold flex justify-center items-center gap-2">
-                      <Download size={18} /> Download File
-                    </button>
+              <div className="text-6xl font-black text-slate-200 absolute -top-8 -left-4 -z-0">01</div>
+              <div className="bg-white p-6 rounded-[2.5rem] border border-slate-200 shadow-xl mb-6 relative overflow-hidden group">
+                <div className="p-4 flex flex-col items-center justify-center h-48 bg-slate-50 text-slate-900 relative rounded-2xl border border-slate-100">
+                  <div className="bg-white p-4 rounded-xl shadow-lg border w-full text-center">
+                    <h4 className="font-bold text-sm mb-2 text-slate-900 line-clamp-1">AIO-YTDER.apk</h4>
+                    <div className="bg-orange-600 text-white w-full py-2 rounded-lg font-bold text-xs flex justify-center items-center gap-2">
+                       Download File
+                    </div>
                   </div>
-                  {/* Annotation */}
-                  <div className="absolute bottom-16 right-8 text-red-500 font-bold flex flex-col items-center animate-bounce">
-                    <span className="bg-red-100 text-red-600 text-xs px-2 py-1 rounded shadow mb-1 border border-red-200">Tap Here</span>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
+                  <div className="absolute -bottom-2 right-4 text-orange-500 font-bold flex flex-col items-center animate-bounce">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M19 12l-7 7-7-7" /></svg>
                   </div>
                 </div>
-              </PhoneMockup>
-              <h3 className="text-xl font-bold text-white mb-2">1. Download the APK</h3>
-              <p className="text-slate-400 text-sm">Tap the big purple button above. Don't worry, it's 100% safe and virus-scanned.</p>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">1. Download APK</h3>
+              <p className="text-slate-500 text-sm">Tap the big orange button. It's 100% safe and virus-scanned.</p>
             </Reveal>
 
             {/* Step 2 */}
             <Reveal delay={100} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-700 absolute -top-8 -left-4 -z-10">02</div>
-              <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
-                <div className="p-4 flex flex-col h-full bg-slate-900 text-white relative">
-                  <div className="mt-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <AlertTriangle className="text-yellow-500" />
-                      <span className="font-bold text-lg">Chrome Settings</span>
-                    </div>
-                    <div className="bg-slate-800 p-4 rounded-xl relative">
-                      <div className="flex justify-between items-center relative z-10">
-                        <span className="text-sm">Allow from this source</span>
-                        <div className="w-10 h-6 bg-blue-500 rounded-full flex items-center p-1 justify-end">
-                          <div className="w-4 h-4 bg-white rounded-full"></div>
-                        </div>
+              <div className="text-6xl font-black text-slate-200 absolute -top-8 -left-4 -z-0">02</div>
+              <div className="bg-white p-6 rounded-[2.5rem] border border-slate-200 shadow-xl mb-6 relative overflow-hidden group">
+                <div className="p-4 flex flex-col justify-center h-48 bg-slate-900 text-white relative rounded-2xl shadow-inner">
+                  <div className="text-[10px] uppercase font-black text-slate-500 mb-2">Security Setting</div>
+                  <div className="bg-slate-800 p-3 rounded-xl border border-slate-700">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-bold">Allow Unknown Apps</span>
+                      <div className="w-8 h-4 bg-orange-500 rounded-full flex items-center p-0.5 justify-end">
+                        <div className="w-3 h-3 bg-white rounded-full shadow-sm"></div>
                       </div>
-                      {/* Red Annotation Circle */}
-                      <div className="absolute inset-0 border-2 border-red-500 rounded-xl z-0 scale-105 animate-pulse"></div>
                     </div>
                   </div>
+                  <div className="absolute top-4 right-4 animate-pulse">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                  </div>
                 </div>
-              </PhoneMockup>
-              <h3 className="text-xl font-bold text-white mb-2">2. Allow Unknown Apps</h3>
-              <p className="text-slate-400 text-sm">Your phone might be cautious. Tap 'Settings' and toggle 'Allow from this source'.</p>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">2. Enable Sources</h3>
+              <p className="text-slate-500 text-sm">Your phone might ask. Tap 'Settings' and toggle 'Allow from this source'.</p>
             </Reveal>
 
             {/* Step 3 */}
             <Reveal delay={200} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-700 absolute -top-8 -left-4 -z-10">03</div>
-              <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
-                <div className="p-4 flex flex-col justify-end h-full bg-slate-100 relative">
-                  <div className="bg-white p-4 rounded-t-2xl shadow-[0_-10px_20px_rgba(0,0,0,0.1)] -mx-4 -mb-4 border-t">
-                    <div className="flex items-center gap-4 mb-6">
-                      <img src="/logo.webp" alt="AIO-YTDER Logo" className="w-12 h-12 rounded-xl" width="48" height="48" loading="lazy" />
-                      <div>
-                        <div className="font-bold text-slate-900">AIO-YTDER</div>
-                        <div className="text-xs text-emerald-600 font-semibold flex items-center gap-1"><CheckCircle2 size={12} /> App Installed</div>
-                      </div>
+              <div className="text-6xl font-black text-slate-200 absolute -top-8 -left-4 -z-0">03</div>
+              <div className="bg-white p-6 rounded-[2.5rem] border border-slate-200 shadow-xl mb-6 relative overflow-hidden group">
+                <div className="p-4 flex flex-col justify-center h-48 bg-slate-50 text-slate-900 relative rounded-2xl border border-slate-100">
+                  <div className="bg-white p-4 rounded-xl shadow-lg border w-full">
+                    <div className="flex items-center gap-3 border-b border-slate-100 pb-2 mb-2">
+                       <div className="w-6 h-6 bg-orange-600 rounded flex items-center justify-center text-white text-[10px]">AIO</div>
+                       <span className="font-bold text-xs">YTDER</span>
                     </div>
-                    <div className="flex gap-2">
-                      <button className="flex-1 py-2 text-purple-600 font-semibold">Done</button>
-                      <button className="flex-1 py-2 bg-purple-600 text-white rounded-lg font-bold shadow-md shadow-purple-600/30 relative">
-                        Open
-                        <div className="absolute -inset-1 border-2 border-red-500 rounded-xl animate-pulse"></div>
-                      </button>
+                    <div className="flex justify-between gap-4">
+                       <div className="flex-1 py-1 text-[10px] font-bold text-slate-400 text-center">CANCEL</div>
+                       <div className="flex-1 py-1 text-[10px] font-bold text-orange-600 text-center">INSTALL</div>
                     </div>
                   </div>
                 </div>
-              </PhoneMockup>
-              <h3 className="text-xl font-bold text-white mb-2">3. Install & Open</h3>
-              <p className="text-slate-400 text-sm">Tap 'Install'. It takes just 5 seconds. Once done, tap 'Open' to launch the app!</p>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">3. Tap Install</h3>
+              <p className="text-slate-500 text-sm">Tap 'Install'. It takes just 5 seconds to get everything set up.</p>
             </Reveal>
 
             {/* Step 4 */}
             <Reveal delay={300} className="relative flex flex-col">
-              <div className="text-6xl font-black text-slate-700 absolute -top-8 -left-4 -z-10">04</div>
-              <PhoneMockup className="!w-full !h-[350px] mb-6 rounded-[2rem] border-[6px]">
-                <div className="p-4 flex flex-col h-full bg-slate-900 relative">
-                  <div className="mt-8 text-center">
-                    <img src="/logo.webp" alt="AIO-YTDER Logo" className="w-16 h-16 rounded-2xl mx-auto mb-4" width="64" height="64" loading="lazy" />
-                    <h4 className="font-bold text-white mb-6">Welcome to AIO-YTDER</h4>
-                    <div className="bg-slate-800 p-3 rounded-lg flex items-center justify-between border border-dashed border-slate-600 relative">
-                      <span className="text-slate-400 text-sm">Paste copied link...</span>
-                      <button className="bg-white text-slate-900 px-3 py-1 rounded font-bold text-sm">Paste</button>
-                      {/* Red Pointer */}
-                      <div className="absolute -right-2 -bottom-6 text-red-500 flex flex-col items-center animate-bounce z-10">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
-                      </div>
-                    </div>
+              <div className="text-6xl font-black text-slate-200 absolute -top-8 -left-4 -z-0">04</div>
+              <div className="bg-white p-6 rounded-[2.5rem] border border-slate-200 shadow-xl mb-6 relative overflow-hidden group">
+                <div className="p-4 flex flex-col items-center justify-center h-48 bg-slate-50 text-slate-900 relative rounded-2xl border border-slate-100">
+                  <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-emerald-100">
+                    <CheckCircle2 size={24} className="text-white" />
                   </div>
+                  <h4 className="font-black text-lg text-emerald-600">App Ready!</h4>
                 </div>
-              </PhoneMockup>
-              <h3 className="text-xl font-bold text-white mb-2">4. Start Downloading</h3>
-              <p className="text-slate-400 text-sm">Copy any video link from Instagram/FB/YT, paste it here, and hit download. Welcome to the club!</p>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">4. Ready to Go!</h3>
+              <p className="text-slate-500 text-sm">Launch AIO-YTDER from your app drawer and start downloading unlimitedly.</p>
             </Reveal>
           </div>
         </div>
       </section>
 
       {/* --- SECTION 5: TESTIMONIALS --- */}
-      <div className="premium-divider-glow" />
-      <section className="py-12 md:py-24 bg-slate-900">
+      <div className="h-px w-full bg-slate-200" />
+      <section className="py-12 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal className="text-center mb-16 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">Loved by Millions Across India</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-900">Loved by Millions Across India</h2>
             <div className="flex justify-center gap-1 text-amber-400 mb-4">
               <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" /> <Star fill="currentColor" />
             </div>
-            <p className="text-slate-400 text-sm sm:text-base">4.8/5 Average Rating from our users</p>
+            <p className="text-slate-500 font-medium">4.8/5 Average Rating from our global users</p>
           </Reveal>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { name: "Rajesh", loc: "Mumbai", text: "Finally a downloader that actually works for all apps. The speed is insane! Mere phone me kabhi buffer nahi karta ab.", color: "bg-orange-500" },
-              { name: "Priya", loc: "Delhi", text: "The 'Made in India' badge caught my attention, but the quality kept me here. Best app for saving reels and status videos.", color: "bg-purple-500" },
-              { name: "Anita", loc: "Bengaluru", text: "Super easy to install. I'm not good with tech, but the step-by-step guide was perfect. Thank you for keeping it 100% free!", color: "bg-blue-500" }
+              { name: "Rajesh", loc: "Mumbai", text: "Finally a downloader that actually works. The speed is insane! Mere phone me kabhi buffer nahi karta ab.", color: "bg-orange-500" },
+              { name: "Priya", loc: "Delhi", text: "The quality is amazing. Best app for saving reels and status videos without any watermark. Made in India rocks!", color: "bg-fuchsia-500" },
+              { name: "Anita", loc: "Bengaluru", text: "Super easy to install. I'm not good with tech, but the guide was perfect. Thank you for keeping it free!", color: "bg-blue-500" }
             ].map((review, idx) => (
               <Reveal key={idx} delay={idx * 150}>
-                <div className="bg-slate-800 p-8 rounded-3xl relative">
+                <div className="bg-slate-50 p-8 rounded-3xl relative border border-slate-100 hover:shadow-xl transition-all">
                   <div className="flex text-amber-400 mb-4 gap-1">
                     {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
                   </div>
-                  <p className="text-lg text-slate-300 italic mb-6">"{review.text}"</p>
+                  <p className="text-lg text-slate-700 italic mb-6 leading-relaxed">"{review.text}"</p>
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 rounded-full ${review.color} flex items-center justify-center text-white font-bold text-xl`}>
                       {review.name.charAt(0)}
                     </div>
                     <div>
-                      <div className="font-bold text-white">{review.name}</div>
-                      <div className="text-sm text-slate-400">{review.loc}</div>
+                      <div className="font-bold text-slate-900">{review.name}</div>
+                      <div className="text-sm text-slate-500">{review.loc}</div>
                     </div>
                   </div>
                 </div>
@@ -1067,14 +1024,12 @@ export default function App() {
       </section>
 
       {/* --- SECTION 6: FINAL CTA & FOOTER --- */}
-      <div className="premium-divider" />
-      <footer className="relative bg-gradient-to-t from-slate-900 to-slate-800 pt-12 md:pt-24">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
-
+      <div className="h-px w-full bg-slate-200" />
+      <footer className="relative bg-white pt-12 md:pt-24 border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center mb-24">
           <Reveal className="px-4">
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8 leading-[1.2]">
-              Ready to download anything?
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 mb-8 leading-[1.2]">
+              Ready to download <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-fuchsia-600">Anything?</span>
             </h2>
             <div className="relative group inline-block w-full md:w-auto">
               <div className="absolute -top-3 -right-3 z-30 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg border border-emerald-400 animate-pulse">
@@ -1082,10 +1037,9 @@ export default function App() {
               </div>
               <a
                 href={versionData.latest_apk_url}
-                className="relative block px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 rounded-full font-bold text-base sm:text-xl md:text-2xl shadow-[0_0_50px_rgba(79,70,229,0.3)] hover:shadow-[0_0_80px_rgba(79,70,229,0.7)] transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10"
+                className="relative block px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 rounded-full font-bold text-base sm:text-xl md:text-2xl text-white shadow-xl shadow-orange-200 hover:shadow-2xl hover:shadow-orange-300 transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group"
               >
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
-                {/* Interactive Shimmer */}
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
                 <span className="relative flex items-center justify-center gap-3 drop-shadow-md">
                   <Download size={28} className="animate-bounce" />
@@ -1094,36 +1048,33 @@ export default function App() {
               </a>
             </div>
             <div className="mt-8 flex flex-col items-center gap-6">
-              <p className="text-slate-400 font-medium flex items-center justify-center gap-2">
-                <ShieldCheck size={18} className="text-emerald-400" /> 100% Safe, Secure & Free
+              <p className="text-slate-500 font-medium flex items-center justify-center gap-2">
+                <ShieldCheck size={18} className="text-emerald-500" /> 100% Safe, Secure & Free
               </p>
 
               <div className="flex flex-wrap justify-center items-center gap-10">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-6 md:h-7 brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
-                <div className="flex items-center gap-2 text-white font-bold text-xs border border-white/20 px-3 py-1.5 rounded-lg bg-white/5 backdrop-blur-sm opacity-40 hover:opacity-80 hover:bg-white/10 transition-all duration-500 cursor-default">
-                  <ShieldCheck size={16} className="text-cyan-400" />
-                  SSL SECURE
-                </div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg?width=320" alt="McAfee" className="h-6 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_NortonLifeLock.svg?width=320" alt="Norton" className="h-6 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Trustpilot_Logo_%282022%29.svg?width=320" alt="Trustpilot" className="h-6 md:h-7 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default" width="120" height="28" loading="lazy" />
               </div>
             </div>
-
           </Reveal>
         </div>
 
-        <div className="premium-divider mt-8 opacity-50" />
-        <div className="bg-slate-900 relative z-10">
+        <div className="h-px w-full bg-slate-200/60" />
+        <div className="bg-slate-50 relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-3 text-slate-300 font-bold text-xl">
-              <img src="/playstore-logo.webp" alt="AIO-YTDER Logo" className="w-10 h-10 rounded-xl" width="40" height="40" loading="lazy" />
+            <div className="flex items-center gap-3 text-slate-900 font-bold text-xl">
+              <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center shadow-lg shadow-orange-100">
+                <Download className="text-white" size={20} />
+              </div>
               AIO-YTDER
             </div>
 
             <div className="flex gap-6 text-sm text-slate-500 font-medium">
-              <a href="#" className="hover:text-cyan-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-cyan-400 transition-colors">Contact Us</a>
+              <a href="#" className="hover:text-orange-600 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-orange-600 transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-orange-600 transition-colors">Contact Us</a>
             </div>
 
             <div className="text-slate-500 text-sm flex items-center gap-1">
@@ -1132,7 +1083,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-
     </div>
   );
 }
