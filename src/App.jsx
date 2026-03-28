@@ -21,7 +21,10 @@ import {
   Music,
   PlayCircle,
   Github,
-  Image
+  Image,
+  Mail,
+  ExternalLink,
+  MessageSquare
 } from 'lucide-react';
 
 // --- Custom Hooks ---
@@ -256,6 +259,9 @@ export default function App() {
   const [stars, setStars] = useState(0);
   const [featureIndex, setFeatureIndex] = useState(0);
   const [screenshotIndex, setScreenshotIndex] = useState(0);
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showContact, setShowContact] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
   const [versionData, setVersionData] = useState({
     latest_version: 'v2.5.0',
     latest_apk_url: '#',
@@ -319,7 +325,7 @@ export default function App() {
   const handleScroll = (e, setter) => {
     const container = e.target;
     if (container.ticking) return;
-    
+
     window.requestAnimationFrame(() => {
       const scrollLeft = container.scrollLeft;
       const firstChild = container.children[0];
@@ -614,7 +620,7 @@ export default function App() {
                     <div className="relative aspect-[9/19.5] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border-4 md:border-[12px] border-slate-100 shadow-2xl shadow-slate-200/50 group transition-all duration-500 bg-white">
                       {/* Reflection/Glow Effect */}
                       <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-10"></div>
-                      
+
                       <img
                         src={shot.img}
                         alt={shot.title}
@@ -821,8 +827,7 @@ export default function App() {
               How to <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-500">Install?</span>
             </h2>
             <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-500 font-bold text-sm sm:text-base">
-              <ShieldCheck size={18} className="text-emerald-500" />
-              100% Secure & Non-Technical Guide
+              Easily install on any Android device.
             </div>
           </Reveal>
 
@@ -987,9 +992,9 @@ export default function App() {
               </div>
               <a
                 href={versionData.latest_apk_url}
-                className="relative block px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 rounded-full font-bold text-base sm:text-xl md:text-2xl text-white shadow-xl shadow-orange-200 hover:shadow-2xl hover:shadow-orange-300 transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group"
+                className="relative block px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 rounded-full font-bold text-base sm:text-xl md:text-2xl text-white shadow-xl shadow-orange-200 hover:shadow-2xl hover:shadow-orange-300 transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group text-center"
               >
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
                 <span className="relative flex items-center justify-center gap-3 drop-shadow-md">
                   <Download size={28} className="animate-bounce" />
@@ -1014,7 +1019,7 @@ export default function App() {
         <div className="h-px w-full bg-slate-200/60" />
         <div className="bg-slate-50 relative z-10">
           <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-slate-200/50 mb-6">
-            <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="flex items-center gap-3 group cursor-pointer" onClick={() => { setShowPrivacy(false); window.scrollTo(0, 0); }}>
               <div className="w-8 h-8 rounded-lg overflow-hidden shadow-lg group-hover:scale-110 transition-transform">
                 <img src="/playstore-logo.webp" alt="AIO-YTDER" className="w-full h-full object-cover" width="32" height="32" loading="lazy" decoding="async" />
               </div>
@@ -1024,9 +1029,9 @@ export default function App() {
             </div>
 
             <div className="flex gap-6 text-sm text-slate-500 font-medium">
-              <a href="#" className="hover:text-orange-600 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-orange-600 transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-orange-600 transition-colors">Contact Us</a>
+              <button onClick={() => { setShowPrivacy(true); setShowTerms(false); setShowContact(false); window.scrollTo(0, 0); }} className="hover:text-orange-600 transition-colors">Privacy Policy</button>
+              <button onClick={() => { setShowTerms(true); setShowPrivacy(false); setShowContact(false); window.scrollTo(0, 0); }} className="hover:text-orange-600 transition-colors">Terms of Service</button>
+              <button onClick={() => { setShowContact(true); setShowPrivacy(false); setShowTerms(false); window.scrollTo(0, 0); }} className="hover:text-orange-600 transition-colors">Contact Us</button>
             </div>
 
             <div className="text-slate-500 text-sm flex items-center gap-1">
@@ -1043,17 +1048,17 @@ export default function App() {
       {/* --- PREMIUM MOBILE STICKY CTA --- */}
       <div className={`md:hidden fixed bottom-6 inset-x-6 z-[60] transition-all duration-700 ease-in-out transform 
         ${showStickyCTA ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-40 opacity-0 scale-95 pointer-events-none'}`}>
-        
+
         {/* Backdrop Environmental Glow */}
         <div className="absolute inset-x-0 -bottom-4 h-16 bg-orange-500/30 blur-[40px] rounded-full -z-10 animate-pulse"></div>
-        
+
         <a
           href={versionData.latest_apk_url}
           className="flex items-center justify-between p-2 pl-6 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] border-t border-white/20 active:scale-95 transition-all overflow-hidden relative group"
         >
           {/* Animated High-Gloss Stripe */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-[45deg] translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out"></div>
-          
+
           <div className="flex flex-col text-left py-2">
             <div className="flex items-center gap-1.5 opacity-70 mb-1">
               <span className="relative flex h-1.5 w-1.5">
@@ -1070,6 +1075,231 @@ export default function App() {
           </div>
         </a>
       </div>
+      {/* --- PRIVACY POLICY VIEW --- */}
+      {showPrivacy && (
+        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-in fade-in duration-500">
+          <div className="max-w-4xl mx-auto px-6 py-20 relative">
+            <button
+              onClick={() => { setShowPrivacy(false); window.scrollTo(0, 0); }}
+              className="fixed top-8 left-8 p-3 rounded-full bg-slate-100 hover:bg-orange-100 hover:text-orange-600 transition-all z-50 flex items-center gap-2 group"
+            >
+              <Rocket className="rotate-[270deg] group-hover:scale-110 transition-transform" size={20} />
+              <span className="font-bold text-sm pr-2">Back to Home</span>
+            </button>
+
+            <div className="text-center mb-16">
+              <div className="inline-block px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-xs font-bold mb-4 uppercase tracking-widest">Privacy Central</div>
+              <h1 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight">Privacy <span className="text-orange-600">Policy</span></h1>
+              <p className="text-slate-500 font-medium">Last Updated: March 29, 2026</p>
+            </div>
+
+            <div className="space-y-12">
+              <div className="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100">
+                <h2 className="text-2xl font-black text-slate-900 mb-4 italic">1. Our Commitment</h2>
+                <p className="text-slate-600 leading-relaxed font-medium">
+                  AIO-YTDER is built as a privacy-first utility. We believe your downloads and browsing history are your business alone. The application is engineered to operate without collecting any personally identifiable information (PII).
+                </p>
+              </div>
+
+              <div className="p-8 rounded-[2.5rem] bg-white border border-slate-200">
+                <h2 className="text-2xl font-black text-slate-900 mb-4 italic">2. Data Collection</h2>
+                <ul className="space-y-4 text-slate-600 font-medium">
+                  <li className="flex gap-3"><span className="text-orange-500 font-bold">•</span> <b>No User Accounts:</b> We do not require any registration or account creation.</li>
+                  <li className="flex gap-3"><span className="text-orange-500 font-bold">•</span> <b>No Tracking:</b> We do not track your location, contacts, or device identifiers.</li>
+                  <li className="flex gap-3"><span className="text-orange-500 font-bold">•</span> <b>No Logs:</b> Your download history is stored locally on your device and is never uploaded to our servers.</li>
+                </ul>
+              </div>
+
+              <div className="p-8 rounded-[2.5rem] bg-orange-50/30 border border-orange-100">
+                <h2 className="text-2xl font-black text-slate-900 mb-4 italic">3. Permissions</h2>
+                <p className="text-slate-600 leading-relaxed font-medium mb-4">
+                  The app requests only the minimum permissions required to function:
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm">
+                    <div className="font-black text-orange-600 text-xs mb-1">STORAGE</div>
+                    <div className="text-sm text-slate-500">To save the downloaded videos and audios to your gallery.</div>
+                  </div>
+                  <div className="bg-white p-4 rounded-2xl border border-orange-100 shadow-sm">
+                    <div className="font-black text-orange-600 text-xs mb-1">INTERNET</div>
+                    <div className="text-sm text-slate-500">To access the websites you wish to download from.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100">
+                <h2 className="text-2xl font-black text-slate-900 mb-4 italic">4. Third-Party Analytics</h2>
+                <p className="text-slate-600 leading-relaxed font-medium">
+                  To improve the app's stability, we may use standard tools like Firebase Crashlytics. These tools only collect anonymous crash reports and technical device data (model, OS version) to help us fix bugs. They cannot identify you.
+                </p>
+              </div>
+
+              <div className="text-center pt-12">
+                <p className="text-slate-400 text-sm font-medium">Have questions? Contact us at the official GitHub repository.</p>
+                <button
+                  onClick={() => { setShowPrivacy(false); window.scrollTo(0, 0); }}
+                  className="mt-8 px-10 py-4 bg-slate-900 text-white rounded-full font-black hover:bg-orange-600 transition-all active:scale-95"
+                >
+                  Close & Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* --- CONTACT US VIEW --- */}
+      {showContact && (
+        <div className="fixed inset-0 z-[110] bg-white overflow-y-auto animate-in fade-in duration-500">
+          {/* Decorative Section Ambient Glows */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-100/30 blur-[120px] rounded-full -mr-64 -mt-64 pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-100/20 blur-[120px] rounded-full -ml-64 -mb-64 pointer-events-none"></div>
+
+          <div className="max-w-4xl mx-auto px-6 py-20 relative">
+            <button
+              onClick={() => { setShowContact(false); window.scrollTo(0, 0); }}
+              className="fixed top-8 left-8 p-3 rounded-full bg-slate-100 hover:bg-orange-100 hover:text-orange-600 transition-all z-50 flex items-center gap-2 group shadow-sm"
+            >
+              <Rocket className="rotate-[270deg] group-hover:scale-110 transition-transform" size={20} />
+              <span className="font-bold text-sm pr-2">Back to Home</span>
+            </button>
+
+            <div className="text-center mb-16">
+              <div className="inline-block px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-xs font-bold mb-4 uppercase tracking-widest">Support Portal</div>
+              <h1 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight">Get in <span className="text-orange-600">Touch</span></h1>
+              <p className="text-slate-500 font-medium text-lg">We're here to help you get the most out of AIO-YTDER.</p>
+            </div>
+
+            <div className="grid gap-8">
+              {/* Primary Email Card */}
+              <div className="p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-white to-slate-50 border border-slate-200 shadow-2xl shadow-slate-200/50 flex flex-col items-center text-center group hover:border-orange-200 transition-colors">
+                <div className="w-20 h-20 rounded-[2rem] bg-orange-500 text-white flex items-center justify-center mb-8 shadow-[0_15px_30px_rgba(249,115,22,0.3)] group-hover:scale-110 transition-all duration-500">
+                  <Mail size={40} />
+                </div>
+                <h2 className="text-2xl font-black text-slate-900 mb-2">Official Email Support</h2>
+                <p className="text-slate-500 font-medium mb-8">Response time: Within 24-48 Business Hours</p>
+                <a
+                  href="mailto:contact@ytder.com"
+                  className="px-10 py-5 bg-slate-900 text-white rounded-[2rem] font-black text-lg hover:bg-orange-600 transition-all active:scale-95 shadow-xl shadow-slate-200 flex items-center gap-3"
+                >
+                  contact@ytder.com
+                  <ExternalLink size={18} className="opacity-50" />
+                </a>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-8">
+                {/* GitHub Support Card */}
+                <div className="p-8 rounded-[2.5rem] bg-white border border-slate-200 hover:border-blue-200 transition-colors flex flex-col items-center text-center group">
+                  <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Github size={32} />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">GitHub Repository</h3>
+                  <p className="text-slate-500 text-sm mb-6 px-4">Report bugs directly or browse the source code.</p>
+                  <a
+                    href="https://github.com/shibaFoss/AIO-Video-Downloader"
+                    target="_blank" rel="noopener noreferrer"
+                    className="font-black text-blue-600 text-sm hover:underline flex items-center gap-2"
+                  >
+                    View Repository <ExternalLink size={14} />
+                  </a>
+                </div>
+
+                {/* FAQ Card Placeholder */}
+                <div className="p-8 rounded-[2.5rem] bg-white border border-slate-200 hover:border-emerald-200 transition-colors flex flex-col items-center text-center group">
+                  <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <MessageSquare size={32} className="text-emerald-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">Chat with Us</h3>
+                  <p className="text-slate-500 text-sm mb-6 px-4">For immediate help, join our developer community.</p>
+                  <button className="font-black text-emerald-600 text-sm hover:underline flex items-center gap-2">
+                    Coming Soon <ExternalLink size={14} className="opacity-50" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-[2.5rem] bg-orange-50/50 border border-orange-100 text-center">
+                <p className="text-slate-500 text-sm font-medium">Please include your <b>Device Model</b> and <b>Android Version</b> when reporting a bug for faster resolution.</p>
+                <button
+                  onClick={() => { setShowContact(false); window.scrollTo(0, 0); }}
+                  className="mt-8 px-12 py-4 bg-slate-900 text-white rounded-full font-black hover:bg-orange-600 transition-all active:scale-95"
+                >
+                  Close Support
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* --- TERMS & CONDITIONS VIEW --- */}
+      {showTerms && (
+        <div className="fixed inset-0 z-[120] bg-white overflow-y-auto animate-in slider-in-bottom duration-500">
+          <div className="max-w-4xl mx-auto px-6 py-20 relative">
+            <button
+              onClick={() => { setShowTerms(false); window.scrollTo(0, 0); }}
+              className="fixed top-8 left-8 p-3 rounded-full bg-slate-100 hover:bg-orange-100 hover:text-orange-600 transition-all z-50 flex items-center gap-2 group shadow-sm"
+            >
+              <Rocket className="rotate-[270deg] group-hover:scale-110 transition-transform" size={20} />
+              <span className="font-bold text-sm pr-2">Back to Home</span>
+            </button>
+
+            <div className="text-center mb-16">
+              <div className="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold mb-4 uppercase tracking-widest">Legal Framework</div>
+              <h1 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight">Terms & <span className="text-orange-600">Conditions</span></h1>
+              <p className="text-slate-500 font-medium">Effective Date: March 29, 2026</p>
+            </div>
+
+            <div className="space-y-8">
+              <div className="p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 shadow-sm">
+                <h2 className="text-2xl font-black text-slate-900 mb-4 italic">1. Acceptance of Terms</h2>
+                <p className="text-slate-600 leading-relaxed font-medium">
+                  By downloading, installing, or using AIO-YTDER, you acknowledge that you have read, understood, and agreed to be bound by these Terms and Conditions. If you do not agree to these terms, you must not use or install the software.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="p-8 rounded-[2.5rem] bg-white border border-slate-200">
+                  <h3 className="text-xl font-black text-slate-900 mb-4">2. Use License</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                    AIO-YTDER provides a personal, non-exclusive, non-transferable license to use the application for strictly personal and non-commercial purposes only. Any unauthorized exploitation of the services is strictly prohibited.
+                  </p>
+                </div>
+                <div className="p-8 rounded-[2.5rem] bg-orange-50/50 border border-orange-100">
+                  <h3 className="text-xl font-black text-slate-900 mb-4">3. Fair Use & Responsibility</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                    Users of AIO-YTDER are solely responsible for the content they download. You agree to respect the intellectual property rights of owners and to use the service in compliance with local and international laws.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-[2.5rem] bg-white border border-slate-200">
+                <h2 className="text-2xl font-black text-slate-900 mb-4 italic">4. Prohibited Conduct</h2>
+                <ul className="grid sm:grid-cols-2 gap-y-4 text-slate-600 font-medium text-sm">
+                  <li className="flex gap-3"><span className="text-orange-500 font-bold">•</span> Commercial redistribution of software.</li>
+                  <li className="flex gap-3"><span className="text-orange-500 font-bold">•</span> Reverse engineering or decompiling.</li>
+                  <li className="flex gap-3"><span className="text-orange-500 font-bold">•</span> Using the app for copyrighted content.</li>
+                  <li className="flex gap-3"><span className="text-orange-500 font-bold">•</span> Attempting to disrupt our backend API.</li>
+                </ul>
+              </div>
+
+              <div className="p-8 rounded-[2.5rem] bg-rose-50/30 border border-rose-100">
+                <h2 className="text-2xl font-black text-rose-900 mb-4 italic">5. Disclaimer of Liability</h2>
+                <p className="text-slate-600 leading-relaxed font-medium">
+                  AIO-YTDER IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. The developers are NOT responsible for any misuse, legal consequences, or data loss resulting from the use of this application. We do not host or store any media content on our servers.
+                </p>
+              </div>
+
+              <div className="text-center pt-12 pb-20">
+                <p className="text-slate-400 text-sm font-medium mb-8">We reserve the right to update these terms at any time without prior notice.</p>
+                <button
+                  onClick={() => { setShowTerms(false); window.scrollTo(0, 0); }}
+                  className="px-10 py-5 bg-slate-900 text-white rounded-full font-black hover:bg-orange-600 transition-all active:scale-95 shadow-xl"
+                >
+                  Close & Accept Terms
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
