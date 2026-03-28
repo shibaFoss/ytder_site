@@ -248,6 +248,8 @@ const SpiderWeb = () => {
 export default function App() {
   const { ref: counterRef, count } = useCountUp(587324, 2500);
   const [stars, setStars] = useState(0);
+  const [featureIndex, setFeatureIndex] = useState(0);
+  const [screenshotIndex, setScreenshotIndex] = useState(0);
   const [versionData, setVersionData] = useState({
     latest_version: 'v2.5.0',
     latest_apk_url: '#',
@@ -284,6 +286,15 @@ export default function App() {
   const scrollToInstall = () => {
     document.getElementById('install-guide').scrollIntoView({ behavior: 'smooth' });
   };
+
+  const handleScroll = (e, setter) => {
+    const container = e.target;
+    const scrollLeft = container.scrollLeft;
+    const itemWidth = container.children[0].offsetWidth + 16; // item width + gap
+    const index = Math.round(scrollLeft / itemWidth);
+    setter(index);
+  };
+
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-50 selection:bg-fuchsia-500 selection:text-white overflow-x-hidden relative">
@@ -548,7 +559,10 @@ export default function App() {
 
             {/* --- MOBILE ONLY SLIDESHOW --- */}
             <div className="md:hidden relative w-full mt-12 overflow-visible">
-              <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar px-6 pb-2">
+              <div
+                className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar px-6 pb-2"
+                onScroll={(e) => handleScroll(e, setScreenshotIndex)}
+              >
                 {[
                   { img: '/screenshot_home.webp', title: 'Power Home' },
                   { img: '/screenshot_browser.webp', title: 'Smart Search' },
@@ -569,6 +583,12 @@ export default function App() {
                       </div>
                     </div>
                   </div>
+                ))}
+              </div>
+              {/* Pagination Dots */}
+              <div className="flex justify-center gap-1.5 mt-4">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === screenshotIndex ? 'bg-fuchsia-500 w-4' : 'bg-slate-700'}`} />
                 ))}
               </div>
             </div>
@@ -751,7 +771,10 @@ export default function App() {
           </div>
 
           {/* New Mobile Experience: Horizontal Snap Scroll Cards */}
-          <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 px-6 -mx-6 pb-4">
+          <div
+            className="md:hidden flex overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 px-6 -mx-6 pb-4"
+            onScroll={(e) => handleScroll(e, setFeatureIndex)}
+          >
             {[
               { icon: Rocket, title: "Ultra Speed", desc: "Download full-length 4K HD movies in a few munites.", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-500/30" },
               { icon: MonitorPlay, title: "4K Quality", desc: "Play stunning 1080p and 4K resolution with built-in player.", color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-500/30" },
@@ -767,6 +790,12 @@ export default function App() {
                   <p className="text-slate-400 text-sm leading-relaxed">{feature.desc}</p>
                 </div>
               </div>
+            ))}
+          </div>
+          {/* Slider Indicator */}
+          <div className="md:hidden flex justify-center gap-1 mt-2">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === featureIndex ? 'w-4 bg-fuchsia-500' : 'w-1 bg-slate-800'}`} />
             ))}
           </div>
 
