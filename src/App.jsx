@@ -688,9 +688,8 @@ export default function App() {
       </section>
       <div className="premium-divider-orange" />
       <section className="pt-8 pb-16 md:py-24 relative overflow-hidden bg-white">
-        <div className="absolute inset-0 bg-white"></div>
-        <div className="absolute inset-0 bg-white opacity-60"></div>
-        <div className="absolute inset-0 bg-slate-50 opacity-10"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,237,213,0.4)_0%,transparent_40%),radial-gradient(circle_at_70%_80%,rgba(245,243,255,0.4)_0%,transparent_40%)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           {/* Mobile-only background spice */}
           <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
@@ -740,9 +739,10 @@ export default function App() {
       </section>
 
       <div className="premium-divider-orange" />
-      <div className="h-px w-full bg-slate-200" />
       <section className="py-8 md:py-24 bg-white relative">
-        <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.05)_0%,transparent_60%)]"></div>
+        {/* Stylized Mobile Atmosphere */}
+        <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.08)_0%,transparent_60%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.03)_0%,transparent_50%)]"></div>
+        <div className="md:hidden absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:32px_32px]"></div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <Reveal className="text-center mb-16 px-4">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight text-slate-900">Why AIO is the <span className="text-orange-600">King</span> of all downloaders?</h2>
@@ -802,7 +802,7 @@ export default function App() {
 
         </div>
       </section>
-
+      <div className="premium-divider-orange" />
       {/* --- SECTION 3.5: PRO FEATURES (ANIMATED) --- */}
       <div className="premium-divider-glow hidden md:block" />
       <section className="py-12 md:py-24 relative overflow-hidden hidden md:block">
