@@ -672,8 +672,19 @@ export default function App() {
         <div className="absolute inset-0 bg-glow-soft opacity-60"></div>
         <div className="absolute inset-0 bg-circuit animate-pulse-soft"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
-          <Reveal>
-            <div className="bg-slate-900/95 md:bg-slate-900/80 backdrop-blur-none md:backdrop-blur-md border border-slate-700 p-6 sm:p-12 rounded-3xl shadow-2xl">
+          {/* Mobile-only background spice */}
+          <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
+            <div className="absolute top-0 left-0 w-32 h-32 bg-fuchsia-500/20 blur-[60px] animate-blob"></div>
+            <div className="absolute bottom-0 right-0 w-32 h-32 bg-cyan-500/20 blur-[60px] animate-blob" style={{ animationDelay: '2s' }}></div>
+          </div>
+
+          <Reveal className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-[2.2rem] blur-xl md:hidden opacity-50 animate-pulse"></div>
+            <div className="relative bg-slate-900/95 md:bg-slate-900/80 backdrop-blur-none md:backdrop-blur-md border border-slate-700 md:group-hover:border-slate-500 p-6 sm:p-12 rounded-3xl shadow-2xl transition-all duration-500 overflow-hidden">
+              {/* Internal spice items */}
+              <div className="md:hidden absolute top-0 right-0 p-4 opacity-10">
+                <Star size={80} className="text-white rotate-12" />
+              </div>
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-8 leading-[1.1] tracking-tighter">
                 <span className="text-slate-300">Millions trust </span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-purple-600 bg-[length:200%_auto] animate-[gradient_4s_linear_infinite]">
@@ -684,12 +695,14 @@ export default function App() {
                 </span>
               </h2>
 
-              <div className="py-8" ref={counterRef}>
-                <div className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 tracking-tighter drop-shadow-sm">
+              <div className="py-8 relative" ref={counterRef}>
+                <div className="absolute inset-0 bg-blue-500/5 blur-3xl md:hidden rounded-full animate-pulse"></div>
+                <div className="relative text-7xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-slate-500 tracking-tighter drop-shadow-2xl">
                   {count.toLocaleString()}
                 </div>
-                <div className="text-cyan-400 font-bold mt-2 uppercase tracking-widest text-sm animate-pulse">
-                  Downloads & Counting... growing every second!
+                <div className="text-cyan-400 font-bold mt-3 uppercase tracking-widest text-[10px] sm:text-sm animate-pulse flex items-center justify-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></span>
+                  Downloads & Counting...
                 </div>
               </div>
 
