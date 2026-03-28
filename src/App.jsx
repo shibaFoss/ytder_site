@@ -331,12 +331,12 @@ export default function App() {
               href="https://github.com/shibaFoss/AIO-Video-Downloader"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-full transition-all duration-300 shadow-sm"
+              className="group flex items-center gap-2 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 border border-slate-200/60 rounded-full transition-all duration-300"
               title="View on GitHub"
             >
-              <Github size={18} className="text-slate-600 group-hover:text-slate-900 transition-colors" />
+              <Github size={15} className="text-slate-500 group-hover:text-slate-900 transition-colors" />
               {stars > 0 && (
-                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-500 group-hover:text-amber-600 transition-colors">
+                <div className="flex items-center gap-1 text-[10px] font-bold text-slate-400 group-hover:text-amber-600 transition-colors">
                   <Star size={10} fill="currentColor" className="text-amber-500" />
                   <span>{stars.toLocaleString()}</span>
                 </div>
