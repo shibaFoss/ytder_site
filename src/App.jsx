@@ -478,7 +478,7 @@ export default function App() {
       `}} />
 
       {/* --- SECTION 1: HERO --- */}
-      <section className="relative pt-24 pb-32 lg:pt-36 lg:pb-40 overflow-hidden">
+      <section className="relative pt-24 pb-16 lg:pt-36 lg:pb-40 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
