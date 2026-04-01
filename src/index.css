@@ -3,3 +3,12 @@
 @theme {
   --font-sans: "Ubuntu", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+@layer base {
+  /* Makes text and elements strictly fluid on mobile devices */
+  @media (max-width: 639px) {
+    html {
+      font-size: clamp(12px, 4vw, 16px);
+    }
+  }
+}
