@@ -116,7 +116,7 @@ export default function AdminDashboard() {
       fileData.append('image', selectedFile);
       try {
         const uploadRes = await axios.post('http://localhost:5000/api/upload', fileData, {
-          headers: { Authorization: token, 'Content-Type': 'multipart/form-data' }
+          headers: { Authorization: token }
         });
         imageUrl = uploadRes.data.url;
       } catch (err) {
