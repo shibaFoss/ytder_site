@@ -165,6 +165,34 @@ app.delete('/api/blogs/:id', verifyToken, (req, res) => {
   res.json({ success: true });
 });
 
+// Update a blog (Admin only)
+app.put('/api/blogs/:id', verifyToken, (req, res) => {
+  const { title, excerpt, content, image, category } = req.body;
+  const id = parseInt(req.params.id);
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  
+  console.log(`Attempting update for ID: ${id}`, { title, slug });
+
+  try {
+    const result = db.prepare(`
+      UPDATE blogs 
+      SET title = ?, slug = ?, excerpt = ?, content = ?, image = ?, category = ?
+      WHERE id = ?
+    `).run(title, slug, excerpt, content, image, category, id);
+
+    if (result.changes === 0) {
+      console.log(`Update failed: No blog found with ID ${id}`);
+      return res.status(404).json({ success: false, message: 'Post not found with that ID' });
+    }
+    
+    console.log(`Update successful for ID: ${id}`);
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Database Error during Update:', error);
+    res.status(400).json({ success: false, message: 'Error updating post (Title might be taken)' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
 });

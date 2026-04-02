@@ -26,6 +26,7 @@ import { GlobalStyles } from '../components/GlobalStyles';
 export default function AdminDashboard() {
   const [blogs, setBlogs] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
+  const [editingPost, setEditingPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [activeTab, setActiveTab] = useState('blogs'); // 'blogs' or 'settings'
@@ -135,17 +136,35 @@ export default function AdminDashboard() {
     };
 
     try {
-      await axios.post('http://localhost:5000/api/blogs', postData, {
-        headers: { Authorization: token }
-      });
+      if (editingPost) {
+        await axios.put(`http://localhost:5000/api/blogs/${editingPost.id}`, postData, {
+          headers: { Authorization: token }
+        });
+      } else {
+        await axios.post('http://localhost:5000/api/blogs', postData, {
+          headers: { Authorization: token }
+        });
+      }
       setIsAdding(false);
+      setEditingPost(null);
       setSelectedFile(null);
       window.location.reload(); 
     } catch (err) {
-      alert(err.response?.data?.message || 'Error creating post');
+      alert(err.response?.data?.message || 'Error saving post');
     } finally {
       setUploading(false);
     }
+  };
+
+  const startEditing = (post) => {
+    setEditingPost(post);
+    setIsAdding(true);
+  };
+
+  const closeForm = () => {
+    setIsAdding(false);
+    setEditingPost(null);
+    setSelectedFile(null);
   };
 
   const handleDelete = async (id) => {
@@ -344,16 +363,18 @@ export default function AdminDashboard() {
                           </span>
                         </td>
                         <td className="px-8 py-6 text-right">
-                          <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
-                            <button className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-orange-600 hover:border-orange-200 shadow-sm transition-all focus:outline-none">
+                          <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all text-xs font-bold uppercase tracking-widest text-slate-400">
+                             <Link to={`/blog/${blog.slug}`} className="p-2.5 bg-white border border-slate-100 rounded-xl hover:text-orange-600 hover:border-orange-200 shadow-sm transition-all text-slate-400">
                               <Eye size={18} />
-                            </button>
-                            <button className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-blue-600 hover:border-blue-200 shadow-sm transition-all focus:outline-none">
+                            </Link>
+                            <button 
+                              onClick={() => startEditing(blog)}
+                              className="p-2.5 bg-white border border-slate-100 rounded-xl hover:text-blue-600 hover:border-blue-200 shadow-sm transition-all text-slate-400">
                               <FileEdit size={18} />
                             </button>
                             <button 
                               onClick={() => handleDelete(blog.id)}
-                              className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-red-600 hover:border-red-200 shadow-sm transition-all focus:outline-none"
+                              className="p-2.5 bg-white border border-slate-100 rounded-xl hover:text-red-500 hover:border-red-200 shadow-sm transition-all text-slate-400"
                             >
                               <Trash2 size={18} />
                             </button>
@@ -460,26 +481,30 @@ export default function AdminDashboard() {
         <div className="fixed inset-0 z-[1000] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-300">
           <div className="bg-white w-full max-w-4xl p-10 md:p-16 rounded-[4rem] shadow-2xl relative animate-in slide-in-from-bottom duration-500 max-h-[90vh] overflow-y-auto">
             <button 
-              onClick={() => setIsAdding(false)}
+              onClick={closeForm}
               className="absolute top-8 right-8 p-3 rounded-full bg-slate-50 hover:bg-red-50 text-slate-300 hover:text-red-500 transition-all"
             >
               <Trash2 size={24} />
             </button>
 
             <header className="mb-12">
-              <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4">Draft Article</h2>
-              <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Release v1.2 Engine</p>
+              <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4">
+                {editingPost ? 'Edit Article' : 'Draft Article'}
+              </h2>
+              <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">
+                {editingPost ? `Modifying: ${editingPost.title}` : 'Release v1.2 Engine'}
+              </p>
             </header>
 
             <form onSubmit={handleCreatePost} className="space-y-8">
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Article Title</label>
-                  <input name="title" type="text" placeholder="Enter post title..." className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
+                  <input name="title" defaultValue={editingPost?.title} type="text" placeholder="Enter post title..." className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Category</label>
-                  <select name="category" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all appearance-none">
+                  <select name="category" defaultValue={editingPost?.category} className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all appearance-none">
                     <option value="Tutorial">Tutorial</option>
                     <option value="News">News</option>
                     <option value="Comparison">Comparison</option>
@@ -500,13 +525,14 @@ export default function AdminDashboard() {
                     <div className={`w-full h-32 rounded-3xl border-2 border-dashed transition-all flex flex-col items-center justify-center gap-2 ${selectedFile ? 'border-orange-500 bg-orange-50' : 'border-slate-200 bg-slate-50 hover:border-slate-300'}`}>
                       <Plus className={`transition-transform ${selectedFile ? 'rotate-45 text-orange-600' : 'text-slate-400'}`} />
                       <span className={`text-[10px] font-black uppercase tracking-widest ${selectedFile ? 'text-orange-600' : 'text-slate-400'}`}>
-                        {selectedFile ? selectedFile.name : 'Upload Local Image'}
+                        {selectedFile ? selectedFile.name : (editingPost ? 'Change Image' : 'Upload Local Image')}
                       </span>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <input 
                       name="image" 
+                      defaultValue={editingPost?.image}
                       type="text" 
                       placeholder="Or Paste Remote Image URL..." 
                       className="w-full h-32 bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all placeholder:text-[10px] placeholder:uppercase placeholder:tracking-widest" 
@@ -528,6 +554,7 @@ export default function AdminDashboard() {
                   <textarea 
                     id="blogContent"
                     name="content" 
+                    defaultValue={editingPost?.content}
                     rows={8} 
                     placeholder="Start writing your magic..." 
                     className="w-full bg-slate-50 border border-slate-100 rounded-[2.5rem] px-8 py-6 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required 
@@ -540,7 +567,7 @@ export default function AdminDashboard() {
                   type="submit"
                   className={`flex-grow rounded-[2rem] py-6 font-black text-xl transition-all shadow-xl shadow-slate-200 ${uploading ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-slate-900 text-white hover:bg-orange-600'}`}
                 >
-                  {uploading ? 'Processing Image...' : 'Publish Post'}
+                   {uploading ? 'Processing Image...' : (editingPost ? 'Update Post' : 'Publish Post')}
                 </button>
               </div>
             </form>
