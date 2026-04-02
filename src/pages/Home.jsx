@@ -19,7 +19,7 @@ import { Testimonials } from '../components/Testimonials';
  */
 export default function Home() {
   const { versionData, trackDownload } = useApp();
-  
+
   // --- Local States ---
   const [featureIndex, setFeatureIndex] = useState(0);
   const [screenshotIndex, setScreenshotIndex] = useState(0);
@@ -51,8 +51,8 @@ export default function Home() {
     <MainLayout>
       <main>
         {/* Hero Section & Screenshot Slider */}
-        <Hero 
-          versionData={versionData} 
+        <Hero
+          versionData={versionData}
           onDownload={trackDownload}
           scrollToInstall={scrollToInstall}
           screenshotIndex={screenshotIndex}
@@ -65,15 +65,15 @@ export default function Home() {
         <div className="premium-divider-orange" />
 
         {/* Dynamic Download Counter */}
-        <CounterSection 
-          count={count} 
-          counterRef={counterRef} 
+        <CounterSection
+          count={count}
+          counterRef={counterRef}
         />
 
         <div className="premium-divider-orange" />
 
         {/* Feature Highlights */}
-        <WhySection 
+        <WhySection
           featureIndex={featureIndex}
           setFeatureIndex={setFeatureIndex}
           handleScroll={handleHorizontalScroll}
@@ -86,13 +86,15 @@ export default function Home() {
 
         <div className="premium-divider-orange" />
 
+        {/* User Reviews */}
+        <Testimonials />
+
+        <div className="premium-divider-orange" />
+
         {/* Latest Blog Insights */}
         <LatestBlogs />
 
         <div className="premium-divider-orange" />
-
-        {/* User Reviews */}
-        <Testimonials />
       </main>
     </MainLayout>
   );
