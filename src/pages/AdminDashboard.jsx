@@ -72,6 +72,29 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault();
+    const currentPassword = e.target.currentPassword.value;
+    const newPassword = e.target.newPassword.value;
+    const confirmPassword = e.target.confirmPassword.value;
+
+    if (newPassword !== confirmPassword) {
+      alert('New passwords do not match');
+      return;
+    }
+
+    const token = localStorage.getItem('adminToken');
+    try {
+      await axios.put('http://localhost:5000/api/user/password', { currentPassword, newPassword }, {
+        headers: { Authorization: token }
+      });
+      alert('Password updated successfully!');
+      e.target.reset();
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to update password');
+    }
+  };
+
   const handleCreatePost = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -185,7 +208,7 @@ export default function AdminDashboard() {
               </button>
             </header>
 
-            {/* --- STATS OVERVIEW --- */}
+            {/* --- ANALYTICS HUB --- */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               <div className="bg-white p-8 rounded-[3rem] border border-slate-100 shadow-2xl shadow-slate-200/40 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-8 opacity-5 -rotate-12 group-hover:scale-110 transition-transform">
@@ -267,12 +290,12 @@ export default function AdminDashboard() {
                     {blogs.map(blog => (
                       <tr key={blog.id} className="hover:bg-slate-50 transition-colors group">
                         <td className="px-8 py-6 font-bold text-slate-900 max-w-sm truncate">{blog.title}</td>
-                        <td className="px-8 py-6 font-medium text-slate-500">{blog.date}</td>
+                        <td className="px-8 py-6 font-medium text-slate-500">{new Date(blog.created_at).toLocaleDateString()}</td>
                         <td className="px-8 py-6 font-black text-slate-900">{blog.views.toLocaleString()}</td>
                         <td className="px-8 py-6">
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
                             <CheckCircle2 size={12} />
-                            {blog.status}
+                            Published
                           </span>
                         </td>
                         <td className="px-8 py-6 text-right">
@@ -305,7 +328,7 @@ export default function AdminDashboard() {
               <p className="text-slate-500 font-medium">Configure your public profile and author details.</p>
             </header>
 
-            <form onSubmit={handleUpdateProfile} className="bg-white rounded-[3rem] border border-slate-100 shadow-2xl shadow-slate-200/40 p-10 md:p-16 space-y-8">
+            <form onSubmit={handleUpdateProfile} className="bg-white rounded-[3rem] border border-slate-100 shadow-2xl shadow-slate-200/40 p-10 md:p-16 space-y-8 mb-16">
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Display Name</label>
@@ -353,6 +376,34 @@ export default function AdminDashboard() {
 
               <button className="w-full py-6 bg-slate-900 text-white rounded-[2rem] font-black text-xl hover:bg-orange-600 transition-all shadow-xl shadow-slate-200 active:scale-[0.98]">
                 Save Profile Changes
+              </button>
+            </form>
+
+            <header className="mb-8">
+              <h2 className="text-2xl font-black text-slate-900 mb-2">Security Settings</h2>
+              <p className="text-slate-500 font-medium">Update your account credentials.</p>
+            </header>
+
+            <form onSubmit={handleUpdatePassword} className="bg-white rounded-[3rem] border border-slate-100 shadow-2xl shadow-slate-200/40 p-10 md:p-16 space-y-8">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Current Password</label>
+                  <input name="currentPassword" type="password" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
+                </div>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">New Password</label>
+                    <input name="newPassword" type="password" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Confirm New Password</label>
+                    <input name="confirmPassword" type="password" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
+                  </div>
+                </div>
+              </div>
+
+              <button className="w-full py-6 bg-slate-900 text-white rounded-[2rem] font-black text-xl hover:bg-orange-600 transition-all shadow-xl shadow-slate-200 active:scale-[0.98]">
+                Update Password
               </button>
             </form>
           </div>

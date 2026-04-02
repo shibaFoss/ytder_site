@@ -14,22 +14,13 @@ app.use(express.json());
 
 // --- AUTH ROUTES ---
 
-// Seed Admin Users
+// Seed Admin User
 const seedAdmin = () => {
-  // Default admin
   const admin = db.prepare('SELECT * FROM users WHERE username = ?').get('admin');
   if (!admin) {
     const hashedPassword = bcrypt.hashSync('admin123', 10);
     db.prepare('INSERT INTO users (username, password) VALUES (?, ?)').run('admin', hashedPassword);
     console.log('Admin user seeded (admin / admin123)');
-  }
-
-  // Shiba user
-  const shiba = db.prepare('SELECT * FROM users WHERE username = ?').get('shiba');
-  if (!shiba) {
-    const hashedPassword = bcrypt.hashSync('@#$420Shiba', 10);
-    db.prepare('INSERT INTO users (username, password) VALUES (?, ?)').run('shiba', hashedPassword);
-    console.log('Shiba user seeded (shiba / @#$420Shiba)');
   }
 };
 seedAdmin();
@@ -74,6 +65,19 @@ app.put('/api/user/profile', verifyToken, (req, res) => {
     WHERE id = ?
   `).run(display_name, email, bio, profile_pic, req.userId);
   res.json({ success: true });
+});
+
+app.put('/api/user/password', verifyToken, (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.userId);
+
+  if (user && bcrypt.compareSync(currentPassword, user.password)) {
+    const hashedPassword = bcrypt.hashSync(newPassword, 10);
+    db.prepare('UPDATE users SET password = ? WHERE id = ?').run(hashedPassword, req.userId);
+    res.json({ success: true });
+  } else {
+    res.status(401).json({ success: false, message: 'Current password incorrect' });
+  }
 });
 
 // --- BLOG ROUTES ---
