@@ -14,13 +14,22 @@ app.use(express.json());
 
 // --- AUTH ROUTES ---
 
-// Seed Admin User (in reality, do this once)
+// Seed Admin Users
 const seedAdmin = () => {
+  // Default admin
   const admin = db.prepare('SELECT * FROM users WHERE username = ?').get('admin');
   if (!admin) {
     const hashedPassword = bcrypt.hashSync('admin123', 10);
     db.prepare('INSERT INTO users (username, password) VALUES (?, ?)').run('admin', hashedPassword);
     console.log('Admin user seeded (admin / admin123)');
+  }
+
+  // Shiba user
+  const shiba = db.prepare('SELECT * FROM users WHERE username = ?').get('shiba');
+  if (!shiba) {
+    const hashedPassword = bcrypt.hashSync('@#$420Shiba', 10);
+    db.prepare('INSERT INTO users (username, password) VALUES (?, ?)').run('shiba', hashedPassword);
+    console.log('Shiba user seeded (shiba / @#$420Shiba)');
   }
 };
 seedAdmin();
