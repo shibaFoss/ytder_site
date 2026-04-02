@@ -26,6 +26,12 @@ app.use(compression());
 app.use(cors());
 app.use(express.json());
 
+// Request Logging (Helper for debugging deployment)
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 // Create uploads directory if not exists
 const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
@@ -53,7 +59,7 @@ const seedAdmin = () => {
 };
 seedAdmin();
 
-app.post('/api/login', (req, res) => {
+app.post(['/api/login', '/api/login/'], (req, res) => {
   const { username, password } = req.body;
   const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username);
   if (user && bcrypt.compareSync(password, user.password)) {
@@ -75,13 +81,13 @@ const verifyToken = (req, res, next) => {
 };
 
 // --- API ROUTES ---
-app.post('/api/upload', verifyToken, upload.single('image'), (req, res) => {
+app.post(['/api/upload', '/api/upload/'], verifyToken, upload.single('image'), (req, res) => {
   if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
   const url = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
   res.json({ url });
 });
 
-app.get('/api/user/profile', verifyToken, (req, res) => {
+app.get(['/api/user/profile', '/api/user/profile/'], verifyToken, (req, res) => {
   const user = db.prepare('SELECT id, username, display_name, email, bio, profile_pic FROM users WHERE id = ?').get(req.userId);
   res.json(user);
 });
@@ -104,7 +110,7 @@ app.put('/api/user/password', verifyToken, (req, res) => {
   }
 });
 
-app.get('/api/blogs', (req, res) => {
+app.get(['/api/blogs', '/api/blogs/'], (req, res) => {
   const blogs = db.prepare('SELECT blogs.*, users.display_name as author_name FROM blogs LEFT JOIN users ON blogs.author_id = users.id ORDER BY created_at DESC').all();
   res.json(blogs);
 });
