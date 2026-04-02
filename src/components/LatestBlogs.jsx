@@ -30,7 +30,7 @@ export const LatestBlogs = () => {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <Reveal className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
+        <Reveal className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-16 px-2 md:px-0">
           <div className="max-w-2xl">
             <div className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-[10px] font-black uppercase tracking-widest mb-4">
               Insights & News
