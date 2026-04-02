@@ -832,14 +832,6 @@ export default function App() {
           </Reveal>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
-            {/* Desktop Connectors - Subtle Dashed Lines */}
-            <div className="hidden lg:block absolute top-1/4 left-0 w-full px-20 pointer-events-none">
-              <div className="flex justify-between">
-                {[1, 2, 3].map((_) => (
-                  <div key={_} className="h-px flex-1 bg-gradient-to-r from-slate-200 via-orange-300/30 to-slate-200 border-dashed border-b-2"></div>
-                ))}
-              </div>
-            </div>
 
             {/* Step 1 */}
             <Reveal delay={0} className="relative flex flex-col group">
