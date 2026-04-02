@@ -13,7 +13,10 @@ import {
   Calendar, 
   Image as ImageIcon,
   CheckCircle2,
-  Rocket
+  Rocket,
+  BarChart3,
+  ExternalLink,
+  Activity
 } from 'lucide-react';
 import { GlobalStyles } from '../components/GlobalStyles';
 
@@ -143,18 +146,67 @@ export default function AdminDashboard() {
         </header>
 
         {/* --- STATS OVERVIEW --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
+        {/* --- ANALYTICS HUB --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {/* Local Content Stats */}
+          <div className="bg-white p-8 rounded-[3rem] border border-slate-100 shadow-2xl shadow-slate-200/40 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-8 opacity-5 -rotate-12 group-hover:scale-110 transition-transform">
+              <BarChart3 size={120} />
+            </div>
+            <h3 className="text-xl font-black text-slate-900 mb-6 flex items-center gap-2">
+              <Activity size={20} className="text-orange-600" />
+              Content Reach
+            </h3>
+            <div className="space-y-4">
+              {blogs.slice(0, 3).map(blog => (
+                <div key={blog.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/50">
+                  <span className="text-xs font-bold text-slate-600 truncate max-w-[200px]">{blog.title}</span>
+                  <span className="text-sm font-black text-slate-900">{blog.views || 0} <span className="text-[10px] text-slate-400 font-medium tracking-normal">Views</span></span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Google Analytics Quick Access */}
+          <div className="bg-slate-900 p-8 rounded-[3rem] border border-slate-800 shadow-2xl shadow-slate-900/20 relative overflow-hidden group">
+             <div className="absolute top-0 right-0 p-8 opacity-10 -rotate-12 group-hover:scale-110 transition-transform text-white">
+              <Globe size={120} />
+            </div>
+            <h3 className="text-xl font-black text-white mb-2">Google Analytics GA4</h3>
+            <p className="text-slate-400 font-medium text-sm mb-8 px-1">Tracking Property: <span className="text-orange-500 font-black">G-EXXGHF7ER6</span></p>
+            
+            <div className="bg-white/5 backdrop-blur-md rounded-[2rem] p-6 border border-white/10 mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-black text-slate-400 tracking-widest uppercase">Real-time Status</span>
+                <span className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981]"></span>
+              </div>
+              <div className="text-3xl font-black text-white mb-1">Active Now</div>
+              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Collecting Events from AioYTDL Official</p>
+            </div>
+
+            <a 
+              href="https://analytics.google.com/analytics/web/#/p41e87bc6/realtime" 
+              target="_blank" rel="noopener noreferrer"
+              className="w-full flex items-center justify-center gap-2 py-4 bg-white text-slate-900 rounded-2xl font-black text-sm hover:bg-orange-500 hover:text-white transition-all active:scale-95 shadow-xl shadow-black/20"
+            >
+              Open Live Dashboard
+              <ExternalLink size={16} />
+            </a>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50">
-            <div className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-2">Total Articles</div>
-            <div className="text-4xl font-black text-slate-900">02</div>
+            <div className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-2">Total Blogs</div>
+            <div className="text-4xl font-black text-slate-900">{blogs.length.toString().padStart(2, '0')}</div>
           </div>
           <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50">
-            <div className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-2">Global Views</div>
-            <div className="text-4xl font-black text-slate-900">14.3K</div>
+            <div className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-2">Global Content Views</div>
+            <div className="text-4xl font-black text-slate-900">{blogs.reduce((acc, b) => acc + (b.views || 0), 0).toLocaleString()}</div>
           </div>
           <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50">
-            <div className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-2">Admin Status</div>
-            <div className="text-4xl font-black text-emerald-500 flex items-center gap-2">Online <span className="w-3 h-3 bg-emerald-500 rounded-full animate-ping"></span></div>
+            <div className="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-2">Admin Engine</div>
+            <div className="text-4xl font-black text-orange-500 flex items-center gap-2">V2.5.0 <Rocket size={24} /></div>
           </div>
         </div>
 
