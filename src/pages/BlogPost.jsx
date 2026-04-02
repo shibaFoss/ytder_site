@@ -29,7 +29,7 @@ export default function BlogPost() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/blogs/${slug}`);
+        const { data } = await axios.get(`/api/blogs/${slug}`);
         setPost(data);
       } catch (err) {
         console.error('Error fetching post', err);

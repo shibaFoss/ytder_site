@@ -16,7 +16,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/blogs');
+        const { data } = await axios.get('/api/blogs');
         setPosts(data);
       } catch (err) {
         console.error('Error fetching blogs', err);

@@ -11,7 +11,7 @@ export const LatestBlogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/blogs');
+        const { data } = await axios.get('/api/blogs');
         setBlogs(data.slice(0, 3)); // Only show latest 3
       } catch (err) {
         console.error('Error fetching latest blogs', err);

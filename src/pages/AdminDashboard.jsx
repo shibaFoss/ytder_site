@@ -50,8 +50,8 @@ export default function AdminDashboard() {
       try {
         const token = localStorage.getItem('adminToken');
         const [blogRes, profileRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/blogs'),
-          axios.get('http://localhost:5000/api/user/profile', { headers: { Authorization: token } })
+          axios.get('/api/blogs'),
+          axios.get('/api/user/profile', { headers: { Authorization: token } })
         ]);
         setBlogs(blogRes.data);
         setProfile(profileRes.data);
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
     e.preventDefault();
     const token = localStorage.getItem('adminToken');
     try {
-      await axios.put('http://localhost:5000/api/user/profile', profile, {
+      await axios.put('/api/user/profile', profile, {
         headers: { Authorization: token }
       });
       alert('Profile updated successfully!');
@@ -94,7 +94,7 @@ export default function AdminDashboard() {
 
     const token = localStorage.getItem('adminToken');
     try {
-      await axios.put('http://localhost:5000/api/user/password', { currentPassword, newPassword }, {
+      await axios.put('/api/user/password', { currentPassword, newPassword }, {
         headers: { Authorization: token }
       });
       alert('Password updated successfully!');
@@ -116,7 +116,7 @@ export default function AdminDashboard() {
       const fileData = new FormData();
       fileData.append('image', selectedFile);
       try {
-        const uploadRes = await axios.post('http://localhost:5000/api/upload', fileData, {
+        const uploadRes = await axios.post('/api/upload', fileData, {
           headers: { Authorization: token }
         });
         imageUrl = uploadRes.data.url;
@@ -137,11 +137,11 @@ export default function AdminDashboard() {
 
     try {
       if (editingPost) {
-        await axios.put(`http://localhost:5000/api/blogs/${editingPost.id}`, postData, {
+        await axios.put(`/api/blogs/${editingPost.id}`, postData, {
           headers: { Authorization: token }
         });
       } else {
-        await axios.post('http://localhost:5000/api/blogs', postData, {
+        await axios.post('/api/blogs', postData, {
           headers: { Authorization: token }
         });
       }
@@ -172,7 +172,7 @@ export default function AdminDashboard() {
 
     const token = localStorage.getItem('adminToken');
     try {
-      await axios.delete(`http://localhost:5000/api/blogs/${id}`, {
+      await axios.delete(`/api/blogs/${id}`, {
         headers: { Authorization: token }
       });
       setBlogs(blogs.filter(b => b.id !== id));
