@@ -1,7 +1,9 @@
+// Hooks
 import React, { useState, useEffect } from 'react';
 
 // Hooks
 import { useCountUp } from '../hooks/useCountUp';
+import { useAppData } from '../hooks/useAppData';
 
 // Components
 import { SpiderWeb } from '../components/SpiderWeb';
@@ -22,35 +24,19 @@ import { PrivacyPolicy, TermsOfService, ContactUs } from '../components/LegalVie
  * Home Page Component
  */
 export default function Home() {
-  // --- States ---
-  const [stars, setStars] = useState(0);
+  // --- Shared Global States ---
+  const { stars, versionData, trackDownload } = useAppData();
+
+  // --- Local States ---
   const [featureIndex, setFeatureIndex] = useState(0);
   const [screenshotIndex, setScreenshotIndex] = useState(0);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [showStickyCTA, setShowStickyCTA] = useState(false);
-  const [versionData, setVersionData] = useState({
-    latest_version: 'v2.5.0',
-    latest_apk_url: '#',
-  });
 
   // --- Custom Hooks ---
   const { ref: counterRef, count } = useCountUp(587324, 2500);
-
-  /**
-   * Track APK Download clicks via Google Analytics
-   */
-  const trackDownload = () => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'download_click', {
-        'event_category': 'Engagement',
-        'event_label': 'APK Download',
-        'value': 1,
-        'version': versionData.latest_version
-      });
-    }
-  };
 
   /**
    * Utility for scroll-based pagination/indexing
@@ -74,29 +60,7 @@ export default function Home() {
 
   // --- Effects ---
   useEffect(() => {
-    // 1. Fetch GitHub Stars
-    fetch('https://api.github.com/repos/shibaFoss/AIO-Video-Downloader')
-      .then(res => res.json())
-      .then(data => {
-        if (data.stargazers_count) setStars(data.stargazers_count);
-      })
-      .catch(err => console.error('Error fetching stars:', err));
-
-    // 2. Fetch Version Info
-    fetch('https://raw.githubusercontent.com/shibaFoss/AIO-Video-Downloader/refs/heads/master/others/version_info.txt')
-      .then(res => res.text())
-      .then(text => {
-        const lines = text.split('\n');
-        const data = {};
-        lines.forEach(line => {
-          const [key, value] = line.split('=');
-          if (key && value) data[key.trim()] = value.trim();
-        });
-        if (data.latest_version) setVersionData(data);
-      })
-      .catch(err => console.error('Error fetching version info:', err));
-
-    // 3. Sticky CTA Scroll Logic
+    // Sticky CTA Scroll Logic
     const handleScrollEvent = () => {
       const scrollY = window.scrollY;
       setShowStickyCTA(scrollY > 600);

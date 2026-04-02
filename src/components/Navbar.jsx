@@ -1,18 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Download, Star, Github } from 'lucide-react';
 
 export const Navbar = ({ stars, versionData, onDownload }) => {
   return (
     <nav className="fixed top-0 inset-x-0 z-[100] px-4 py-4 pointer-events-none">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 bg-white/70 backdrop-blur-xl border border-slate-200/60 rounded-full shadow-2xl shadow-slate-200/50 pointer-events-auto">
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3 pointer-events-auto">
           <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg hover:scale-110 transition-transform cursor-pointer">
             <img src="/playstore-logo.webp" alt="AIO-YTDER" className="w-full h-full object-cover" />
           </div>
           <span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tighter">
             AIO<span className="text-orange-600">-</span>YTDER
           </span>
-        </div>
+        </Link>
 
         <div className="flex items-center gap-4">
           <a

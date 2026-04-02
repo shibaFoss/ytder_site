@@ -6,11 +6,13 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Reveal } from '../components/Reveal';
 import { GlobalStyles } from '../components/GlobalStyles';
+import { useAppData } from '../hooks/useAppData';
 
 /**
  * Blog Listing Page
  */
 export default function Blog() {
+  const { stars, versionData, trackDownload } = useAppData();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -33,8 +35,7 @@ export default function Blog() {
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
       <GlobalStyles />
       
-      {/* Reusing existing Navbar structure (but without the version logic for now or simplified) */}
-      <Navbar stars={0} versionData={{ latest_version: 'v2.5.0', latest_apk_url: '#' }} onDownload={() => {}} />
+      <Navbar stars={stars} versionData={versionData} onDownload={trackDownload} />
 
       <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <Reveal>
@@ -79,11 +80,11 @@ export default function Blog() {
                       <div className="flex items-center gap-4 text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest">
                         <div className="flex items-center gap-1.5">
                           <Calendar size={14} className="text-orange-500" />
-                          <span>{post.date}</span>
+                          <span>Mar 29, 2026</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                           <Clock size={14} className="text-orange-500" />
-                          <span>{post.readTime}</span>
+                          <span>5 Min Read</span>
                         </div>
                       </div>
                       <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-4 group-hover:text-orange-600 transition-colors leading-tight">
@@ -105,7 +106,7 @@ export default function Blog() {
         )}
       </main>
 
-      <Footer versionData={{ latest_version: 'v2.5.0', latest_apk_url: '#' }} onDownload={() => {}} setShowPrivacy={() => {}} setShowTerms={() => {}} setShowContact={() => {}} />
+      <Footer versionData={versionData} onDownload={trackDownload} setShowPrivacy={() => {}} setShowTerms={() => {}} setShowContact={() => {}} />
     </div>
   );
 }

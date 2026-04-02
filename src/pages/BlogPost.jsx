@@ -6,8 +6,10 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { GlobalStyles } from '../components/GlobalStyles';
 import { Reveal } from '../components/Reveal';
+import { useAppData } from '../hooks/useAppData';
 
 export default function BlogPost() {
+  const { stars, versionData, trackDownload } = useAppData();
   const { slug } = useParams();
   const [post, setPost] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
@@ -35,7 +37,7 @@ export default function BlogPost() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
       <GlobalStyles />
-      <Navbar stars={0} versionData={{ latest_version: 'v2.5.0', latest_apk_url: '#' }} onDownload={() => {}} />
+      <Navbar stars={stars} versionData={versionData} onDownload={trackDownload} />
 
       <main className="pt-32 pb-20 max-w-4xl mx-auto px-6">
         <Reveal>
@@ -96,7 +98,7 @@ export default function BlogPost() {
         </Reveal>
       </main>
 
-      <Footer versionData={{ latest_version: 'v2.5.0', latest_apk_url: '#' }} onDownload={() => {}} setShowPrivacy={() => {}} setShowTerms={() => {}} setShowContact={() => {}} />
+      <Footer versionData={versionData} onDownload={trackDownload} setShowPrivacy={() => {}} setShowTerms={() => {}} setShowContact={() => {}} />
     </div>
   );
 }
