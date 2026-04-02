@@ -50,6 +50,9 @@ export default function AdminDashboard() {
         setBlogs(blogRes.data);
         setProfile(profileRes.data);
       } catch (err) {
+        if (err.response?.status === 401 || err.response?.status === 404) {
+          handleLogout();
+        }
         console.error('Failed to fetch data', err);
       } finally {
         setLoading(false);

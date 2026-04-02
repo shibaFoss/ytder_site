@@ -54,6 +54,7 @@ const verifyToken = (req, res, next) => {
 
 app.get('/api/user/profile', verifyToken, (req, res) => {
   const user = db.prepare('SELECT id, username, display_name, email, bio, profile_pic FROM users WHERE id = ?').get(req.userId);
+  if (!user) return res.status(404).json({ message: 'User not found' });
   res.json(user);
 });
 
