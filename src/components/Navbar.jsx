@@ -33,9 +33,10 @@ export const Navbar = ({ stars, versionData, onDownload }) => {
           <a
             href={versionData.latest_apk_url}
             onClick={onDownload}
-            className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-full font-bold text-sm text-slate-900 transition-all duration-300 active:scale-95"
+            className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-600 text-white rounded-full font-black text-sm transition-all duration-300 active:scale-95 shadow-xl shadow-orange-200/40 relative overflow-hidden group/btn"
           >
-            <Download size={16} className="text-fuchsia-500" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+            <Download size={16} className="group-hover/btn:-translate-y-0.5 transition-transform" />
             Download APK
           </a>
         </div>
