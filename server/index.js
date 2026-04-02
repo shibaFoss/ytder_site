@@ -42,6 +42,7 @@ app.post('/api/login', (req, res) => {
     const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1d' });
     res.json({ success: true, token });
   } else {
+    console.log(`Login failed for user: ${username}`);
     res.status(401).json({ success: false, message: 'Invalid credentials' });
   }
 });
@@ -58,19 +59,46 @@ const verifyToken = (req, res, next) => {
   });
 };
 
+// --- USER PROFILE ROUTES ---
+
+app.get('/api/user/profile', verifyToken, (req, res) => {
+  const user = db.prepare('SELECT id, username, display_name, email, bio, profile_pic FROM users WHERE id = ?').get(req.userId);
+  res.json(user);
+});
+
+app.put('/api/user/profile', verifyToken, (req, res) => {
+  const { display_name, email, bio, profile_pic } = req.body;
+  db.prepare(`
+    UPDATE users 
+    SET display_name = ?, email = ?, bio = ?, profile_pic = ? 
+    WHERE id = ?
+  `).run(display_name, email, bio, profile_pic, req.userId);
+  res.json({ success: true });
+});
+
 // --- BLOG ROUTES ---
 
-// Get all blogs
+// Get all blogs (join with users to get author info)
 app.get('/api/blogs', (req, res) => {
-  const blogs = db.prepare('SELECT * FROM blogs ORDER BY created_at DESC').all();
+  const blogs = db.prepare(`
+    SELECT blogs.*, users.display_name as author_name 
+    FROM blogs 
+    LEFT JOIN users ON blogs.author_id = users.id
+    ORDER BY created_at DESC
+  `).all();
   res.json(blogs);
 });
 
 // Get a single blog by slug
 app.get('/api/blogs/:slug', (req, res) => {
-  const blog = db.prepare('SELECT * FROM blogs WHERE slug = ?').get(req.params.slug);
+  const blog = db.prepare(`
+    SELECT blogs.*, users.display_name as author_name, users.bio as author_bio, users.profile_pic as author_image
+    FROM blogs 
+    LEFT JOIN users ON blogs.author_id = users.id
+    WHERE blogs.slug = ?
+  `).get(req.params.slug);
+  
   if (blog) {
-    // Increment view count
     db.prepare('UPDATE blogs SET views = views + 1 WHERE id = ?').run(blog.id);
     res.json(blog);
   } else {
@@ -85,12 +113,13 @@ app.post('/api/blogs', verifyToken, (req, res) => {
   
   try {
     const info = db.prepare(`
-      INSERT INTO blogs (title, slug, excerpt, content, image, category)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `).run(title, slug, excerpt, content, image, category);
+      INSERT INTO blogs (author_id, title, slug, excerpt, content, image, category)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `).run(req.userId, title, slug, excerpt, content, image, category);
     
     res.json({ success: true, id: info.lastInsertRowid });
   } catch (error) {
+    console.error(error);
     res.status(400).json({ success: false, message: 'Title must be unique (slug exists)' });
   }
 });

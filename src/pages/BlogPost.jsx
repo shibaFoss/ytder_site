@@ -66,7 +66,7 @@ export default function BlogPost() {
               </div>
               <div className="flex items-center gap-2">
                 <User size={18} className="text-orange-500" />
-                <span>By Admin</span>
+                <span>By {post.author_name || 'Admin'}</span>
               </div>
             </div>
           </div>
@@ -82,6 +82,23 @@ export default function BlogPost() {
           <div className="mb-20 prose prose-slate max-w-none prose-lg prose-orange font-medium leading-relaxed text-slate-600">
             {post.content.split('\n').map((para, i) => <p key={i} className="mb-4">{para}</p>)}
           </div>
+
+          {post.author_bio && (
+            <div className="p-8 md:p-12 bg-slate-50 rounded-[3rem] border border-slate-100 flex flex-col md:flex-row items-center gap-8 mb-20 shadow-inner">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0">
+                <img 
+                  src={post.author_image || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200'} 
+                  alt={post.author_name} 
+                  className="w-full h-full object-cover" 
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <div className="text-[10px] font-black text-orange-600 uppercase tracking-widest mb-2">Written By</div>
+                <h4 className="text-xl font-black text-slate-900 mb-2">{post.author_name}</h4>
+                <p className="text-sm text-slate-500 font-medium leading-relaxed">{post.author_bio}</p>
+              </div>
+            </div>
+          )}
 
           <div className="border-t border-slate-100 pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-4">

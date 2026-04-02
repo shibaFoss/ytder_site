@@ -12,11 +12,16 @@ db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE,
-    password TEXT
+    password TEXT,
+    display_name TEXT DEFAULT 'Admin',
+    email TEXT,
+    bio TEXT,
+    profile_pic TEXT
   );
 
   CREATE TABLE IF NOT EXISTS blogs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    author_id INTEGER REFERENCES users(id),
     slug TEXT UNIQUE,
     title TEXT,
     excerpt TEXT,
@@ -27,5 +32,12 @@ db.exec(`
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
 `);
+
+// Migrations (Ensure new columns exist in older DBs)
+try { db.exec("ALTER TABLE users ADD COLUMN display_name TEXT DEFAULT 'Admin'"); } catch(e){}
+try { db.exec("ALTER TABLE users ADD COLUMN email TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE users ADD COLUMN bio TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE users ADD COLUMN profile_pic TEXT"); } catch(e){}
+try { db.exec("ALTER TABLE blogs ADD COLUMN author_id INTEGER REFERENCES users(id)"); } catch(e){}
 
 export default db;
