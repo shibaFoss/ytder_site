@@ -269,6 +269,18 @@ export default function App() {
 
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
+  // Track APK Download clicks
+  const trackDownload = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'download_click', {
+        'event_category': 'Engagement',
+        'event_label': 'APK Download',
+        'value': 1,
+        'version': versionData.latest_version
+      });
+    }
+  };
+
   useEffect(() => {
     // Fetch GitHub Stars
     fetch('https://api.github.com/repos/shibaFoss/AIO-Video-Downloader')
@@ -387,6 +399,7 @@ export default function App() {
 
             <a
               href={versionData.latest_apk_url}
+              onClick={trackDownload}
               className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-full font-bold text-sm text-slate-900 transition-all duration-300 active:scale-95"
             >
               <Download size={16} className="text-fuchsia-500" />
@@ -570,6 +583,7 @@ export default function App() {
                   </div>
                   <a
                     href={versionData.latest_apk_url}
+                    onClick={trackDownload}
                     className="relative block w-full sm:w-auto px-10 py-4 sm:px-12 sm:py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 rounded-full font-bold text-lg sm:text-xl text-white shadow-xl shadow-orange-200 hover:shadow-2xl hover:shadow-orange-300 transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/20 group text-center"
                   >
                     <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
@@ -984,6 +998,7 @@ export default function App() {
               </div>
               <a
                 href={versionData.latest_apk_url}
+                onClick={trackDownload}
                 className="relative block px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 rounded-full font-bold text-base sm:text-xl md:text-2xl text-white shadow-xl shadow-orange-200 hover:shadow-2xl hover:shadow-orange-300 transition-all duration-300 hover:scale-105 active:scale-95 hover:-translate-y-1 overflow-hidden border border-white/10 group text-center"
               >
                 <div className="absolute inset-x-0 top-0 h-1/2 bg-white/10 group-hover:bg-white/20 transition-colors"></div>
@@ -1046,6 +1061,7 @@ export default function App() {
 
         <a
           href={versionData.latest_apk_url}
+          onClick={trackDownload}
           className="flex items-center justify-between p-2 pl-6 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(249,115,22,0.4)] border-t border-white/20 active:scale-95 transition-all overflow-hidden relative group"
         >
           {/* Animated High-Gloss Stripe */}
