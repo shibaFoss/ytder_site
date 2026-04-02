@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { ChevronLeft, Calendar, Clock, User, Share2, Facebook, Twitter, Instagram } from 'lucide-react';
 import { MainLayout } from '../components/MainLayout';
 import { Reveal } from '../components/Reveal';
@@ -79,8 +81,10 @@ export default function BlogPost() {
             />
           </div>
 
-          <div className="mb-20 prose prose-slate max-w-none prose-lg prose-orange font-medium leading-relaxed text-slate-600">
-            {post.content.split('\n').map((para, i) => <p key={i} className="mb-4">{para}</p>)}
+          <div className="mb-20 prose prose-slate max-w-none prose-lg prose-orange font-medium leading-relaxed text-slate-600 prose-img:rounded-[2rem] prose-img:shadow-xl">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {post.content}
+            </ReactMarkdown>
           </div>
 
           {post.author_bio && (

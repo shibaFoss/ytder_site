@@ -11,12 +11,15 @@ import {
   Eye, 
   Globe, 
   Calendar, 
-  Image as ImageIcon,
-  CheckCircle2,
   Rocket,
   BarChart3,
   ExternalLink,
-  Activity
+  Activity,
+  Bold,
+  Italic,
+  Link2,
+  Image as ImageIcon,
+  CheckCircle2
 } from 'lucide-react';
 import { GlobalStyles } from '../components/GlobalStyles';
 
@@ -138,6 +141,21 @@ export default function AdminDashboard() {
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
     navigate('/admin/login');
+  };
+
+  const insertMarkdown = (prefix, suffix = '') => {
+    const textarea = document.getElementById('blogContent');
+    if (!textarea) return;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+    const selection = text.substring(start, end);
+    const before = text.substring(0, start);
+    const after = text.substring(end);
+    
+    textarea.value = before + prefix + selection + suffix + after;
+    textarea.focus();
+    textarea.setSelectionRange(start + prefix.length, end + prefix.length);
   };
 
   if (loading) return (
@@ -399,7 +417,7 @@ export default function AdminDashboard() {
                     <input name="newPassword" type="password" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Confirm New Password</label>
+                    <label className="text-[10px) font-black text-slate-400 uppercase tracking-widest ml-2">Confirm New Password</label>
                     <input name="confirmPassword" type="password" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
                   </div>
                 </div>
@@ -413,10 +431,10 @@ export default function AdminDashboard() {
         )}
       </main>
 
-      {/* --- NEW/EDIT MODAL PLACEHOLDER --- */}
+      {/* --- NEW/EDIT MODAL --- */}
       {isAdding && (
         <div className="fixed inset-0 z-[1000] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-300">
-          <div className="bg-white w-full max-w-4xl p-10 md:p-16 rounded-[4rem] shadow-2xl relative animate-in slide-in-from-bottom duration-500">
+          <div className="bg-white w-full max-w-4xl p-10 md:p-16 rounded-[4rem] shadow-2xl relative animate-in slide-in-from-bottom duration-500 max-h-[90vh] overflow-y-auto">
             <button 
               onClick={() => setIsAdding(false)}
               className="absolute top-8 right-8 p-3 rounded-full bg-slate-50 hover:bg-red-50 text-slate-300 hover:text-red-500 transition-all"
@@ -433,11 +451,11 @@ export default function AdminDashboard() {
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Article Title</label>
-                  <input name="title" type="text" placeholder="Enter post title..." className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
+                  <input name="title" type="text" placeholder="Enter post title..." className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Category</label>
-                  <select name="category" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all appearance-none">
+                  <select name="category" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all appearance-none">
                     <option value="Tutorial">Tutorial</option>
                     <option value="News">News</option>
                     <option value="Comparison">Comparison</option>
@@ -446,17 +464,28 @@ export default function AdminDashboard() {
               </div>
 
               <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Post Content (Markdown Support)</label>
-                  <textarea name="content" rows={6} placeholder="Start writing your magic..." className="w-full bg-slate-50 border border-slate-100 rounded-[2.5rem] px-8 py-6 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
+                  <div className="flex items-center justify-between ml-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Post Content (Markdown Active)</label>
+                    <div className="flex gap-2">
+                      <button type="button" onClick={() => insertMarkdown('**', '**')} className="p-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 rounded-lg transition-colors"><Bold size={16} /></button>
+                      <button type="button" onClick={() => insertMarkdown('_', '_')} className="p-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 rounded-lg transition-colors"><Italic size={16} /></button>
+                      <button type="button" onClick={() => insertMarkdown('[', '](https://)')} className="p-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 rounded-lg transition-colors"><Link2 size={16} /></button>
+                      <button type="button" onClick={() => insertMarkdown('![alt text](', ')')} className="p-2 hover:bg-slate-50 text-slate-400 hover:text-orange-600 rounded-lg transition-colors border border-slate-100 shadow-sm"><ImageIcon size={16} /></button>
+                    </div>
+                  </div>
+                  <textarea 
+                    id="blogContent"
+                    name="content" 
+                    rows={8} 
+                    placeholder="Start writing your magic..." 
+                    className="w-full bg-slate-50 border border-slate-100 rounded-[2.5rem] px-8 py-6 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required 
+                  />
               </div>
 
               <div className="flex gap-4 items-center">
                 <button className="flex-grow bg-slate-900 text-white rounded-[2rem] py-6 font-black text-xl hover:bg-orange-600 transition-all shadow-xl shadow-slate-200">
                   Publish Post
                 </button>
-                <div className="w-16 h-16 bg-slate-50 rounded-[1.5rem] border border-slate-100 flex items-center justify-center text-slate-300 hover:text-orange-500 cursor-pointer transition-colors shadow-inner">
-                  <ImageIcon size={32} />
-                </div>
               </div>
             </form>
           </div>
