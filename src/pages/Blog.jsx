@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Calendar, User, ArrowRight, Search, Clock } from 'lucide-react';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
+import { Calendar, ArrowRight, Clock } from 'lucide-react';
+import { MainLayout } from '../components/MainLayout';
 import { Reveal } from '../components/Reveal';
-import { GlobalStyles } from '../components/GlobalStyles';
-import { useAppData } from '../hooks/useAppData';
 
 /**
  * Blog Listing Page
  */
 export default function Blog() {
-  const { stars, versionData, trackDownload } = useAppData();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,11 +28,7 @@ export default function Blog() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
-      <GlobalStyles />
-      
-      <Navbar stars={stars} versionData={versionData} onDownload={trackDownload} />
-
+    <MainLayout>
       <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <Reveal>
           <div className="text-center mb-16">
@@ -105,8 +97,6 @@ export default function Blog() {
           </div>
         )}
       </main>
-
-      <Footer versionData={versionData} onDownload={trackDownload} setShowPrivacy={() => {}} setShowTerms={() => {}} setShowContact={() => {}} />
-    </div>
+    </MainLayout>
   );
 }

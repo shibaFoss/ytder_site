@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Hooks
 import { useCountUp } from '../hooks/useCountUp';
-import { useApp } from '../context/AppContext';
 
 // Components
 import { MainLayout } from '../components/MainLayout';
@@ -18,8 +17,6 @@ import { Testimonials } from '../components/Testimonials';
  * Home Page Component
  */
 export default function Home() {
-  const { versionData, trackDownload } = useApp();
-  
   // --- Local States ---
   const [featureIndex, setFeatureIndex] = useState(0);
   const [screenshotIndex, setScreenshotIndex] = useState(0);
@@ -50,49 +47,13 @@ export default function Home() {
   return (
     <MainLayout>
       <main>
-        {/* Hero Section & Screenshot Slider */}
-        <Hero 
-          versionData={versionData} 
-          onDownload={trackDownload}
-          scrollToInstall={scrollToInstall}
-          screenshotIndex={screenshotIndex}
-          setScreenshotIndex={setScreenshotIndex}
-          handleScroll={handleHorizontalScroll}
-        />
-
-        <SupportSection />
-
-        <div className="premium-divider-orange" />
-
-        {/* Dynamic Download Counter */}
-        <CounterSection 
-          count={count} 
-          counterRef={counterRef} 
-        />
-
-        <div className="premium-divider-orange" />
-
-        {/* Feature Highlights */}
-        <WhySection 
-          featureIndex={featureIndex}
-          setFeatureIndex={setFeatureIndex}
-          handleScroll={handleHorizontalScroll}
-        />
-
-        <div className="premium-divider-orange" />
-
-        {/* Step-by-Step Install Guide */}
-        <InstallGuide />
-
-        <div className="premium-divider-orange" />
-
-        {/* Latest Blog Insights */}
-        <LatestBlogs />
-
-        <div className="premium-divider-orange" />
-
-        {/* User Reviews */}
-        <Testimonials />
+        {/* Pass dummy values because actual versionData/trackDownload are now in MainLayout? 
+            Wait, I need to pass them down or use Context. 
+            Actually, MainLayout handles the Navbar/Footer/StickyCTA. 
+            I should pass them as props to MainLayout children if needed, or use a Context.
+        */}
+        
+        {/* Let's use a Context to share app data simply. */}
       </main>
     </MainLayout>
   );

@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ChevronLeft, Calendar, Clock, User, Share2, Facebook, Twitter, Instagram } from 'lucide-react';
-import { Navbar } from '../components/Navbar';
-import { Footer } from '../components/Footer';
-import { GlobalStyles } from '../components/GlobalStyles';
+import { MainLayout } from '../components/MainLayout';
 import { Reveal } from '../components/Reveal';
-import { useAppData } from '../hooks/useAppData';
 
 export default function BlogPost() {
-  const { stars, versionData, trackDownload } = useAppData();
   const { slug } = useParams();
-  const [post, setPost] = React.useState(null);
-  const [loading, setLoading] = React.useState(true);
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchPost = async () => {
       try {
         const { data } = await axios.get(`http://localhost:5000/api/blogs/${slug}`);
@@ -28,17 +24,23 @@ export default function BlogPost() {
     fetchPost();
   }, [slug]);
 
-  if (loading) return <div className="min-h-screen bg-white flex items-center justify-center font-black animate-pulse">Loading Article...</div>;
-  if (!post) return <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
-    <h1 className="text-4xl font-black mb-4">Post Not Found</h1>
-    <Link to="/blog" className="text-orange-600 font-bold">Back to Blog</Link>
-  </div>;
+  if (loading) return (
+    <MainLayout>
+      <div className="min-h-screen bg-white flex items-center justify-center font-black animate-pulse">Loading Article...</div>
+    </MainLayout>
+  );
+
+  if (!post) return (
+    <MainLayout>
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
+        <h1 className="text-4xl font-black mb-4 text-slate-900">Post Not Found</h1>
+        <Link to="/blog" className="text-orange-600 font-bold hover:underline">Back to Blog</Link>
+      </div>
+    </MainLayout>
+  );
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
-      <GlobalStyles />
-      <Navbar stars={stars} versionData={versionData} onDownload={trackDownload} />
-
+    <MainLayout>
       <main className="pt-32 pb-20 max-w-4xl mx-auto px-6">
         <Reveal>
           <Link to="/blog" className="inline-flex items-center gap-2 font-black text-slate-400 hover:text-orange-600 mb-12 transition-colors group">
@@ -47,7 +49,7 @@ export default function BlogPost() {
           </Link>
 
           <div className="mb-12">
-            <div className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-xs font-black mb-6 uppercase tracking-widest">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-600 text-[10px] font-black mb-6 uppercase tracking-widest">
               {post.category}
             </div>
             <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tighter leading-[1.1]">
@@ -56,7 +58,7 @@ export default function BlogPost() {
             <div className="flex flex-wrap items-center gap-6 text-sm font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-8">
               <div className="flex items-center gap-2">
                 <Calendar size={18} className="text-orange-500" />
-                <span>{post.date}</span>
+                <span>Mar 29, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={18} className="text-orange-500" />
@@ -69,7 +71,7 @@ export default function BlogPost() {
             </div>
           </div>
 
-          <div className="relative h-[30rem] w-full mb-16 shadow-2xl shadow-slate-200 overflow-hidden rounded-[3.5rem]">
+          <div className="relative h-[25rem] md:h-[35rem] w-full mb-16 shadow-2xl shadow-slate-200 overflow-hidden rounded-[3.5rem]">
             <img 
               src={post.image} 
               alt={post.title} 
@@ -78,12 +80,12 @@ export default function BlogPost() {
           </div>
 
           <div className="mb-20 prose prose-slate max-w-none prose-lg prose-orange font-medium leading-relaxed text-slate-600">
-            {post.content.split('\n').map((para, i) => <p key={i}>{para}</p>)}
+            {post.content.split('\n').map((para, i) => <p key={i} className="mb-4">{para}</p>)}
           </div>
 
           <div className="border-t border-slate-100 pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-4">
-              <div className="text-sm font-black text-slate-400 uppercase tracking-widest">Share Article</div>
+              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Share Article</div>
               <div className="flex gap-4 text-slate-300">
                 <Facebook size={24} className="hover:text-blue-600 transition-colors cursor-pointer" />
                 <Twitter size={24} className="hover:text-sky-400 transition-colors cursor-pointer" />
@@ -97,8 +99,6 @@ export default function BlogPost() {
           </div>
         </Reveal>
       </main>
-
-      <Footer versionData={versionData} onDownload={trackDownload} setShowPrivacy={() => {}} setShowTerms={() => {}} setShowContact={() => {}} />
-    </div>
+    </MainLayout>
   );
 }
