@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 import { ChevronLeft, Calendar, Clock, User, Share2, Facebook, Twitter, Instagram } from 'lucide-react';
 import { MainLayout } from '../components/MainLayout';
 import { Reveal } from '../components/Reveal';
@@ -149,7 +150,7 @@ export default function BlogPost() {
                           prose-pre:bg-slate-900 prose-pre:rounded-[2.5rem] prose-pre:p-8
                           prose-ul:list-disc prose-ul:pl-6 prose-li:mb-4
                           selection:bg-orange-500 selection:text-white">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
                 {post.content}
               </ReactMarkdown>
             </div>
