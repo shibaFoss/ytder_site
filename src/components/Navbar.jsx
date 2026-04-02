@@ -15,14 +15,12 @@ export const Navbar = ({ stars, versionData, onDownload }) => {
           </span>
         </Link>
 
-        <div className="flex-grow flex items-center justify-center pointer-events-none">
-          <Link to="/blog" className="hidden md:flex items-center gap-2 px-6 py-2 px-6 py-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 rounded-full font-black text-[13px] transition-all uppercase tracking-widest pointer-events-auto">
+        <div className="flex items-center gap-4">
+          <Link to="/blog" className="hidden md:flex items-center gap-2 px-6 py-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 rounded-full font-black text-[11px] transition-all uppercase tracking-[0.2em] pointer-events-auto border border-transparent hover:border-slate-100">
              <FileEdit size={14} className="text-orange-500" />
              Blog
           </Link>
-        </div>
 
-        <div className="flex items-center gap-4">
           <a
             href="https://github.com/shibaFoss/AIO-Video-Downloader"
             target="_blank"
