@@ -559,7 +559,7 @@ export default function App() {
 
               <Reveal delay={300}>
                 <p className="text-base sm:text-lg lg:text-xl text-slate-600 mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-2 sm:px-0">
-                  The #1 premium alternative to Snaptube and Vidmate. Download any video from any website in HD quality. Trusted by over <strong className="text-slate-900">5 Lakh+</strong> users.
+                  The #1 premium alternative to Snaptube and Vidmate. Download any video from any website in HD quality. Trusted by over <strong className="text-slate-900">5 Lakh+</strong> users worldwide. 🚀
                 </p>
               </Reveal>
 
