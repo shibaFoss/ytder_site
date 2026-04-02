@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Download, Star, Github } from 'lucide-react';
+import { Download, Star, Github, FileEdit } from 'lucide-react';
 
 export const Navbar = ({ stars, versionData, onDownload }) => {
   return (
@@ -14,6 +14,13 @@ export const Navbar = ({ stars, versionData, onDownload }) => {
             AIO<span className="text-orange-600">-</span>YTDER
           </span>
         </Link>
+
+        <div className="flex-grow flex items-center justify-center pointer-events-none">
+          <Link to="/blog" className="hidden md:flex items-center gap-2 px-6 py-2 px-6 py-2 hover:bg-slate-50 text-slate-400 hover:text-slate-900 rounded-full font-black text-[13px] transition-all uppercase tracking-widest pointer-events-auto">
+             <FileEdit size={14} className="text-orange-500" />
+             Blog
+          </Link>
+        </div>
 
         <div className="flex items-center gap-4">
           <a

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -56,6 +57,30 @@ export default function BlogPost() {
 
   return (
     <MainLayout>
+      {post && (
+        <Helmet>
+          <title>{post.title} | AioYtdl Official</title>
+          <meta name="description" content={post.excerpt} />
+          
+          {/* Open Graph / Facebook */}
+          <meta property="og:type" content="article" />
+          <meta property="og:url" content={`http://localhost:5173/blog/${post.slug}`} />
+          <meta property="og:title" content={post.title} />
+          <meta property="og:description" content={post.excerpt} />
+          <meta property="og:image" content={post.image} />
+
+          {/* Twitter */}
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content={`http://localhost:5173/blog/${post.slug}`} />
+          <meta property="twitter:title" content={post.title} />
+          <meta property="twitter:description" content={post.excerpt} />
+          <meta property="twitter:image" content={post.image} />
+          
+          <meta name="author" content={post.author_name} />
+          <meta name="keywords" content={`aioytdl, video downloader, youtube downloader, ${post.category}, app`} />
+        </Helmet>
+      )}
+
       {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 z-[1000] pointer-events-none">
         <div
