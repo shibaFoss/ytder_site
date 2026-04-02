@@ -27,7 +27,9 @@ export default function AdminDashboard() {
   const [blogs, setBlogs] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const [activeTab, setActiveTab] = useState('blogs'); // 'blogs' or 'settings'
+  const [selectedFile, setSelectedFile] = useState(null);
   const [profile, setProfile] = useState({
     display_name: 'Admin',
     email: '',
@@ -104,23 +106,45 @@ export default function AdminDashboard() {
   const handleCreatePost = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    let imageUrl = formData.get('image'); 
+
+    const token = localStorage.getItem('adminToken');
+
+    if (selectedFile) {
+      setUploading(true);
+      const fileData = new FormData();
+      fileData.append('image', selectedFile);
+      try {
+        const uploadRes = await axios.post('http://localhost:5000/api/upload', fileData, {
+          headers: { Authorization: token, 'Content-Type': 'multipart/form-data' }
+        });
+        imageUrl = uploadRes.data.url;
+      } catch (err) {
+        alert('Failed to upload image');
+        setUploading(false);
+        return;
+      }
+    }
+
     const postData = {
       title: formData.get('title'),
       category: formData.get('category'),
       content: formData.get('content'),
       excerpt: formData.get('content').substring(0, 150) + '...',
-      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800'
+      image: imageUrl
     };
 
-    const token = localStorage.getItem('adminToken');
     try {
       await axios.post('http://localhost:5000/api/blogs', postData, {
         headers: { Authorization: token }
       });
       setIsAdding(false);
-      window.location.reload(); // Quick refresh
+      setSelectedFile(null);
+      window.location.reload(); 
     } catch (err) {
       alert(err.response?.data?.message || 'Error creating post');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -417,7 +441,7 @@ export default function AdminDashboard() {
                     <input name="newPassword" type="password" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px) font-black text-slate-400 uppercase tracking-widest ml-2">Confirm New Password</label>
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Confirm New Password</label>
                     <input name="confirmPassword" type="password" className="w-full bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all" required />
                   </div>
                 </div>
@@ -463,6 +487,34 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
+              <div className="space-y-4">
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Feature Image</label>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="relative group cursor-pointer">
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={e => setSelectedFile(e.target.files[0])}
+                      className="absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer" 
+                    />
+                    <div className={`w-full h-32 rounded-3xl border-2 border-dashed transition-all flex flex-col items-center justify-center gap-2 ${selectedFile ? 'border-orange-500 bg-orange-50' : 'border-slate-200 bg-slate-50 hover:border-slate-300'}`}>
+                      <Plus className={`transition-transform ${selectedFile ? 'rotate-45 text-orange-600' : 'text-slate-400'}`} />
+                      <span className={`text-[10px] font-black uppercase tracking-widest ${selectedFile ? 'text-orange-600' : 'text-slate-400'}`}>
+                        {selectedFile ? selectedFile.name : 'Upload Local Image'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <input 
+                      name="image" 
+                      type="text" 
+                      placeholder="Or Paste Remote Image URL..." 
+                      className="w-full h-32 bg-slate-50 border border-slate-100 rounded-3xl px-8 py-5 font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500/30 transition-all placeholder:text-[10px] placeholder:uppercase placeholder:tracking-widest" 
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-2">
                   <div className="flex items-center justify-between ml-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Post Content (Markdown Active)</label>
@@ -483,8 +535,12 @@ export default function AdminDashboard() {
               </div>
 
               <div className="flex gap-4 items-center">
-                <button className="flex-grow bg-slate-900 text-white rounded-[2rem] py-6 font-black text-xl hover:bg-orange-600 transition-all shadow-xl shadow-slate-200">
-                  Publish Post
+                <button 
+                  disabled={uploading}
+                  type="submit"
+                  className={`flex-grow rounded-[2rem] py-6 font-black text-xl transition-all shadow-xl shadow-slate-200 ${uploading ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-slate-900 text-white hover:bg-orange-600'}`}
+                >
+                  {uploading ? 'Processing Image...' : 'Publish Post'}
                 </button>
               </div>
             </form>

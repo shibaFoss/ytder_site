@@ -4,6 +4,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import db from './db.js';
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -11,6 +18,22 @@ const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-123';
 
 app.use(cors());
 app.use(express.json());
+
+// Create uploads directory if not exists
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
+// Serve static files from uploads
+app.use('/uploads', express.static(uploadDir));
+
+// Multer Config
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+});
+const upload = multer({ storage });
 
 // --- AUTH ROUTES ---
 
@@ -49,6 +72,13 @@ const verifyToken = (req, res, next) => {
     next();
   });
 };
+
+// --- UPLOAD ROUTE ---
+app.post('/api/upload', verifyToken, upload.single('image'), (req, res) => {
+  if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
+  const url = `http://localhost:5000/uploads/${req.file.filename}`;
+  res.json({ url });
+});
 
 // --- USER PROFILE ROUTES ---
 

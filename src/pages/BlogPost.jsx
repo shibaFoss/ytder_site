@@ -58,7 +58,7 @@ export default function BlogPost() {
     <MainLayout>
       {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 z-[1000] pointer-events-none">
-        <div 
+        <div
           className="h-full bg-orange-500 shadow-[0_0_15px_#f97316] transition-all duration-75"
           style={{ width: `${scrollProgress}%` }}
         />
@@ -102,25 +102,27 @@ export default function BlogPost() {
             </div>
           </div>
 
-          <div className="relative w-full mb-20 rounded-[4rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(15,23,42,0.15)] border-8 border-white group">
-            <img 
-              src={post.image} 
-              alt={post.title} 
-              className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-[3s] ease-out" 
-            />
+          <div className="relative w-full max-w-3xl mx-auto mb-20 rounded-[3rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(15,23,42,0.1)] border-4 border-white group">
+            <div className="aspect-[16/9]">
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[3s] ease-out"
+              />
+            </div>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className="text-slate-600 font-medium text-lg md:text-xl leading-[1.8] mb-24 
+            <div className="text-slate-600 font-normal text-lg md:text-xl leading-[1.9] mb-24 
                           prose prose-slate prose-lg max-w-none 
                           prose-headings:font-black prose-headings:tracking-tight prose-headings:text-slate-900
-                          prose-p:mb-8 prose-p:leading-[1.8]
-                          prose-blockquote:border-l-4 prose-blockquote:border-orange-500 prose-blockquote:bg-orange-50 prose-blockquote:py-8 prose-blockquote:px-10 prose-blockquote:rounded-r-[2rem] prose-blockquote:italic
+                          prose-p:mb-10 prose-p:leading-[1.9]
+                          prose-blockquote:border-l-4 prose-blockquote:border-orange-500 prose-blockquote:bg-orange-50/50 prose-blockquote:py-8 prose-blockquote:px-10 prose-blockquote:rounded-r-[2rem] prose-blockquote:italic prose-blockquote:font-medium
                           prose-a:text-orange-600 prose-a:font-black prose-a:no-underline prose-a:border-b-2 prose-a:border-orange-500/20 hover:prose-a:border-orange-500 prose-a:transition-all
-                          prose-img:rounded-[2.5rem] prose-img:shadow-2xl prose-img:mb-16
+                          prose-img:rounded-[2rem] prose-img:shadow-xl prose-img:my-16
                           prose-pre:bg-slate-900 prose-pre:rounded-[2.5rem] prose-pre:p-8
-                          prose-ul:list-disc prose-ul:pl-6 prose-li:mb-2
+                          prose-ul:list-disc prose-ul:pl-6 prose-li:mb-4
                           selection:bg-orange-500 selection:text-white">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {post.content}
@@ -131,10 +133,10 @@ export default function BlogPost() {
               <div className="p-12 md:p-20 bg-slate-900 rounded-[4.5rem] flex flex-col md:flex-row items-center gap-12 mb-24 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/10 blur-[100px] rounded-full -mr-48 -mt-48" />
                 <div className="relative w-32 h-32 rounded-[2.5rem] overflow-hidden border-4 border-white/10 shadow-2xl flex-shrink-0 group-hover:rotate-6 transition-transform duration-700">
-                  <img 
-                    src={post.author_image || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200'} 
-                    alt={post.author_name} 
-                    className="w-full h-full object-cover" 
+                  <img
+                    src={post.author_image || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200'}
+                    alt={post.author_name}
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="text-center md:text-left relative z-10">
